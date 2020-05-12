@@ -11,7 +11,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "lite": "lite-server",
-    "postinstall": "ng build --prod"
+    "preinstall": "npm install -g angular-cli",
+    "postinstall": "ng build && mv dist/* ."
   },
   "private": true,
   "dependencies": {
