@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "nodemon server.js",
+    "desarrollar": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -49,9 +50,7 @@
     "tslint": "~6.1.0",
     "typescript": "~3.8.3"
   },
-  "devDependencies": {
-    
-  },
+  "devDependencies": {},
   "engines": {
     "node": "12.16.2",
     "npm": "6.14.4"

@@ -1,14 +1,15 @@
-const path = require('path');
+// Instalar servidor express
 const express = require('express');
-const app = express();
+const path = require('path');
 
-// Serve static files
-app.use(express.static(__dirname + '/src'));
+const app = express ();
 
-// Send all requests to index.html
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname + '/src/app/app.component.html'));
+// Servir solo los archivos estáticos del directorio dist
+app.use(express.static(__dirname + '/dist/WebAppImpactoFRONT'));
+
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname + '/dist/WebAppImpactoFRONT/index.html'));
 });
 
-// default Heroku port
+// Inicie la aplicación escuchando en el puerto predeterminado de Heroku
 app.listen(process.env.PORT || 4200);
