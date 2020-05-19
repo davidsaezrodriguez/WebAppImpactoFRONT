@@ -42,10 +42,9 @@ export class LoginComponent implements OnInit {
       dni: this.formLogin.controls.dni.value,
       password: this.formLogin.controls.password.value
     };
-    console.log(usuario);
+
     this.loginService.loginUsuario(usuario).subscribe(res => {
-      console.log('ENTRAMOS');
-      // this.router.navigateByUrl('/auth');
+      this.router.navigate(['/menu']);
     });
   }
 

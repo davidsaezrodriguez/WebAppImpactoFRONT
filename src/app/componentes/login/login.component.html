@@ -1,17 +1,33 @@
 <div class="container">
-    <h2 class="login-header">LOGIN</h2>
-    <div class="col-xs-12 col-sm-12" [formGroup]="formLogin" class="login-container">
-        <label class="col-xs-12 control-label ">
-            DNI
-            <input type="text" class="form-control input-sm" formControlName="dni">
-        </label>
-        <label class="col-xs-12 control-label ">
-            Contraseña
-            <input type="text" class="form-control input-sm" formControlName="password">
-        </label>
-        <button (click)="accederApp()" type="button" class="btn btn-success">
-            <i class="fa fa-pencil" aria-hidden="true"></i>
-            ACCEDER
-        </button>
-    </div>
+	<div class="d-flex justify-content-center align-items-center h-100">
+		<div class="card">
+			<div class="card-header">
+				<h3>Login</h3>
+				<div class="d-flex justify-content-end social_icon">
+					<span><i class="fab fa-facebook-square"></i></span>
+					<span><i class="fab fa-google-plus-square"></i></span>
+					<span><i class="fab fa-twitter-square"></i></span>
+				</div>
+			</div>
+			<div class="card-body">
+				<div class="col-xs-12 col-sm-12" [formGroup]="formLogin" class="login-container">
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        <input type="text" class="form-control input-sm" formControlName="dni"  placeholder="DNI">
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input type="password" class="form-control input-sm" formControlName="password"  placeholder="Contraseña">
+					</div>
+                    <button (click)="accederApp()" type="button" class="btn float-right login_btn">
+                        ACCEDER
+                    </button>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
