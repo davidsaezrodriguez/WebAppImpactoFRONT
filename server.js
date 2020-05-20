@@ -6,6 +6,7 @@ const app = express ();
 
 // Servir solo los archivos estáticos del directorio dist
 app.use(express.static(__dirname + '/dist/WebAppImpactoFRONT'));
+app.use(express.static(__dirname + '/src/assets/imagenes'));
 
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname + '/dist/WebAppImpactoFRONT/index.html'));

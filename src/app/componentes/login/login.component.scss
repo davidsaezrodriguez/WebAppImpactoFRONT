@@ -4,7 +4,8 @@ section {
     width: 100%;
     margin: 0;
     padding: 0;
-    background: url("assets/imagenes/fondoLogin.jpg") no-repeat center center fixed;
+    background: url("src/assets/imagenes/fondoLogin.jpg") no-repeat center center fixed;
+    background-size: 100% 100%;
 }
 
 // Card es la tarjeta del login
@@ -54,4 +55,9 @@ section {
 .login_btn:hover {
     color: black;
     background-color: white;
+}
+
+
+a {
+    color: red;
 }
