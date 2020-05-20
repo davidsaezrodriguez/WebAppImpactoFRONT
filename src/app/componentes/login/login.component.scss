@@ -1,84 +1,57 @@
-@import url('https://fonts.googleapis.com/css?family=Numans');
-
-body{
-background-color:black !important;
-height: 100%;
-font-family: 'Numans', sans-serif;
+// General es el div que engloba toda la pagina por lo que indicamos que ocupe todo nuestro navegador y ponemos un fondo
+section {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: url("assets/imagenes/fondoLogin.jpg") no-repeat center center fixed;
 }
 
-.container{
-height: 100%;
-align-content: center;
+// Card es la tarjeta del login
+.card {
+    width: 400px;
+    background-color: rgba(0, 0, 0, 0.849) !important;
 }
 
-.card{
-margin-top: auto;
-margin-bottom: auto;
-width: 400px;
-background-color: rgba(0, 0, 0, 0.849) !important;
+// Social_icon son los iconos de las redes sociales, les ponemos color, cambios con el hover y posicion sobresaliendo de la tarjeta
+.social_icon span {
+    font-size: 60px;
+    margin-left: 10px;
+    color: red;
 }
 
-.social_icon span{
-font-size: 60px;
-margin-left: 10px;
-color: red;
+.social_icon span:hover {
+    color: white;
+    cursor: pointer;
 }
 
-.social_icon span:hover{
-color: white;
-cursor: pointer;
+.social_icon {
+    position: absolute;
+    right: 20px;
+    top: -45px;
 }
 
-.card-header h3{
-color: white;
+// Color al titulo de la tarjeta de login
+.card-header h3 {
+    color: white;
 }
 
-.social_icon{
-position: absolute;
-right: 20px;
-top: -45px;
+// Inputs del formulario de login
+.input-group-prepend span {
+    width: 50px;
+    background-color: red;
+    color: black;
+    border: 0 !important;
 }
 
-.input-group-prepend span{
-width: 50px;
-background-color: red;
-color: black;
-border:0 !important;
+// Boton de login, colores y cambios con hover
+.login_btn {
+    color: black;
+    background-color: red;
+    width: 100px;
 }
 
-input:focus{
-outline: 0 0 0 0  !important;
-box-shadow: 0 0 0 0 !important;
-
-}
-
-.remember{
-color: white;
-}
-
-.remember input
-{
-width: 20px;
-height: 20px;
-margin-left: 15px;
-margin-right: 5px;
-}
-
-.login_btn{
-color: black;
-background-color: red;
-width: 100px;
-}
-
-.login_btn:hover{
-color: black;
-background-color: white;
-}
-
-.links{
-color: white;
-}
-
-.links a{
-margin-left: 4px;
+.login_btn:hover {
+    color: black;
+    background-color: white;
 }

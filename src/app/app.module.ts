@@ -6,17 +6,19 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { RegisterComponent } from './componentes/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from './servicios/loginService';
 import { MenuComponent } from './componentes/menu/menu.component';
+import { FooterComponent } from './componentes/footer/footer.component';
+import { NavbarComponent } from './componentes/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent,
-    MenuComponent
+    MenuComponent,
+    FooterComponent,
+    NavbarComponent
   ],
   imports: [
     AppRoutingModule,
