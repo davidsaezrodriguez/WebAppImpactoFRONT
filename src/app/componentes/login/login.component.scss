@@ -1,17 +1,18 @@
 // General es el div que engloba toda la pagina por lo que indicamos que ocupe todo nuestro navegador y ponemos un fondo
 section {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
+    min-height: calc(100vh - 60px - 85px);
     background: url("src/assets/imagenes/fondoLogin.jpg") no-repeat center center fixed;
     background-size: 100% 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 // Card es la tarjeta del login
 .card {
     width: 400px;
     background-color: rgba(0, 0, 0, 0.849) !important;
+    margin: auto auto;
 }
 
 // Social_icon son los iconos de las redes sociales, les ponemos color, cambios con el hover y posicion sobresaliendo de la tarjeta
@@ -56,7 +57,6 @@ section {
     color: black;
     background-color: white;
 }
-
 
 a {
     color: red;
