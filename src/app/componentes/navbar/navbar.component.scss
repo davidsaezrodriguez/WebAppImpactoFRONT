@@ -1,5 +1,20 @@
 nav{
     height:60px;
-    background-color:#fd3c3d  ;
+    width: 100%;
+    background-color:red  ;
     padding: 1em;
 }
+
+a{
+    color: black !important;
+}
+
+
+@media only screen and (max-width: 768px) {
+    nav{
+        height:122px;
+        width: 100%;
+        padding: 1em;
+        transition: 0.5s;
+    }
+  }

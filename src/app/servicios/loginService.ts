@@ -13,7 +13,7 @@ export class LoginService {
   local = 'http://localhost:3000';
   heroku = 'https://webappimpactoback.herokuapp.com';
 
-  ServidorBACKEND = this.heroku;
+  ServidorBACKEND = this.heroku || this.local  ;
   authSubject = new BehaviorSubject(false);
 
   // Creamos token

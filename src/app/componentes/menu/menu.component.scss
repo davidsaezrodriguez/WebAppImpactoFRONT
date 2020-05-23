@@ -1,9 +1,10 @@
 section{
     min-height: calc(100vh - 60px - 85px);
     background: url("src/assets/imagenes/fondoLogin.jpg") no-repeat center center fixed;
-    background-size: 100% 100%;
+    background-size: cover;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 .tarjeta{
     display: flex;
@@ -22,4 +23,8 @@ img{
 h3{
     text-align: center;
     color: white;
+}
+
+a:link, a:visited, a:active {
+    text-decoration:none;
 }

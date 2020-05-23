@@ -11,6 +11,7 @@ import { LoginService } from './servicios/loginService';
 import { MenuComponent } from './componentes/menu/menu.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
+import { TablasComponent } from './componentes/tablas/tablas.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { NavbarComponent } from './componentes/navbar/navbar.component';
     LoginComponent,
     MenuComponent,
     FooterComponent,
-    NavbarComponent
+    NavbarComponent,
+    TablasComponent
   ],
   imports: [
     AppRoutingModule,
