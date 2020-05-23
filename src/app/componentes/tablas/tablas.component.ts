@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AutentificacionService } from 'src/app/servicios/autentificacionService';
 
 @Component({
   selector: 'app-tablas',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TablasComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private autentificacionService: AutentificacionService,
+  ) { }
 
+  datosUsuario = this.autentificacionService.getTokenData();
   ngOnInit(): void {
   }
 

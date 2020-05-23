@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
-import { LoginService } from 'src/app/servicios/loginService';
+import { AutentificacionService } from 'src/app/servicios/autentificacionService';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
 
 
   constructor(
-    private loginService: LoginService,
+    private autentificacionService: AutentificacionService,
     private router: Router,
   ) { }
 
@@ -40,7 +40,11 @@ export class NavbarComponent implements OnInit {
 
   // Funcion con la que eliminamos el token generado y cerramos sesion 
   cerrarSesion(): void {
-    this.loginService.borrarToken();
+    this.autentificacionService.borrarToken();
     this.router.navigate(['/']);
   }
+
+  comprobarAutentificacion() {
+    return this.autentificacionService.comprobarAutentificacion();
+}
 }

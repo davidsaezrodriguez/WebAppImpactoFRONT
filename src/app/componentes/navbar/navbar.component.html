@@ -1,12 +1,12 @@
 <nav class="navbar navbar-expand-sm navbar-light" id="navbar">
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand" href="/menu">
         <img src="/assets/imagenes/logoImpacto.png">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" (click)="expandirNav()">
         <span class="navbar-toggler-icon"></span>
     </button>
     
-    <div class="collapse navbar-collapse navbarDiv" id="navbarSupportedContent" >
+    <div class="collapse navbar-collapse navbarDiv" id="navbarSupportedContent" *ngIf="comprobarAutentificacion()">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="nav-link"  href="/tablas">Tablas </a>

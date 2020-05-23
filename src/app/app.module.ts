@@ -7,7 +7,7 @@ import { LoginComponent } from './componentes/login/login.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoginService } from './servicios/loginService';
+import { AutentificacionService } from './servicios/autentificacionService';
 import { MenuComponent } from './componentes/menu/menu.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
@@ -31,7 +31,7 @@ import { TablasComponent } from './componentes/tablas/tablas.component';
     HttpClientModule
   ],
   providers: [
-    LoginService
+    AutentificacionService
   ],
   bootstrap: [AppComponent]
 })

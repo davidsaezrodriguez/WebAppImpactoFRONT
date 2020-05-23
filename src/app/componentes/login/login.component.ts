@@ -1,6 +1,6 @@
 import { Component, OnInit, ɵConsole } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/servicios/loginService';
+import { AutentificacionService } from 'src/app/servicios/autentificacionService';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 import { Usuario } from 'src/app/modelos/usuario';
 
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
 
   //#region FUNCIONES PRINCIPALES
   constructor(
-    private loginService: LoginService,
+    private autentificacionService: AutentificacionService,
     private router: Router,
     private formBuilder: FormBuilder,
   ) { }
@@ -42,8 +42,10 @@ export class LoginComponent implements OnInit {
       dni: this.formLogin.controls.dni.value,
       password: this.formLogin.controls.password.value
     };
+    const dni = this.formLogin.controls.dni.value;
+    const password = this.formLogin.controls.password.value;
 
-    this.loginService.loginUsuario(usuario).subscribe(res => {
+    this.autentificacionService.loginUsuario(dni,password).subscribe(res => {
       this.router.navigate(['/menu']);
     });
   }

@@ -1,8 +1,7 @@
 export interface JwtResponseI {
+  // Interface con la que recogeremos los datos que nos manda la api
   datosUsuario: {
-    id: number,
-    dni: string,
-    nombre: string,
+    id: string,
     accessToken: string,
     expiresIn: string
   };
