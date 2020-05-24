@@ -1,27 +1,31 @@
 <section>
     <div class="col-sm-7">
         <div class="row">
-            <a class="col-sm-12 col-md tarjeta row " href="/tablas">
+            <a class="col-sm-12 col-md tarjeta row " href="/tablas" *ngIf="(nivelAcceso == '1') || (nivelAcceso == '2') || (nivelAcceso == '5')  || (nivelAcceso == '6')  || (nivelAcceso == '7')">
                 <img src="/assets/imagenes/tablas.png" alt="Acceso a tablas">
                 <h3 class="col-sm-12">Tablas</h3>
             </a>
-            <a class="col-sm-12 col-md tarjeta row ">
+            <a class="col-sm-12 col-md tarjeta row " *ngIf="(nivelAcceso == '1') || (nivelAcceso == '2') || (nivelAcceso == '5')  || (nivelAcceso == '6')  || (nivelAcceso == '7')">
                 <img src="/assets/imagenes/ejercicios.png" alt="Acceso a tablas">
                 <h3 class="col-sm-12">Ejercicios</h3>
             </a>
         </div>
         <div class="row">
-            <a class="col-sm-12 col-md tarjeta row ">
+            <a class="col-sm-12 col-md tarjeta row " *ngIf="(nivelAcceso == '1') || (nivelAcceso == '3') || (nivelAcceso == '5')  || (nivelAcceso == '7')  || (nivelAcceso == '8')">
                 <img src="/assets/imagenes/dietas.png" alt="Acceso a tablas">
                 <h3 class="col-sm-12">Dietas</h3>
             </a>
-            <a class="col-sm-12 col-md tarjeta row " >
+            <a class="col-sm-12 col-md tarjeta row " *ngIf="(nivelAcceso == '1') || (nivelAcceso == '3') || (nivelAcceso == '5')  || (nivelAcceso == '7')  || (nivelAcceso == '8')">
                 <img src="/assets/imagenes/seguimiento.png" alt="Acceso a tablas">
                 <h3 class="col-sm-12">Seguimiento</h3>
             </a>
-            <a class="col-sm-12 col-md tarjeta row " >
+            <a class="col-sm-12 col-md tarjeta row " *ngIf="(nivelAcceso == '1') || (nivelAcceso == '4') || (nivelAcceso == '6')  || (nivelAcceso == '7')  || (nivelAcceso == '8')">
                 <img src="/assets/imagenes/clases.png" alt="Acceso a tablas">
                 <h3 class="col-sm-12">Clases</h3>
+            </a>
+            <a class="col-sm-12 col-md tarjeta row " *ngIf="nivelAcceso == ('1')">
+                <img src="/assets/imagenes/usuarios.png" alt="Acceso a usuarios">
+                <h3 class="col-sm-12">Usuarios</h3>
             </a>
         </div>
     </div>

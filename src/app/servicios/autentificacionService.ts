@@ -51,7 +51,7 @@ export class AutentificacionService {
         (res: JwtResponseI) => {
           if (res) {
             // Si el back funciona correctamente la respuesta sera un token que guardamos en la siguiente funcion
-            console.log('Usuario registrado')
+            console.log('Usuario registrado');
           }
         })
       );
@@ -75,8 +75,8 @@ export class AutentificacionService {
 
   // Comprobamos si el usuario esta autentificado si esta el token el el storage
   public comprobarAutentificacion(): boolean {
-    return localStorage.getItem('TokenDeAcceso') !== null
-      && localStorage.getItem('ExpiracionToken') !== null
+    // tslint:disable-next-line: semicolon
+    return localStorage.getItem('TokenDeAcceso') !== null && localStorage.getItem('ExpiracionToken') !== null
   }
 
   // Nos devolvera el token guardado en localstorage
@@ -94,7 +94,7 @@ export class AutentificacionService {
     return localStorage.getItem('ExpiracionToken');
   }
 
-  // Desciframos los datos del token 
+  // Desciframos los datos del token
   public getTokenData(): JsonWebToken {
     const t = this.getToken();
     if (t) {

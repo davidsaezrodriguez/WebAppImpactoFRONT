@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import { AutentificacionService } from 'src/app/servicios/autentificacionService';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -10,22 +11,34 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
+
+
   // VARIABLES
+
+  // Utiliaremos para actualizar nombre de usuario al logear
+  public static updateUserStatus: Subject<boolean> = new Subject();
 
   // Var para comprobar si la nav esta expandida o no
   navExpandida = false;
 
+  // Datos de usuario logeado
+  usuarioLogeado;
+
+
+  // FUNCIONES
 
   constructor(
     private autentificacionService: AutentificacionService,
     private router: Router,
-  ) { }
-
-  ngOnInit(): void {
-
+  ) {
+    NavbarComponent.updateUserStatus.subscribe(res => {
+      this.usuarioLogeado = this.autentificacionService.getTokenData();
+    });
   }
 
-  // FUNCIONES
+  ngOnInit(): void {
+    this.actualizarUsuarioLogeado();
+  }
 
   // Funcion con la que expandimos el navbar para desplegar las opciones en la version movil
   public expandirNav() {
@@ -44,7 +57,13 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+  // Comporbamos si el usuario esta logeado para mostrar menus de navbar o no
   comprobarAutentificacion() {
     return this.autentificacionService.comprobarAutentificacion();
-}
+  }
+
+  // Actualizamos usuario logeado al acceder
+  actualizarUsuarioLogeado() {
+    this.usuarioLogeado = this.autentificacionService.getTokenData();
+  }
 }
