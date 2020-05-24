@@ -8,10 +8,12 @@ import { AutentificacionService } from 'src/app/servicios/autentificacionService
 })
 export class MenuComponent implements OnInit {
 
-  // VARIABLES
+  //#region VARIABLES
+
   public nivelAcceso = this.autentificacionService.getAccesoUsuario();
 
-  // FUNCIONES
+  //#endregion
+
   constructor(
     private autentificacionService: AutentificacionService,
   ) { }

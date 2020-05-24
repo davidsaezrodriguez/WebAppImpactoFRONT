@@ -15,7 +15,7 @@ export class AutentificacionService {
   local = 'http://localhost:3000';
   heroku = 'https://webappimpactoback.herokuapp.com';
 
-  ServidorBACKEND = this.local || this.heroku;
+  ServidorBACKEND = this.heroku;
   authSubject = new BehaviorSubject(false);
 
   // Variable para descifrar token
@@ -27,6 +27,12 @@ export class AutentificacionService {
     private httpClient: HttpClient
   ) {
 
+  }
+
+
+  // Buscamos los usuarios registrados en la base de datos y devolvemos nombre y id
+  public usuariosRegistrados() {
+   return this.httpClient.post<any>(`${this.ServidorBACKEND}/listarUsuarios`, '');
   }
 
   // Funcion para logear usuario
@@ -118,5 +124,6 @@ export class AutentificacionService {
       return token.acceso;
     }
   }
+
 
 }

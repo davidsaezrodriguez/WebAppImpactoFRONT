@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit {
 
 
 
-  // VARIABLES
+  // #region VARIABLES
 
   // Utiliaremos para actualizar nombre de usuario al logear
   public static updateUserStatus: Subject<boolean> = new Subject();
@@ -24,8 +24,7 @@ export class NavbarComponent implements OnInit {
   // Datos de usuario logeado
   usuarioLogeado;
 
-
-  // FUNCIONES
+  //#endregion
 
   constructor(
     private autentificacionService: AutentificacionService,
@@ -39,6 +38,8 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.actualizarUsuarioLogeado();
   }
+
+  //#region FUNCIONES
 
   // Funcion con la que expandimos el navbar para desplegar las opciones en la version movil
   public expandirNav() {
@@ -66,4 +67,6 @@ export class NavbarComponent implements OnInit {
   actualizarUsuarioLogeado() {
     this.usuarioLogeado = this.autentificacionService.getTokenData();
   }
+  
+  //#endregion
 }

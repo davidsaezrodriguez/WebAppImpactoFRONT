@@ -1,0 +1,22 @@
+<!-- <div class="form-inline formBuscar col-md-12">
+    <span class="icon"><i class="fa fa-search"></i></span>
+    <input class="form-control col-md-11" type="search" placeholder="Buscar usuario" id="buscarUsuario">
+</div> -->
+
+<div [formGroup]="form" [class.has-error]="form.controls['input'].invalid && form.controls['input'].dirty"
+    [class.has-success]="form.controls['input'].valid && form.controls['input'].dirty">
+    <label class="formBuscar col-md-12">
+        <span class="icon"><i class="fa fa-search"></i></span>
+        <input class="form-control col-md-11" type="search" placeholder="Buscar usuario" id="buscarUsuario"
+            formControlName="input" (mousedown)="showAutocomplete()" (blur)="selectObject(null)" type="text"
+            [attr.placeholder]="inputLoader ? '' : config.placeholder" class="form-control {{config.inputClass}}">
+    </label>
+    <div #autocompleteList class="form-control autocomplete " [class.hide]="!openModal">
+        <ng-container *ngIf="!listLoader">
+            <p *ngFor="let object of listObjects" (mousedown)="selectObject(object)">
+                {{config.render(object)}}
+            </p>
+            <p *ngIf="listObjects.length == 0"><strong>{{config.empty}}</strong></p>
+        </ng-container>
+    </div>
+</div>

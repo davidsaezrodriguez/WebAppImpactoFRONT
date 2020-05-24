@@ -2,7 +2,7 @@
     <a class="navbar-brand" href="/menu">
         <img src="/assets/imagenes/logoImpacto.png">
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" (click)="expandirNav()">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" (click)="expandirNav()" *ngIf="comprobarAutentificacion()">
         <span class="navbar-toggler-icon"></span>
     </button>
     

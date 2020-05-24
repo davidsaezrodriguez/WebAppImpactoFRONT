@@ -12,20 +12,13 @@ import { NavbarComponent } from '../navbar/navbar.component';
 })
 export class LoginComponent implements OnInit {
 
-  // VARIABLES
+  //#region VARIABLES
 
   // Formulario
   public formLogin: FormGroup;
 
-  // FORMULARIOS
-  private setFormLogin() {
-    this.formLogin = this.formBuilder.group({
-      dni: new FormControl(null, Validators.required),
-      password: new FormControl(null, Validators.required),
-    });
-  }
+  //#endregion
 
-  // FUNCIONES PRINCIPALES
 
   constructor(
     private autentificacionService: AutentificacionService,
@@ -37,6 +30,17 @@ export class LoginComponent implements OnInit {
     this.usuarioLogeado();
     this.setFormLogin();
   }
+
+  //#region FUNCIONES
+
+  // FORMULARIOS
+  private setFormLogin() {
+    this.formLogin = this.formBuilder.group({
+      dni: new FormControl(null, Validators.required),
+      password: new FormControl(null, Validators.required),
+    });
+  }
+
   // Funcion donde mandamos usuario logeado en el formulario al servicio que nos autentifica al usuario y mandamos a menus si es valido
   accederApp(): void {
     const usuario: Usuario = {

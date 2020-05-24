@@ -1,6 +1,7 @@
 export interface Usuario {
-  dni: string ;
+  id?: string;
+  dni?: string ;
   nombre ?: string;
-  password: string;
+  password?: string;
   acceso ?: string;
 }

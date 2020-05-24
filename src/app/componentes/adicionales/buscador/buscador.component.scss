@@ -1,0 +1,50 @@
+// Modificar el input y colocar icon dentro
+.formBuscar{
+    padding: 0;
+}
+.formBuscar input#buscarUsuario {
+    width: 100%;
+    height: 4em;
+    background: #2b303b;
+    border: none;
+    font-size: 12pt;
+    color: white ;
+    padding-left: 3em;
+    transition: .55s ease;
+}
+
+.formBuscar .icon {
+    position: absolute;
+    margin-top: 1.3em;
+    margin-left: 1em;
+    z-index: 1;
+    color: red;
+}
+
+.formBuscar input#buscarUsuario:hover,
+.formBuscar input#buscarUsuario:focus,
+.formBuscar input#buscarUsuario:active {
+    color: black;
+    background: white;
+}
+
+.selected{
+    background-color: rgb(255, 147, 147);
+    color: white;
+}
+
+.autocomplete{
+    z-index: 11;
+    max-width: 500px;
+    overflow-y: scroll;
+    padding: 0;
+    >p{
+        margin: 0;
+        padding: 3px 6px;
+    }
+    >p:hover{
+        background-color: red;
+        color: black;
+        cursor:pointer;
+    }
+}

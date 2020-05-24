@@ -12,6 +12,7 @@ import { MenuComponent } from './componentes/menu/menu.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { TablasComponent } from './componentes/tablas/tablas.component';
+import { BuscadorComponent } from './componentes/adicionales/buscador/buscador.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { TablasComponent } from './componentes/tablas/tablas.component';
     MenuComponent,
     FooterComponent,
     NavbarComponent,
-    TablasComponent
+    TablasComponent,
+    BuscadorComponent
   ],
   imports: [
     AppRoutingModule,

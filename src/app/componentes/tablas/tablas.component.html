@@ -1,6 +1,6 @@
 <section>
-    ID> {{datosUsuario.id}}<br>
-   DNI> {{datosUsuario.dni}}<br>
-   nombre> {{datosUsuario.nombre}}<br>
-   Acceso> {{datosUsuario.acceso}}<br>
+    <div class="col-md-4 pt-5">
+        <buscador-component (selected)="selectUsuario($event)" [config]="configBuscador"></buscador-component>
+    </div>
+  
 </section> 
