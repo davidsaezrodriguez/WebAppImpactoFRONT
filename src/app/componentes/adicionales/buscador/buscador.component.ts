@@ -135,7 +135,7 @@ export class BuscadorComponent implements OnInit {
   // Si no selecciono un elemento (evento blur, hago click fuera de la lista) y el input ha sido editado: limpio el campo y emito un null
   public selectObject(object) {
     if (this.openModal) {
-      this.zone.runOutsideAngular(() => {
+      // this.zone.runOutsideAngular(() => {
         if (object) {
           this.form.controls.input.setValue(this.getFilterValue(object), { emitEvent: false });
           this.form.controls.input.markAsDirty();
@@ -146,7 +146,7 @@ export class BuscadorComponent implements OnInit {
           this.dirtyInput = false;
           this.selected.emit(object);
         }
-      });
+      // });
       this.openModal = false;
     }
   }

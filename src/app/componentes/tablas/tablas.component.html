@@ -1,6 +1,25 @@
 <section>
-    <div class="col-md-4 pt-5">
-        <buscador-component (selected)="selectUsuario($event)" [config]="configBuscador"></buscador-component>
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-12 d-flex justify-content-center">
+                <div class="col-md-4 pt-5">
+                    <buscador-component (selected)="selectUsuario($event)" [config]="configBuscador">
+                    </buscador-component>
+                </div>
+            </div>
+        </div>
+
+        <div class="row d-flex justify-content-center ">
+            <a class="col-sm-12 col-md-2 tarjeta row " href="/tablas/crear">
+                <i class="fas fa-plus-square fa-4x"></i>
+                <h3 class="col-sm-12">Añadir tabla</h3>
+            </a>
+            <a class="col-sm-12 col-md-2 tarjeta row " *ngFor="let tabla of tablasUsuario"  href="/tablas/visualizar/{{tabla._id}}">
+                <i class="fas fa-calendar-alt fa-4x"></i>
+                <h3 class="col-sm-12">{{tabla.nombre}}</h3>
+            </a>
+
+
+        </div>
     </div>
-  
-</section> 
+</section>

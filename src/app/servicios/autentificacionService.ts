@@ -6,7 +6,7 @@ import { JwtResponseI } from '../modelos/jwt-response';
 import { tap } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { JsonWebToken } from '../modelos/jsonWebToken';
-
+import { Tabla, Tablas } from '../modelos/tabla';
 
 @Injectable()
 export class AutentificacionService {
@@ -15,7 +15,7 @@ export class AutentificacionService {
   local = 'http://localhost:3000';
   heroku = 'https://webappimpactoback.herokuapp.com';
 
-  ServidorBACKEND = this.heroku;
+  ServidorBACKEND = this.local || this.heroku;
   authSubject = new BehaviorSubject(false);
 
   // Variable para descifrar token
@@ -29,11 +29,7 @@ export class AutentificacionService {
 
   }
 
-
-  // Buscamos los usuarios registrados en la base de datos y devolvemos nombre y id
-  public usuariosRegistrados() {
-   return this.httpClient.post<any>(`${this.ServidorBACKEND}/listarUsuarios`, '');
-  }
+  //#region FUNCIONES INTERACTUAR CON API
 
   // Funcion para logear usuario
   loginUsuario(dni: string, password: string): Observable<JwtResponseI> {
@@ -62,6 +58,39 @@ export class AutentificacionService {
         })
       );
   }
+
+  // Buscamos los usuarios registrados en la base de datos y devolvemos nombre y id
+  public usuariosRegistrados() {
+    return this.httpClient.post<any>(`${this.ServidorBACKEND}/listarUsuarios`, '');
+  }
+
+  // Funcion para guardar en base de datos nueva tabla
+  crearTabla(tabla: Tabla) {
+    // Creamos una variable con la tabla para crear un padre al json de la tabla llamado "tabla" y poder buscar mejor con la api
+    const nuevaTabla = ({
+      tabla
+    });
+    return this.httpClient.post(`${this.ServidorBACKEND}/crearTabla`, nuevaTabla).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  // Buscamos los usuarios registrados en la base de datos y devolvemos nombre y id
+  public listarTablasUsuario(idUsuario): Observable<Tablas> {
+    return this.httpClient.post<Tablas>(`${this.ServidorBACKEND}/listarTablasUsuario`, { idUsuario });
+  }
+
+  // Buscamos los usuarios registrados en la base de datos y devolvemos nombre y id
+  public buscarTabla(idTabla): Observable<Tablas> {
+    return this.httpClient.post<Tablas>(`${this.ServidorBACKEND}/buscarTabla`, { idTabla });
+  }
+
+
+
+  //#endregion
+
+
+  //#region FUNCIONES INTERNAS
 
   // Funcion que nos guardara el token en el localStorage del navegador
   private guardarToken(id: string, token: string, expiresIn: string): void {
@@ -125,5 +154,6 @@ export class AutentificacionService {
     }
   }
 
+  //#endregion
 
 }

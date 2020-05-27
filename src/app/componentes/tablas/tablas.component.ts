@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { AutentificacionService } from 'src/app/servicios/autentificacionService';
 import { ConfiguracionBuscador } from '../adicionales/buscador/buscador.component';
 import { Subject } from 'rxjs';
 import { Usuario } from 'src/app/modelos/usuario';
+import { Tabla, Tablas } from 'src/app/modelos/tabla';
 
 // tslint:disable: member-ordering
 @Component({
@@ -14,20 +15,20 @@ export class TablasComponent implements OnInit {
 
   //#region VARIABLES
 
-
+  public tablasUsuario: Tabla[] = [];
 
   //#endregion
 
   constructor(
-    private autentificacionService: AutentificacionService,
-  ) { }
+    private autentificacionService: AutentificacionService, // Servicio para interactuar con API
+  ) {
+  }
 
   ngOnInit(): void {
     // Cargamos los nombres de usuarios de BD en el componente de buscador
-    this.autentificacionService.usuariosRegistrados().subscribe(data =>
-      (
-        this.configBuscador.values = data.usuarios
-      ));
+    this.autentificacionService.usuariosRegistrados().subscribe(data => (
+      this.configBuscador.values = data.usuarios
+    ));
   }
 
   //#region COMPONENTES
@@ -46,10 +47,15 @@ export class TablasComponent implements OnInit {
   };
   selectUsuario($event) {
     if ($event != null) {
-      // this.formViaje.controls.proyecto.setValue(event);
-      console.log($event._id);
+      const idUsuario = $event._id;
+      this.cargarTablasUsuario(idUsuario);
     }
   }
 
+  cargarTablasUsuario(idUsuario) {
+    this.autentificacionService.listarTablasUsuario(idUsuario).subscribe(data => {
+      this.tablasUsuario = data.tablas;
+    });
+  }
   //#endregion
 }
