@@ -15,7 +15,7 @@ export class AutentificacionService {
   local = 'http://localhost:3000';
   heroku = 'https://webappimpactoback.herokuapp.com';
 
-  ServidorBACKEND = this.local || this.heroku;
+  ServidorBACKEND = this.heroku;
   authSubject = new BehaviorSubject(false);
 
   // Variable para descifrar token
