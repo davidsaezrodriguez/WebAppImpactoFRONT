@@ -3,6 +3,7 @@ import * as $ from 'jquery';
 import { AutentificacionService } from 'src/app/servicios/autentificacionService';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { LocalService } from 'src/app/servicios/localService';
 
 @Component({
   selector: 'app-navbar',
@@ -27,11 +28,11 @@ export class NavbarComponent implements OnInit {
   //#endregion
 
   constructor(
-    private autentificacionService: AutentificacionService,
+    private localService: LocalService, // Servicio para recuperar datos del localstorage
     private router: Router,
   ) {
     NavbarComponent.updateUserStatus.subscribe(res => {
-      this.usuarioLogeado = this.autentificacionService.getTokenData();
+      this.usuarioLogeado = this.localService.getTokenData();
     });
   }
 
@@ -44,7 +45,7 @@ export class NavbarComponent implements OnInit {
   // Funcion con la que expandimos el navbar para desplegar las opciones en la version movil
   public expandirNav() {
     if (!this.navExpandida) {
-      $('#navbar').height(300);
+      $('#navbar').height(370);
       this.navExpandida = true;
     } else {
       $('#navbar').height(90);
@@ -52,21 +53,21 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  // Funcion con la que eliminamos el token generado y cerramos sesion 
+  // Funcion con la que eliminamos el token generado y cerramos sesion
   cerrarSesion(): void {
-    this.autentificacionService.borrarToken();
+    this.localService.borrarToken();
     this.router.navigate(['/']);
   }
 
   // Comporbamos si el usuario esta logeado para mostrar menus de navbar o no
   comprobarAutentificacion() {
-    return this.autentificacionService.comprobarAutentificacion();
+    return this.localService.comprobarAutentificacion();
   }
 
   // Actualizamos usuario logeado al acceder
   actualizarUsuarioLogeado() {
-    this.usuarioLogeado = this.autentificacionService.getTokenData();
+    this.usuarioLogeado = this.localService.getTokenData();
   }
-  
+
   //#endregion
 }

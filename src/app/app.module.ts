@@ -15,6 +15,8 @@ import { TablasComponent } from './componentes/tablas/tablas.component';
 import { BuscadorComponent } from './componentes/adicionales/buscador/buscador.component';
 import { CrearTablasComponent } from './componentes/tablas/crear-tablas/crear-tablas.component';
 import { VisualizarTablasComponent } from './componentes/tablas/visualizar-tablas/visualizar-tablas.component';
+import { LocalService } from './servicios/localService';
+import { TablasService } from './servicios/tablasService';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { VisualizarTablasComponent } from './componentes/tablas/visualizar-tabla
     HttpClientModule
   ],
   providers: [
-    AutentificacionService
+    AutentificacionService,
+    LocalService,
+    TablasService
   ],
   bootstrap: [AppComponent]
 })

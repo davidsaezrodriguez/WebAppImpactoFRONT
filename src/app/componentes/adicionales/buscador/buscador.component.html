@@ -2,7 +2,7 @@
     [class.has-success]="form.controls['input'].valid && form.controls['input'].dirty">
     <label class="formBuscar col-md-12">
         <span class="icon"><i class="fa fa-search"></i></span>
-        <input class="form-control col-md-11" type="search" placeholder="Buscar usuario" id="buscarUsuario"
+        <input class="form-control col-md-11" type="search" placeholder="Buscar usuario" id="buscarUsuario" autocomplete="off"
             formControlName="input" (mousedown)="showAutocomplete()" (blur)="selectObject(null)" type="text"
             [attr.placeholder]="inputLoader ? '' : config.placeholder" class="form-control {{config.inputClass}}">
     </label>

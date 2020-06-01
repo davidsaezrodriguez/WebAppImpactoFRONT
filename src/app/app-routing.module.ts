@@ -24,7 +24,7 @@ const routes: Routes = [
         component: TablasComponent,
       },
       {
-        path: 'crear',
+        path: 'crear/:idUsuario',
         component: CrearTablasComponent,
       },
       {

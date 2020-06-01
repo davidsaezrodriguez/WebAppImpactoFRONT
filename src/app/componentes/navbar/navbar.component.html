@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-sm navbar-light" id="navbar">
-    <a class="navbar-brand" href="/menu">
+    <a class="navbar-brand" href="/">
         <img src="/assets/imagenes/logoImpacto.png">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" (click)="expandirNav()" *ngIf="comprobarAutentificacion()">
@@ -23,19 +23,19 @@
             <li class="nav-item">
                 <a class="nav-link" >Clases</a>
             </li>
-
         </ul>
         <ul  class="navbar-nav ">
-            <li class="nav-item dropleft ">
+            <li class="nav-item dropdown ">
                 <a class="nav-link dropleft-toggle " id="navbarDropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    {{usuarioLogeado.nombre}}
+                    
                     <i class="fas fa-user fa-2x ml-2"></i>
+                    {{usuarioLogeado.nombre}}
                     
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <div class="dropdown-menu " aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="#">Cambiar contraseña</a>
-                    <a class="dropdown-item" href="#" (click)="cerrarSesion()">Cerrar sesion</a>
+                    <a class="dropdown-item" href="/" (click)="cerrarSesion()">Cerrar sesion</a>
                 </div>
             </li>
         </ul>

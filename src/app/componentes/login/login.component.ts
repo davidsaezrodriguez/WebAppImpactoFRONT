@@ -4,6 +4,7 @@ import { AutentificacionService } from 'src/app/servicios/autentificacionService
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 import { Usuario } from 'src/app/modelos/usuario';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { LocalService } from 'src/app/servicios/localService';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private autentificacionService: AutentificacionService,
+    private localService: LocalService, // Servicio para recuperar datos del localstorage
     private router: Router,
     private formBuilder: FormBuilder,
   ) { }
@@ -58,7 +60,7 @@ export class LoginComponent implements OnInit {
 
   // Comprobamos hay algun usuario ya logeado y si es que si mandamos a menu directamente
   usuarioLogeado() {
-    if (this.autentificacionService.comprobarAutentificacion()) {
+    if (this.localService.comprobarAutentificacion()) {
       this.router.navigate(['/menu']);
     }
   }

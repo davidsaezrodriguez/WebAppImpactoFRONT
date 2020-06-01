@@ -6,10 +6,10 @@ export interface Tabla {
     _id?: String;
     usuario: String;
     nombre: String;
-    dias: Dia[];
+    dia: Dia[];
 }
 export interface Dia {
-    ejercicios: Ejercicio[];
+    ejercicio: Ejercicio[];
 }
 export interface Ejercicio {
     nombre: String;

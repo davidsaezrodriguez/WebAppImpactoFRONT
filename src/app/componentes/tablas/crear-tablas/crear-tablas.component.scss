@@ -1,0 +1,24 @@
+h2{
+    text-align: center;
+    margin: 1em;
+}
+
+
+// Diseño de la tarjeta para cada dia de la tabla
+.dia{
+    background-color: rgba(104, 104, 104, 0.452);
+    border: 1px solid rgba(109, 109, 109, 0.1);
+   
+    margin: 1em;
+    padding: 1.5em;;
+}
+th{
+    background-color: rgb(47, 47, 47) !important;
+}
+.tablaEjercicios{
+    margin-top: 1em;
+}
+.botonAñadirEjer{
+    background-color: red;
+    margin-bottom: 5px;
+}

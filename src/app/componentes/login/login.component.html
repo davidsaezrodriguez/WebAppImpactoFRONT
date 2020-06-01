@@ -1,31 +1,32 @@
-<section>
-	<div class="d-flex justify-content-center align-items-center h-100">
-		<div class="card">
-			<div class="card-header">
-				<h3>Login</h3>
-				<div class="d-flex justify-content-end social_icon">
-					<span> <a class="fb-ic" href="https://www.facebook.com/GimansioImpactoLaguna"><i class="fab fa-facebook-square"></i></a></span>
-					<span><a class="ins-ic" href="https://www.instagram.com/impactolaguna"><i class="fab fa-instagram-square"></i></a></span>
-				</div>
+<section class="d-flex justify-content-center align-items-center h-100">
+	<div class="card">
+		<div class="card-header">
+			<h3>Login</h3>
+			<div class="d-flex justify-content-end social_icon">
+				<span> <a class="fb-ic" href="https://www.facebook.com/GimansioImpactoLaguna"><i
+							class="fab fa-facebook-square"></i></a></span>
+				<span><a class="ins-ic" href="https://www.instagram.com/impactolaguna"><i
+							class="fab fa-instagram-square"></i></a></span>
 			</div>
-			<div class="card-body">
-				<div class="col-xs-12 col-sm-12" [formGroup]="formLogin" class="login-container">
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-user"></i></span>
-                        </div>
-                        <input type="text" class="form-control input-sm" formControlName="dni"  placeholder="DNI">
+		</div>
+		<div class="card-body">
+			<div class="col-xs-12 col-sm-12" [formGroup]="formLogin" class="login-container">
+				<div class="input-group form-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text"><i class="fas fa-user"></i></span>
 					</div>
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-key"></i></span>
-                        </div>
-                        <input type="password" class="form-control input-sm" formControlName="password"  placeholder="Contraseña">
-					</div>
-                    <button (click)="accederApp()" type="button" class="btn float-right login_btn">
-                        ACCEDER
-                    </button>
+					<input type="text" class="form-control input-sm" formControlName="dni" placeholder="DNI">
 				</div>
+				<div class="input-group form-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text"><i class="fas fa-key"></i></span>
+					</div>
+					<input type="password" class="form-control input-sm" formControlName="password"
+						placeholder="Contraseña">
+				</div>
+				<button (click)="accederApp()" type="button" class="btn float-right login_btn">
+					ACCEDER
+				</button>
 			</div>
 		</div>
 	</div>

@@ -4,6 +4,8 @@ import { ConfiguracionBuscador } from '../adicionales/buscador/buscador.componen
 import { Subject } from 'rxjs';
 import { Usuario } from 'src/app/modelos/usuario';
 import { Tabla, Tablas } from 'src/app/modelos/tabla';
+import { LocalService } from 'src/app/servicios/localService';
+import { TablasService } from 'src/app/servicios/tablasService';
 
 // tslint:disable: member-ordering
 @Component({
@@ -15,26 +17,49 @@ export class TablasComponent implements OnInit {
 
   //#region VARIABLES
 
-  public tablasUsuario: Tabla[] = [];
+  // Array donde almacenamos las tablas que nos devuelve la api para el usuario seleccionado o logeado
+  tablasUsuario: Tabla[] = [];
+
+  // Nivel de acceso de usuario logeado
+  acceso = this.localService.getAccesoUsuario();
+
+  // Id de usuario logeado
+  idUsuario = null;
 
   //#endregion
 
   constructor(
     private autentificacionService: AutentificacionService, // Servicio para interactuar con API
+    private localService: LocalService, // Servicio para recuperar datos del localstorage
+    private tablasService: TablasService // Servicio para interactuar con API con TABLAS
   ) {
   }
 
+  // usuarioAccesoTablas: [];
   ngOnInit(): void {
     // Cargamos los nombres de usuarios de BD en el componente de buscador
     this.autentificacionService.usuariosRegistrados().subscribe(data => (
+      // this.usuarioAccesoTablas = data.usuarios
       this.configBuscador.values = data.usuarios
     ));
+    // for (let usuario of this.usuarioAccesoTablas) {
+    //   if(usuario.)
+    //   this.usuarioAccesoTablas.push(usuario)
+    // };
+
+
+    // Si accceso es 1 seria admin por lo que usaria el buscador para cargar tablas de usuario
+    // si es otro nivel es un usuario, cargamos sus tablas
+    if (this.acceso !== '1') {
+      this.idUsuario = this.localService.getIdUsuario();
+      this.cargarTablasUsuario(this.idUsuario);
+    }
   }
 
   //#region COMPONENTES
 
   // Buscador de usuarios
-  public configBuscador: ConfiguracionBuscador = {
+  configBuscador: ConfiguracionBuscador = {
     values: [],
     selected: null,
     filter: 'nombre',
@@ -43,17 +68,20 @@ export class TablasComponent implements OnInit {
     fontSize: '14px',
     fontColor: '#000000',
     render: (value) => value.nombre
-    // render: (value: Proyecto) => value.nombre
   };
+
   selectUsuario($event) {
     if ($event != null) {
-      const idUsuario = $event._id;
-      this.cargarTablasUsuario(idUsuario);
+      this.idUsuario = $event._id;
+      this.cargarTablasUsuario(this.idUsuario);
+    } else {
+      this.tablasUsuario = []; // Si selecciona fuera vaciamos las tablas por si se cargaron antes
+      this.idUsuario = null; // Tambien vaciamos el usuario ya que no habria ninguno seleccionado
     }
   }
-
+  // Buscamos con api las tablas del usuario seleccionado y las cargamos
   cargarTablasUsuario(idUsuario) {
-    this.autentificacionService.listarTablasUsuario(idUsuario).subscribe(data => {
+    this.tablasService.listarTablasUsuario(idUsuario).subscribe(data => {
       this.tablasUsuario = data.tablas;
     });
   }

@@ -1,0 +1,16 @@
+h2{
+    padding-top: 1em;;
+}
+// Diseño de la tarjeta para cada dia de la tabla
+.dia{
+    background-color: rgba(104, 104, 104, 0.452);
+    border: 1px solid rgba(109, 109, 109, 0.1);
+   
+    margin: 1em;
+    padding: 1.5em;;
+}
+
+// Color de la cabecera de la tabla
+th{
+    background-color: rgb(47, 47, 47) !important;
+}

@@ -1,2 +1,27 @@
-<p>visualizar-tablas works!</p>
-{{tabla}}
+<section class="col-sm-12 ">
+    <div class="row d-flex justify-content-center" *ngIf="tabla">
+        <h2 class="col-sm-12 text-center"> {{tabla.nombre}}</h2>
+        <div class="col-md-8 dia" *ngFor="let dia of tabla.dia;index as i">
+            <h3>Dia {{i+1}}</h3>
+            <div class="table-responsive">
+                <table class="table table-dark  ">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Ejercicio</th>
+                            <th scope="col">Repeticiones</th>
+                            <th scope="col">Peso Max</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let ejercicio of dia.ejercicio">
+                            <td> {{ejercicio.nombre}}</td>
+                            <td> {{ejercicio.repeticiones}}</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</section>

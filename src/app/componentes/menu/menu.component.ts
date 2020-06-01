@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AutentificacionService } from 'src/app/servicios/autentificacionService';
+import { LocalService } from 'src/app/servicios/localService';
 
 @Component({
   selector: 'app-menu',
@@ -10,12 +11,13 @@ export class MenuComponent implements OnInit {
 
   //#region VARIABLES
 
-  public nivelAcceso = this.autentificacionService.getAccesoUsuario();
+  public nivelAcceso = this.localService.getAccesoUsuario();
 
   //#endregion
 
   constructor(
-    private autentificacionService: AutentificacionService,
+    private localService: LocalService, // Servicio para recuperar datos del localstorage
+
   ) { }
 
 
