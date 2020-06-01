@@ -9,9 +9,19 @@ export interface Tabla {
     dia: Dia[];
 }
 export interface Dia {
+    _id?: String;
     ejercicio: Ejercicio[];
 }
 export interface Ejercicio {
+    _id?: string;
     nombre: String;
     repeticiones: String;
+    pesoMax: String;
 }
+
+export interface CambiosPeso {
+    idTabla: String;
+    idDia: String;
+    idEjercicio: String;
+    pesoMax: String;
+  }

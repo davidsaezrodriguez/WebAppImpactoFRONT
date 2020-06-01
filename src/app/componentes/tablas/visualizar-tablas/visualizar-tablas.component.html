@@ -6,20 +6,31 @@
             <div class="table-responsive">
                 <table class="table table-dark  ">
                     <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Ejercicio</th>
-                            <th scope="col">Repeticiones</th>
-                            <th scope="col">Peso Max</th>
+                        <tr class="d-flex">
+                            <th class="col-4 col-md-7">Ejercicio</th>
+                            <th class="col-5 col-md-3">Repeticiones</th>
+                            <th class="col-3 col-md-2">Peso Max</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let ejercicio of dia.ejercicio">
-                            <td> {{ejercicio.nombre}}</td>
-                            <td> {{ejercicio.repeticiones}}</td>
-                            <td></td>
+                        <tr *ngFor="let ejercicio of dia.ejercicio" class="d-flex">
+                            <td class="col-4 col-md-7">{{ejercicio.nombre}}</td>
+                            <td class="col-5 col-md-3">{{ejercicio.repeticiones}}</td>
+                            <td class="col-3 col-md-2">
+                                <div [formGroup]="formPesoMax">
+                                    <input type="text" class="form-control" formControlName="pesoMax"
+                                        (change)="actualizarPeso(ejercicio._id,dia._id)" placeholder="{{ejercicio.pesoMax}}">
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
+            <div class="col-sm-12 d-flex justify-content-center">
+                <button type="submit" class="btn botonGuardarPesos col-md-8 mx-auto" (click)="actualizarPesosTabla()"
+                    [disabled]="cambiosPesoMax.length==0">
+                    <i class="fas fa-plus-circle"></i> Guardar pesos nuevos
+                </button>
             </div>
 
         </div>

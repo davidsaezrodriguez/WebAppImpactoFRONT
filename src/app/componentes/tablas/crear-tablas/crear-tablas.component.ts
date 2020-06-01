@@ -78,6 +78,7 @@ export class CrearTablasComponent implements OnInit {
     const ejercicio = ({
       nombre: this.formNuevaTabla.get(inputEjer).value,
       repeticiones: this.formNuevaTabla.get(inputRep).value,
+      pesoMax : ''
     });
     dia.push(ejercicio);
     // Borramos inputs para añadir otro ejercicio
@@ -125,9 +126,10 @@ export class CrearTablasComponent implements OnInit {
         nombre: this.formNuevaTabla.controls.nombreTabla.value,
         dia: this.dias
       });
-      this.tablasService.crearTabla(this.tabla);
+      // this.tablasService.crearTabla(this.tabla);
+      console.log(this.tabla);
       alert('Tabla creada con exito');
-      this.router.navigate(['/tablas']);
+      // this.router.navigate(['/tablas']);
 
     }else {
       alert('No hay ningun ejercicio en la tabla');

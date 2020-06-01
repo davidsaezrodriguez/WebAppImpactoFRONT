@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { Tabla, Tablas } from '../modelos/tabla';
+import { Tabla, Tablas, CambiosPeso } from '../modelos/tabla';
 import { LocalService } from './localService';
 import { AutentificacionService } from './autentificacionService';
 
@@ -47,6 +47,13 @@ export class TablasService {
   // Buscamos la tabla con la api en la base de datos
   public buscarTabla(idTabla): Observable<any> {
     return this.httpClient.post<any>(`${this.ServidorBACKEND}/buscarTabla`, { idTabla });
+  }
+
+  // Actualizamos pesosMax de tabla
+  public actualizarPesoMax(cambiosPesoMax : Array<CambiosPeso>) {
+    return this.httpClient.post(`${this.ServidorBACKEND}/actualizarPeso`, cambiosPesoMax).subscribe(data => {
+      console.log(data);
+    });
   }
 
   //#endregion

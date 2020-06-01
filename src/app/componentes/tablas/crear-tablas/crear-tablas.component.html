@@ -6,19 +6,19 @@
 
 
         <div class="col-sm-12 " [formGroup]="formNuevaTabla">
-            <label class="col-sm-12 control-label text-left">
+            <label class="col-sm-12 control-label text-left labelNombreTabla">
                 Nombre de la tabla
                 <input type="text" class="form-control" formControlName="nombreTabla">
             </label>
-            <div class="dia">
-                <h3 class="col-sm-12">Dia 1</h3>
-                <label class="control-label text-left col-md-7 col-sm-12"> Ejercicio
+            <div class="dia ">
+                <h3 class="col-sm-12 pl-0">Dia 1</h3>
+                <label class="control-label text-left col-md-7 col-sm-12 pl-0  pl-0  "> Ejercicio
                     <input type="text" class="form-control" formControlName="ejercicioDia1">
                 </label>
-                <label class="control-label text-left col-md-3 col-sm-12"> Repeticiones
+                <label class="control-label text-left col-md-3 col-sm-12 pl-0 pl-0"> Repeticiones
                     <input type="text" class="form-control" formControlName="repeticionesDia1">
                 </label>
-                <button type="submit" class="btn botonAñadirEjer"
+                <button type="submit" class="btn botonAñadirEjer col-md-2 mx-auto"
                     (click)="anadirEjercicio(ejerciciosDia1,'ejercicioDia1','repeticionesDia1')"
                     [disabled]="(!formNuevaTabla.controls.ejercicioDia1.valid || !formNuevaTabla.controls.repeticionesDia1.valid)">
                     <i class="fas fa-plus-circle"></i> Añadir ejercicio
@@ -27,18 +27,20 @@
                     <table class="table table-dark   ">
                         <thead class="thead-dark">
                             <tr class="d-flex">
-                                <th class="col-7">Ejercicio</th>
-                                <th class="col-3">Repeticiones</th>
-                                <th class="col-2">Eliminar</th>
+                                <th class="col-4 col-md-7">Ejercicio</th>
+                                <th class="col-5 col-md-3">Repeticiones</th>
+                                <th class="col-3 col-md-2">Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let ejercicio of ejerciciosDia1; let i = index" class="d-flex">
-                                <td class="col-7"> {{ejercicio.nombre}}</td>
-                                <td class="col-3"> {{ejercicio.repeticiones}}</td>
-                                <td class="col-2 text-center"><button class="btn botonAñadirEjer"
+                                <td class="col-4 col-md-7"> {{ejercicio.nombre}}</td>
+                                <td class="col-5 col-md-3"> {{ejercicio.repeticiones}}</td>
+                                <td class="col-3 col-md-2 text-center">
+                                    <button class="btn botonBorrarEjer mx-auto"
                                         (click)="borrarEjercicio(ejerciciosDia1,i)">
-                                        <i class="fas fa-trash-alt"></i></button>
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
                                 </td>
                         </tbody>
                     </table>
@@ -47,14 +49,14 @@
             </div>
 
             <div class="dia">
-                <h3 class="col-sm-12">Dia 2</h3>
-                <label class="control-label text-left col-md-7 col-sm-12"> Ejercicio
+                <h3 class="col-sm-12 pl-0">Dia 2</h3>
+                <label class="control-label text-left col-md-7 col-sm-12 pl-0 "> Ejercicio
                     <input type="text" class="form-control" formControlName="ejercicioDia2">
                 </label>
-                <label class="control-label text-left col-md-3 col-sm-12"> Repeticiones
+                <label class="control-label text-left col-md-3 col-sm-12 pl-0"> Repeticiones
                     <input type="text" class="form-control" formControlName="repeticionesDia2">
                 </label>
-                <button type="submit" class="btn botonAñadirEjer  "
+                <button type="submit" class="btn botonAñadirEjer col-md-2 mx-auto"
                     (click)="anadirEjercicio(ejerciciosDia2,'ejercicioDia2','repeticionesDia2')"
                     [disabled]="(!formNuevaTabla.controls.ejercicioDia2.valid || !formNuevaTabla.controls.repeticionesDia2.valid)">
                     <i class="fas fa-plus-circle"></i> Añadir ejercicio
@@ -63,16 +65,16 @@
                     <table class="table table-dark   ">
                         <thead class="thead-dark">
                             <tr class="d-flex">
-                                <th class="col-7">Ejercicio</th>
-                                <th class="col-3">Repeticiones</th>
-                                <th class="col-2">Eliminar</th>
+                                <th class="col-4 col-md-7">Ejercicio</th>
+                                <th class="col-5 col-md-3">Repeticiones</th>
+                                <th class="col-3 col-md-2">Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let ejercicio of ejerciciosDia2; let i = index" class="d-flex">
-                                <td class="col-7"> {{ejercicio.nombre}}</td>
-                                <td class="col-3"> {{ejercicio.repeticiones}}</td>
-                                <td class="col-2 text-center"><button class="btn botonAñadirEjer"
+                                <td class="col-4 col-md-7"> {{ejercicio.nombre}}</td>
+                                <td class="col-5 col-md-3"> {{ejercicio.repeticiones}}</td>
+                                <td class="col-3 col-md-2 text-center"><button class="btn botonBorrarEjer"
                                         (click)="borrarEjercicio(ejerciciosDia2,i)">
                                         <i class="fas fa-trash-alt"></i></button>
                                 </td>
@@ -82,14 +84,14 @@
                 </div>
             </div>
             <div class="dia">
-                <h3 class="col-sm-12">Dia 3</h3>
-                <label class="control-label text-left col-md-7 col-sm-12"> Ejercicio
+                <h3 class="col-sm-12 pl-0">Dia 3</h3>
+                <label class="control-label text-left col-md-7 col-sm-12 pl-0 "> Ejercicio
                     <input type="text" class="form-control" formControlName="ejercicioDia3">
                 </label>
-                <label class="control-label text-left col-md-3 col-sm-12"> Repeticiones
+                <label class="control-label text-left col-md-3 col-sm-12 pl-0"> Repeticiones
                     <input type="text" class="form-control" formControlName="repeticionesDia3">
                 </label>
-                <button type="submit" class="btn botonAñadirEjer  "
+                <button type="submit" class="btn botonAñadirEjer col-md-2 mx-auto"
                     (click)="anadirEjercicio(ejerciciosDia3,'ejercicioDia3','repeticionesDia3')"
                     [disabled]="(!formNuevaTabla.controls.ejercicioDia3.valid || !formNuevaTabla.controls.repeticionesDia3.valid)">
                     <i class="fas fa-plus-circle"></i> Añadir ejercicio
@@ -98,16 +100,16 @@
                     <table class="table table-dark   ">
                         <thead class="thead-dark">
                             <tr class="d-flex">
-                                <th class="col-7">Ejercicio</th>
-                                <th class="col-3">Repeticiones</th>
-                                <th class="col-2">Eliminar</th>
+                                <th class="col-4 col-md-7">Ejercicio</th>
+                                <th class="col-5 col-md-3">Repeticiones</th>
+                                <th class="col-3 col-md-2">Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let ejercicio of ejerciciosDia3; let i = index" class="d-flex">
-                                <td class="col-7"> {{ejercicio.nombre}}</td>
-                                <td class="col-3"> {{ejercicio.repeticiones}}</td>
-                                <td class="col-2 text-center"><button class="btn botonAñadirEjer"
+                                <td class="col-4 col-md-7"> {{ejercicio.nombre}}</td>
+                                <td class="col-5 col-md-3"> {{ejercicio.repeticiones}}</td>
+                                <td class="col-3 col-md-2 text-center"><button class="btn botonBorrarEjer"
                                         (click)="borrarEjercicio(ejerciciosDia3,i)">
                                         <i class="fas fa-trash-alt"></i></button>
                                 </td>
@@ -117,14 +119,14 @@
                 </div>
             </div>
             <div class="dia">
-                <h3 class="col-sm-12">Dia 4</h3>
-                <label class="control-label text-left col-md-7 col-sm-12"> Ejercicio
+                <h3 class="col-sm-12 pl-0">Dia 4</h3>
+                <label class="control-label text-left col-md-7 col-sm-12 pl-0 "> Ejercicio
                     <input type="text" class="form-control" formControlName="ejercicioDia4">
                 </label>
-                <label class="control-label text-left col-md-3 col-sm-12"> Repeticiones
+                <label class="control-label text-left col-md-3 col-sm-12 pl-0"> Repeticiones
                     <input type="text" class="form-control" formControlName="repeticionesDia4">
                 </label>
-                <button type="submit" class="btn botonAñadirEjer  "
+                <button type="submit" class="btn botonAñadirEjer col-md-2 mx-auto"
                     (click)="anadirEjercicio(ejerciciosDia4,'ejercicioDia4','repeticionesDia4')"
                     [disabled]="(!formNuevaTabla.controls.ejercicioDia4.valid || !formNuevaTabla.controls.repeticionesDia4.valid)">
                     <i class="fas fa-plus-circle"></i> Añadir ejercicio
@@ -133,16 +135,16 @@
                     <table class="table table-dark   ">
                         <thead class="thead-dark">
                             <tr class="d-flex">
-                                <th class="col-7">Ejercicio</th>
-                                <th class="col-3">Repeticiones</th>
-                                <th class="col-2">Eliminar</th>
+                                <th class="col-4 col-md-7">Ejercicio</th>
+                                <th class="col-5 col-md-3">Repeticiones</th>
+                                <th class="col-3 col-md-2">Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let ejercicio of ejerciciosDia4; let i = index" class="d-flex">
-                                <td class="col-7"> {{ejercicio.nombre}}</td>
-                                <td class="col-3"> {{ejercicio.repeticiones}}</td>
-                                <td class="col-2 text-center"><button class="btn botonAñadirEjer"
+                                <td class="col-4 col-md-7"> {{ejercicio.nombre}}</td>
+                                <td class="col-5 col-md-3"> {{ejercicio.repeticiones}}</td>
+                                <td class="col-3 col-md-2 text-center"><button class="btn botonBorrarEjer"
                                         (click)="borrarEjercicio(ejerciciosDia4,i)">
                                         <i class="fas fa-trash-alt"></i></button>
                                 </td>
@@ -152,14 +154,14 @@
                 </div>
             </div>
             <div class="dia">
-                <h3 class="col-sm-12">Dia 5</h3>
-                <label class="control-label text-left col-md-7 col-sm-12"> Ejercicio
+                <h3 class="col-sm-12 pl-0">Dia 5</h3>
+                <label class="control-label text-left col-md-7 col-sm-12 pl-0  pl-0 "> Ejercicio
                     <input type="text" class="form-control" formControlName="ejercicioDia5">
                 </label>
-                <label class="control-label text-left col-md-3 col-sm-12"> Repeticiones
+                <label class="control-label text-left col-md-3 col-sm-12 pl-0"> Repeticiones
                     <input type="text" class="form-control" formControlName="repeticionesDia5">
                 </label>
-                <button type="submit" class="btn botonAñadirEjer  "
+                <button type="submit" class="btn botonAñadirEjer col-md-2 mx-auto"
                     (click)="anadirEjercicio(ejerciciosDia5,'ejercicioDia5','repeticionesDia5')"
                     [disabled]="(!formNuevaTabla.controls.ejercicioDia5.valid || !formNuevaTabla.controls.repeticionesDia5.valid)">
                     <i class="fas fa-plus-circle"></i> Añadir ejercicio
@@ -168,16 +170,16 @@
                     <table class="table table-dark   ">
                         <thead class="thead-dark">
                             <tr class="d-flex">
-                                <th class="col-7">Ejercicio</th>
-                                <th class="col-3">Repeticiones</th>
-                                <th class="col-2">Eliminar</th>
+                                <th class="col-4 col-md-7">Ejercicio</th>
+                                <th class="col-5 col-md-3">Repeticiones</th>
+                                <th class="col-3 col-md-2">Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let ejercicio of ejerciciosDia5; let i = index" class="d-flex">
-                                <td class="col-7"> {{ejercicio.nombre}}</td>
-                                <td class="col-3"> {{ejercicio.repeticiones}}</td>
-                                <td class="col-2 text-center"><button class="btn botonAñadirEjer"
+                                <td class="col-4 col-md-7"> {{ejercicio.nombre}}</td>
+                                <td class="col-5 col-md-3"> {{ejercicio.repeticiones}}</td>
+                                <td class="col-3 col-md-2 text-center"><button class="btn botonBorrarEjer"
                                         (click)="borrarEjercicio(ejerciciosDia5,i)">
                                         <i class="fas fa-trash-alt"></i></button>
                                 </td>
@@ -187,7 +189,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center p-3">
-                <button type="submit" class="btn botonAñadirEjer col-md-10  " (click)="guardarTabla()" >
+                <button type="submit" class="btn botonGuardarTabla col-sm-12" (click)="guardarTabla()">
                     <i class="fas fa-save"></i>Guardar tabla
                 </button>
             </div>

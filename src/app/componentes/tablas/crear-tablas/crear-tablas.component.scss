@@ -1,24 +1,57 @@
-h2{
+h2 {
     text-align: center;
     margin: 1em;
 }
 
-
 // Diseño de la tarjeta para cada dia de la tabla
-.dia{
+.dia {
     background-color: rgba(104, 104, 104, 0.452);
     border: 1px solid rgba(109, 109, 109, 0.1);
-   
+
     margin: 1em;
-    padding: 1.5em;;
+    padding: 1.5em;
 }
-th{
+th {
     background-color: rgb(47, 47, 47) !important;
 }
-.tablaEjercicios{
+.tablaEjercicios {
     margin-top: 1em;
+    padding-right: 0;
+    padding-left: 0;
 }
-.botonAñadirEjer{
+
+// Estilo de botones
+.botonAñadirEjer {
     background-color: red;
     margin-bottom: 5px;
+}
+.botonBorrarEjer {
+    background-color: red;
+}
+.botonGuardarTabla {
+    background-color: red;
+    margin-bottom: 5px;
+}
+tr th,tr td {
+    padding-left: 3px;
+}
+// Css para version movil
+@media only screen and (max-width: 768px) {
+    // Quitamos padding a la tarjeta que engloba cada dia y ponemos en columna
+    .dia {
+        padding: 0.5em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .botonAñadirEjer {
+        width: 12em;
+        margin-top: 0.5em;
+    }
+    label {
+        padding-right: 0;
+    }
+    .labelNombreTabla {
+        padding-right: 15px;
+    }
 }
