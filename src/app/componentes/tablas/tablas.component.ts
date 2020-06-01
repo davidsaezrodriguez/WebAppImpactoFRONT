@@ -1,9 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { AutentificacionService } from 'src/app/servicios/autentificacionService';
 import { ConfiguracionBuscador } from '../adicionales/buscador/buscador.component';
-import { Subject } from 'rxjs';
-import { Usuario } from 'src/app/modelos/usuario';
-import { Tabla, Tablas } from 'src/app/modelos/tabla';
+import { Tabla } from 'src/app/modelos/tabla';
 import { LocalService } from 'src/app/servicios/localService';
 import { TablasService } from 'src/app/servicios/tablasService';
 
@@ -35,24 +33,17 @@ export class TablasComponent implements OnInit {
   ) {
   }
 
-  // usuarioAccesoTablas: [];
   ngOnInit(): void {
-    // Cargamos los nombres de usuarios de BD en el componente de buscador
-    this.autentificacionService.usuariosRegistrados().subscribe(data => (
-      // this.usuarioAccesoTablas = data.usuarios
-      this.configBuscador.values = data.usuarios
-    ));
-    // for (let usuario of this.usuarioAccesoTablas) {
-    //   if(usuario.)
-    //   this.usuarioAccesoTablas.push(usuario)
-    // };
-
-
     // Si accceso es 1 seria admin por lo que usaria el buscador para cargar tablas de usuario
     // si es otro nivel es un usuario, cargamos sus tablas
     if (this.acceso !== '1') {
       this.idUsuario = this.localService.getIdUsuario();
       this.cargarTablasUsuario(this.idUsuario);
+    } else {
+      // Cargamos los nombres de usuarios de BD en el componente de buscador
+      this.autentificacionService.usuariosNivelAcceso([2, 5, 6, 7]).subscribe(data => (
+        this.configBuscador.values = data.usuarios
+      ));
     }
   }
 

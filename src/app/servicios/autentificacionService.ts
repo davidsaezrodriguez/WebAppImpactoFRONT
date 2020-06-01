@@ -62,6 +62,11 @@ export class AutentificacionService {
     return this.httpClient.post<any>(`${this.ServidorBACKEND}/listarUsuarios`, '');
   }
 
+  // Buscamos usuarios con el nivel acceso indicado. El nivel habra que mandarle en formato { "acceso" : [1,3,4] }
+  public usuariosNivelAcceso(acceso) {
+    return this.httpClient.post<any>(`${this.ServidorBACKEND}/listarUsuariosFiltrarNivel`, {acceso});
+  }
+
   //#endregion
 
 
