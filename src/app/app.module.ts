@@ -1,11 +1,10 @@
-
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AutentificacionService } from './servicios/autentificacionService';
 import { MenuComponent } from './componentes/menu/menu.component';
@@ -17,6 +16,9 @@ import { CrearTablasComponent } from './componentes/tablas/crear-tablas/crear-ta
 import { VisualizarTablasComponent } from './componentes/tablas/visualizar-tablas/visualizar-tablas.component';
 import { LocalService } from './servicios/localService';
 import { TablasService } from './servicios/tablasService';
+import { AuthInterceptor } from './servicios/AuthInteceptor';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -36,9 +38,12 @@ import { TablasService } from './servicios/tablasService';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     AutentificacionService,
     LocalService,
     TablasService

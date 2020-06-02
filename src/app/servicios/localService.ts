@@ -1,6 +1,7 @@
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Injectable } from '@angular/core';
 import { JsonWebToken } from '../modelos/jsonWebToken';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class LocalService {
@@ -12,6 +13,7 @@ export class LocalService {
     private token: string;
 
     constructor(
+        private router: Router,
     ) {
 
     }
@@ -19,10 +21,11 @@ export class LocalService {
     //#region FUNCIONES
 
     // Funcion que nos eliminara el token del localStorage del navegador
-    borrarToken(): void {
+    cerrarSesion(): void {
         this.token = '';
         localStorage.removeItem('TokenDeAcceso');
         localStorage.removeItem('ExpiracionToken');
+        this.router.navigate(['/']);
     }
 
     // Comprobamos si el usuario esta autentificado si esta el token el el storage

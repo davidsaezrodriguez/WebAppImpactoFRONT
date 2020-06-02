@@ -55,8 +55,7 @@ export class NavbarComponent implements OnInit {
 
   // Funcion con la que eliminamos el token generado y cerramos sesion
   cerrarSesion(): void {
-    this.localService.borrarToken();
-    this.router.navigate(['/']);
+    this.localService.cerrarSesion();
   }
 
   // Comporbamos si el usuario esta logeado para mostrar menus de navbar o no

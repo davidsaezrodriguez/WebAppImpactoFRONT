@@ -3,6 +3,7 @@ import { Tabla, Ejercicio, Dia } from 'src/app/modelos/tabla';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { TablasService } from 'src/app/servicios/tablasService';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -41,7 +42,8 @@ export class CrearTablasComponent implements OnInit {
     private tablasService: TablasService, // Servicio para interactuar con API con TABLAS
     private formBuilder: FormBuilder,
     private router: Router,
-  ){
+    private toastr: ToastrService // Servicio que nos creara notificaciones
+  ) {
     this.setformNuevaTabla();
   }
 
@@ -78,7 +80,7 @@ export class CrearTablasComponent implements OnInit {
     const ejercicio = ({
       nombre: this.formNuevaTabla.get(inputEjer).value,
       repeticiones: this.formNuevaTabla.get(inputRep).value,
-      pesoMax : ''
+      pesoMax: ''
     });
     dia.push(ejercicio);
     // Borramos inputs para añadir otro ejercicio
@@ -126,13 +128,16 @@ export class CrearTablasComponent implements OnInit {
         nombre: this.formNuevaTabla.controls.nombreTabla.value,
         dia: this.dias
       });
-      // this.tablasService.crearTabla(this.tabla);
-      console.log(this.tabla);
-      alert('Tabla creada con exito');
-      // this.router.navigate(['/tablas']);
+      this.tablasService.crearTabla(this.tabla);
+      this.toastr.success('', 'Tabla creada correctamente', {
+        timeOut: 3000,
+      });
+      this.router.navigate(['/tablas']);
 
-    }else {
-      alert('No hay ningun ejercicio en la tabla');
+    } else {
+      this.toastr.warning('', 'No hay ningun ejercicio en la tabla', {
+        timeOut: 3000,
+      });
     }
   }
 

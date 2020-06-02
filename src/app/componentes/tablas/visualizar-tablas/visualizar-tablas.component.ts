@@ -4,6 +4,7 @@ import { Tabla, Tablas, CambiosPeso } from 'src/app/modelos/tabla';
 import { AutentificacionService } from 'src/app/servicios/autentificacionService';
 import { TablasService } from 'src/app/servicios/tablasService';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-visualizar-tablas',
@@ -33,7 +34,8 @@ export class VisualizarTablasComponent implements OnInit {
     private rutaActiva: ActivatedRoute, // Clase con la que cogemos de URL el valor idTabla que nos manda el componente tablas
     private autentificacionService: AutentificacionService, // Servicio para interactuar con API
     private tablasService: TablasService, // Servicio para interactuar con API con TABLAS
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService // Servicio que nos creara notificaciones
   ) {
     this.setformPesoMax()
   }
@@ -80,9 +82,13 @@ export class VisualizarTablasComponent implements OnInit {
   // Funcion con la que mandamos un array con todos los pesos cambiados a la bbdd con la api
   actualizarPesosTabla() {
     this.tablasService.actualizarPesoMax(this.cambiosPesoMax);
+    // tslint:disable-next-line: no-unused-expression
+
+    this.toastr.success('', 'Pesos actualizados', {
+      timeOut: 3000,
+    });
     this.cambiosPesoMax = [];
   }
-  
   //#endregion
 }
 
