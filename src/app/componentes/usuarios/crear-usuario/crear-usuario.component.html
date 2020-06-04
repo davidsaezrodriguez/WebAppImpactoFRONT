@@ -1,0 +1,61 @@
+<section class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-sm-12 text-center">
+            <h2 class=""> Creacion de nuevo usuario </h2>
+        </div>
+
+        <div class="col-sm-6 " [formGroup]="formNuevoUsuario">
+            <label class="col-sm-12 col-md-12 control-label text-left labelNombreTabla">
+                DNI
+                <input type="text" class="form-control" formControlName="dniUsuario">
+            </label>
+            <label class="control-label text-left col-sm-12 col-md-12 "> Nombre
+                <input type="text" class="form-control" formControlName="nombreUsuario">
+            </label>
+            <label class="control-label text-left col-sm-12 col-md-12"> Domicilio
+                <input type="text" class="form-control" formControlName="domicilioUsuario">
+            </label>
+            <label class="control-label text-left col-sm-12 col-md-12"> Telefono
+                <input type="text" class="form-control" formControlName="telefonoUsuario">
+            </label>
+            <label class="control-label text-left col-sm-12 col-md-12">Nivel de acceso del usuario
+                <select class="form-control" formControlName="accesoUsuario">
+                    <option value="2" selected >Ejercicio</option>
+                    <option value="3">Nutricion</option>
+                    <option value="4">Clases</option>
+                    <option value="5">Ejercicio + Nutricion</option>
+                    <option value="6">Ejercicio + Clases</option>
+                    <option value="7">Nutricion + Clases</option>
+                    <option value="8">Ejercicio + Nutricion + Clases</option>
+                    <option value="1">Administrador</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="row d-flex justify-content-center col-sm-12 col-md-6">
+            <div class="col-sm-10 tarjeta row ">
+                <i class="fas fa-user fa-4x col-sm-2 text-center"></i>
+                <div class="col-sm-10">
+                    <h5 class="col-sm-12">DNI: {{formNuevoUsuario.controls.dniUsuario.value}}</h5>
+                    <h5 class="col-sm-12">Nombre: {{formNuevoUsuario.controls.nombreUsuario.value}}</h5>
+                    <h5 class="col-sm-12">Domicilio: {{formNuevoUsuario.controls.domicilioUsuario.value}}</h5>
+                    <h5 class="col-sm-12">Telefono: {{formNuevoUsuario.controls.telefonoUsuario.value}}</h5>
+                    <h5 class="col-sm-12">Acceso: {{nivelAcceso()}}</h5>
+                </div>
+            </div>
+            <button type="submit" class="btn botonCrearUsuario col-sm-6 mx-auto" (click)="crearUsuario()"
+                [disabled]="(!formNuevoUsuario.valid)">
+                <i class="fas fa-save"></i> Guardar usuario
+            </button>
+
+        </div>
+        <div class="col-sm-12 col-md-9 pt-4">
+            <div class="alert alert-dark" role="alert">
+                El nuevo usuario tendra de contraseña <strong>'123456'</strong>, tendra que cambiarla cuando entre en la aplicacion
+              </div>
+        </div>
+
+
+    </div>
+</section>

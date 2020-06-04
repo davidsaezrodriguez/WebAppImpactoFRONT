@@ -1,3 +1,4 @@
+// Section que engloba todo el componente
 section{
     min-height: calc(100vh - 60px - 85px);
     background: url("src/assets/imagenes/fondoLogin.jpg") no-repeat center center fixed;
@@ -6,6 +7,8 @@ section{
     justify-content: center;
     align-items: center;
 }
+
+// Diseño de tarjeta que recuadra opciones
 .tarjeta{
     display: flex;
     justify-content: center;

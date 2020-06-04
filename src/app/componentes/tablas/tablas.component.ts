@@ -1,5 +1,5 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { AutentificacionService } from 'src/app/servicios/autentificacionService';
+import { UsuariosService } from 'src/app/servicios/usuariosService';
 import { ConfiguracionBuscador } from '../adicionales/buscador/buscador.component';
 import { Tabla } from 'src/app/modelos/tabla';
 import { LocalService } from 'src/app/servicios/localService';
@@ -27,7 +27,7 @@ export class TablasComponent implements OnInit {
   //#endregion
 
   constructor(
-    private autentificacionService: AutentificacionService, // Servicio para interactuar con API
+    private usuariosService: UsuariosService, // Servicio para interactuar con API
     private localService: LocalService, // Servicio para recuperar datos del localstorage
     private tablasService: TablasService // Servicio para interactuar con API con TABLAS
   ) {
@@ -41,7 +41,7 @@ export class TablasComponent implements OnInit {
       this.cargarTablasUsuario(this.idUsuario);
     } else {
       // Cargamos los nombres de usuarios de BD en el componente de buscador
-      this.autentificacionService.usuariosNivelAcceso([2, 5, 6, 7]).subscribe(data => (
+      this.usuariosService.usuariosNivelAcceso([2, 5, 6, 7]).subscribe(data => (
         this.configBuscador.values = data.usuarios
       ));
     }
@@ -61,6 +61,7 @@ export class TablasComponent implements OnInit {
     render: (value) => value.nombre
   };
 
+  // Funcion utilizada pada cuando se selecciona usuario del autocomplete en la version admin
   selectUsuario($event) {
     if ($event != null) {
       this.idUsuario = $event._id;
@@ -70,6 +71,7 @@ export class TablasComponent implements OnInit {
       this.idUsuario = null; // Tambien vaciamos el usuario ya que no habria ninguno seleccionado
     }
   }
+
   // Buscamos con api las tablas del usuario seleccionado y las cargamos
   cargarTablasUsuario(idUsuario) {
     this.tablasService.listarTablasUsuario(idUsuario).subscribe(data => {

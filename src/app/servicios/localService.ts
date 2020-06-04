@@ -31,7 +31,7 @@ export class LocalService {
     // Comprobamos si el usuario esta autentificado si esta el token el el storage
     public comprobarAutentificacion(): boolean {
         // tslint:disable-next-line: semicolon
-        return localStorage.getItem('TokenDeAcceso') !== null && localStorage.getItem('ExpiracionToken') !== null
+        return localStorage.getItem('TokenDeAcceso') !== null;
     }
 
     // Nos devolvera el token guardado en localstorage

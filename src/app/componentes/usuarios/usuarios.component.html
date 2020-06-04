@@ -1,0 +1,23 @@
+<section class="col-sm-12">
+    <div class="row" >  
+        <div class="col-sm-12 d-flex justify-content-center">
+            <div class="col-md-4 pt-5">
+                <buscador-component (selected)="selectUsuario($event)" [config]="configBuscador" (click)="refrescarUsuarios()">
+                </buscador-component>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center ">
+        <a class="col-sm-12 col-md-3 tarjeta row " [routerLink]="'/usuarios/crearUsuario'" >
+            <i class="fas fa-plus-square fa-4x"></i>
+            <h4 class="col-sm-12">Añadir usuario</h4>
+        </a>
+    </div>
+    <div class="row d-flex justify-content-center ">
+       
+        <a class="col-sm-12 col-md-2 tarjeta row " *ngFor="let usuario of usuarios"   [routerLink]="['/usuarios/datosUsuario',usuario._id]" >
+            <i class="fas fa-user fa-4x"></i>
+            <h4 class="col-sm-12">{{usuario.nombre}}</h4>
+        </a>
+    </div>
+</section>

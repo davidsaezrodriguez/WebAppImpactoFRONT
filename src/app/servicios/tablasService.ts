@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Tabla, Tablas, CambiosPeso } from '../modelos/tabla';
-import { LocalService } from './localService';
-import { AutentificacionService } from './autentificacionService';
 
 @Injectable()
 export class TablasService {
@@ -19,9 +17,7 @@ export class TablasService {
   private token: string;
 
   constructor(
-    private httpClient: HttpClient,
-    private autentificacionService: AutentificacionService, // Servicio para interactuar con API autentificacion
-    private localService: LocalService, // Servicio para recuperar datos del localstorage
+    private httpClient: HttpClient
   ) {
 
   }
@@ -29,17 +25,11 @@ export class TablasService {
   //#region FUNCIONES INTERACTUAR CON API
 
   // Funcion para guardar en base de datos nueva tabla
-  crearTabla(tabla: Tabla) {
-    // Creamos una variable con la tabla para crear un padre al json de la tabla llamado "tabla" y poder buscar mejor con la api
-    const nuevaTabla = ({
-      tabla
-    });
-    return this.httpClient.post(`${this.ServidorBACKEND}/crearTabla`, nuevaTabla).subscribe(data => {
-      console.log(data);
-    });
+  crearTabla(tabla: Tabla): Observable<any> {
+    return this.httpClient.post<any>(`${this.ServidorBACKEND}/crearTabla`, { tabla });
   }
 
-  // Buscamos los usuarios registrados en la base de datos y devolvemos nombre y id
+  // Buscamos las tablas del usuario que mandamos a la api
   public listarTablasUsuario(idUsuario): Observable<Tablas> {
     return this.httpClient.post<Tablas>(`${this.ServidorBACKEND}/listarTablasUsuario`, { idUsuario });
   }
@@ -50,10 +40,8 @@ export class TablasService {
   }
 
   // Actualizamos pesosMax de tabla
-  public actualizarPesoMax(cambiosPesoMax : Array<CambiosPeso>) {
-    return this.httpClient.post(`${this.ServidorBACKEND}/actualizarPeso`, cambiosPesoMax).subscribe(data => {
-      console.log(data);
-    });
+  public actualizarPesoMax(cambiosPesoMax: Array<CambiosPeso>) {
+    return this.httpClient.post(`${this.ServidorBACKEND}/actualizarPeso`, cambiosPesoMax);
   }
 
   //#endregion

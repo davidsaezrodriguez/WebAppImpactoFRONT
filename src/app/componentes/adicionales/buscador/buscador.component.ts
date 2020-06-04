@@ -1,6 +1,5 @@
-import { debounceTime } from 'rxjs/internal/operators';
+
 import { Component, OnInit, EventEmitter, ElementRef, ViewChild, Output, Input, NgZone } from '@angular/core';
-import { Subject } from 'rxjs';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 export interface ConfiguracionBuscador {
@@ -37,19 +36,19 @@ export class BuscadorComponent implements OnInit {
   @ViewChild('autocompleteList') autocompleteList: ElementRef;
 
   // openModal = controla el abrir y cerrar el modal
-  public openModal = false;
+  openModal = false;
 
   // dirtyInput = controla si escribo en el input (si escribo y al seleccionar selecciono fuera borro el input y emito un null)
-  public dirtyInput = false;
+  dirtyInput = false;
 
   // inputLoader = no se esta usando, era para mostrar simbolo de "cargando" en input, se añade al listado, con la variable listLoader
-  public inputLoader = false;
+  inputLoader = false;
 
   // listLoader = muestra el simbolo de "cargando" en el listado
-  public listLoader = false;
+  listLoader = false;
 
-  public form: FormGroup;
-  public listObjects: any[] = [];
+  form: FormGroup;
+  listObjects: any[] = [];
 
   //#endregion
 
@@ -81,7 +80,6 @@ export class BuscadorComponent implements OnInit {
         this.dirtyInput = true;
         this.openModal = true;
       });
-      // this.form.controls.input.valueChanges.debounceTime(500).subscribe(data => {
       this.form.controls.input.valueChanges.subscribe(data => {
         this.filterObjects(data);
       });
@@ -125,7 +123,7 @@ export class BuscadorComponent implements OnInit {
     }
   }
 
-  public showAutocomplete() {
+  showAutocomplete() {
     this.filterObjects(this.form.controls.input.value);
     this.openModal = true;
   }
@@ -133,26 +131,24 @@ export class BuscadorComponent implements OnInit {
   // Este metodo cierra el modal
   // Si selecciono un elemento (evento click): relleno el valor y lo emito
   // Si no selecciono un elemento (evento blur, hago click fuera de la lista) y el input ha sido editado: limpio el campo y emito un null
-  public selectObject(object) {
+  selectObject(object) {
     if (this.openModal) {
-      // this.zone.runOutsideAngular(() => {
-        if (object) {
-          this.form.controls.input.setValue(this.getFilterValue(object), { emitEvent: false });
-          this.form.controls.input.markAsDirty();
-          this.dirtyInput = false;
-          this.selected.emit(object);
-        } else if (this.dirtyInput) {
-          this.clearInput(false);
-          this.dirtyInput = false;
-          this.selected.emit(object);
-        }
-      // });
+      if (object) {
+        this.form.controls.input.setValue(this.getFilterValue(object), { emitEvent: false });
+        this.form.controls.input.markAsDirty();
+        this.dirtyInput = false;
+        this.selected.emit(object);
+      } else if (this.dirtyInput) {
+        this.clearInput(false);
+        this.dirtyInput = false;
+        this.selected.emit(object);
+      }
       this.openModal = false;
     }
   }
 
   // Limpiamos el input
-  public clearInput(isNew) {
+  clearInput(isNew) {
     this.form.controls.input.setValue('', { emitEvent: false });
     if (isNew) {
       this.form.controls.input.markAsPristine();

@@ -1,29 +1,29 @@
 <section>
     <div class="col-sm-7">
         <div class="row">
-            <a class="col-sm-12 col-md tarjeta row " href="/tablas" *ngIf="(nivelAcceso == '1') || (nivelAcceso == '2') || (nivelAcceso == '5')  || (nivelAcceso == '6')  || (nivelAcceso == '7')">
+            <a class="col-sm-12 col-md tarjeta row "  [routerLink]="['/tablas']"  *ngIf="(nivelAcceso == '1') || (nivelAcceso == '2') || (nivelAcceso == '5')  || (nivelAcceso == '6')  || (nivelAcceso == '8')">
                 <img src="/assets/imagenes/tablas.png" alt="Acceso a tablas">
                 <h3 class="col-sm-12">Tablas</h3>
             </a>
-            <a class="col-sm-12 col-md tarjeta row " *ngIf="(nivelAcceso == '1') || (nivelAcceso == '2') || (nivelAcceso == '5')  || (nivelAcceso == '6')  || (nivelAcceso == '7')">
+            <a class="col-sm-12 col-md tarjeta row " [routerLink]="['/ejercicios']" *ngIf="(nivelAcceso == '1') || (nivelAcceso == '2') || (nivelAcceso == '5')  || (nivelAcceso == '6')  || (nivelAcceso == '8')">
                 <img src="/assets/imagenes/ejercicios.png" alt="Acceso a tablas">
                 <h3 class="col-sm-12">Ejercicios</h3>
             </a>
         </div>
         <div class="row">
-            <a class="col-sm-12 col-md tarjeta row " *ngIf="(nivelAcceso == '1') || (nivelAcceso == '3') || (nivelAcceso == '5')  || (nivelAcceso == '7')  || (nivelAcceso == '8')">
+            <a class="col-sm-12 col-md tarjeta row " [routerLink]="['/dietas']" *ngIf="(nivelAcceso == '1') || (nivelAcceso == '3') || (nivelAcceso == '5')  || (nivelAcceso == '7')  || (nivelAcceso == '8')">
                 <img src="/assets/imagenes/dietas.png" alt="Acceso a tablas">
                 <h3 class="col-sm-12">Dietas</h3>
             </a>
-            <a class="col-sm-12 col-md tarjeta row " *ngIf="(nivelAcceso == '1') || (nivelAcceso == '3') || (nivelAcceso == '5')  || (nivelAcceso == '7')  || (nivelAcceso == '8')">
+            <a class="col-sm-12 col-md tarjeta row " [routerLink]="['/seguimiento']" *ngIf="(nivelAcceso == '1') || (nivelAcceso == '3') || (nivelAcceso == '5')  || (nivelAcceso == '7')  || (nivelAcceso == '8')">
                 <img src="/assets/imagenes/seguimiento.png" alt="Acceso a tablas">
                 <h3 class="col-sm-12">Seguimiento</h3>
             </a>
-            <a class="col-sm-12 col-md tarjeta row " *ngIf="(nivelAcceso == '1') || (nivelAcceso == '4') || (nivelAcceso == '6')  || (nivelAcceso == '7')  || (nivelAcceso == '8')">
+            <a class="col-sm-12 col-md tarjeta row " [routerLink]="['/clases']" *ngIf="(nivelAcceso == '1') || (nivelAcceso == '4') || (nivelAcceso == '6')  || (nivelAcceso == '7')  || (nivelAcceso == '8')">
                 <img src="/assets/imagenes/clases.png" alt="Acceso a tablas">
                 <h3 class="col-sm-12">Clases</h3>
             </a>
-            <a class="col-sm-12 col-md tarjeta row " *ngIf="nivelAcceso == ('1')">
+            <a class="col-sm-12 col-md tarjeta row " [routerLink]="['/usuarios']"  *ngIf="nivelAcceso == ('1')">
                 <img src="/assets/imagenes/usuarios.png" alt="Acceso a usuarios">
                 <h3 class="col-sm-12">Usuarios</h3>
             </a>

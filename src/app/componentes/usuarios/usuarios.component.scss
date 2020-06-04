@@ -1,0 +1,22 @@
+section {
+    color: white;
+}
+
+.tarjeta {
+    display: flex;
+    justify-content: center;
+    margin: 1em;
+    padding: 1em;
+    background-color: rgba(104, 104, 104, 0.452);
+    border: 1px solid rgba(109, 109, 109, 0.1);
+}
+
+h4 {
+    text-align: center;
+    color: white;
+    padding-top: 1em;;
+    font-size: 20px;
+}
+i {
+    color: white;
+}

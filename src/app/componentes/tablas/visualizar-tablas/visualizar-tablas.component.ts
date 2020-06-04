@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Tabla, Tablas, CambiosPeso } from 'src/app/modelos/tabla';
-import { AutentificacionService } from 'src/app/servicios/autentificacionService';
+import { UsuariosService } from 'src/app/servicios/usuariosService';
 import { TablasService } from 'src/app/servicios/tablasService';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { HttpErrorEnum } from '../../../../../../../../../CTIDI-client-davsae/CTIDI-client-davsae/src/app/modelos/base-app/httpErrorEnum';
 
 @Component({
   selector: 'app-visualizar-tablas',
@@ -16,10 +17,9 @@ export class VisualizarTablasComponent implements OnInit {
   //#region VARIABLES
 
   // id de la tabla seleccionada que nos mandamos desde el menu de tablas
-  public idTabla;
+  idTabla;
 
   // tabla correspondiente al idTabla que nos devuelve la API
-  public tablaRe;
   tabla: Tabla;
 
   // Formulario para guardar peso maximo de ejercicio
@@ -32,12 +32,12 @@ export class VisualizarTablasComponent implements OnInit {
 
   constructor(
     private rutaActiva: ActivatedRoute, // Clase con la que cogemos de URL el valor idTabla que nos manda el componente tablas
-    private autentificacionService: AutentificacionService, // Servicio para interactuar con API
+    private usuariosService: UsuariosService, // Servicio para interactuar con API
     private tablasService: TablasService, // Servicio para interactuar con API con TABLAS
     private formBuilder: FormBuilder,
     private toastr: ToastrService // Servicio que nos creara notificaciones
   ) {
-    this.setformPesoMax()
+    this.setformPesoMax();
   }
 
   ngOnInit(): void {
@@ -76,13 +76,25 @@ export class VisualizarTablasComponent implements OnInit {
       idEjercicio,
       pesoMax: this.formPesoMax.controls.pesoMax.value
     };
+    // Por cada peso guardamos un objeto en el array de cambios que luego mandaremos a la api
     this.cambiosPesoMax.push(pesoMaxActualizado);
   }
 
   // Funcion con la que mandamos un array con todos los pesos cambiados a la bbdd con la api
   actualizarPesosTabla() {
-    this.tablasService.actualizarPesoMax(this.cambiosPesoMax);
-    // tslint:disable-next-line: no-unused-expression
+    this.tablasService.actualizarPesoMax(this.cambiosPesoMax).subscribe(res => {
+      // Si se actualizan sin problema mandamos mensaje de todo OK
+      this.toastr.success('', 'Pesos actualizados', {
+        timeOut: 3000,
+      });
+    }, err => {
+      // Si da error lo mostramos
+      if (err.status === HttpErrorEnum.BAD_REQUEST) {
+        this.toastr.error(err.error.error.message);
+      } else {
+        this.toastr.error('Error al actualziar pesos');
+      }
+    });
 
     this.toastr.success('', 'Pesos actualizados', {
       timeOut: 3000,

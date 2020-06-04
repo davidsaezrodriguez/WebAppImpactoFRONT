@@ -1,25 +1,35 @@
-nav{
-    height:60px;
+nav {
+    height: 60px;
     width: 100%;
-    background-color:red  ;
+    background-color: red;
     padding: 1em;
-   
 }
 
-a{
+a {
     color: black !important;
-    
 }
 
+// margen del ul de la derecha para dejar espacio de sobra para que entre y se vea el menu
 ul:nth-last-child(1) li a {
-    margin-right: 6em;
+    margin-right: 1em;
 }
 
+// Negrita que ponemos a la opcion actual en el navbar
+.activado {
+    font-weight: bold;
+    cursor: default !important;
+}
+
+li {
+    cursor: pointer;
+}
 @media only screen and (max-width: 768px) {
-    nav{
-        height:122px;
+    // nav en version movil donde tenemos transicion al dar al boton
+    nav {
+        height: 122px;
         width: 100%;
         padding: 1em;
         transition: 0.5s;
+        z-index: 100;
     }
-  }
+}

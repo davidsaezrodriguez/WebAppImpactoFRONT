@@ -1,10 +1,11 @@
 import { Component, OnInit, ɵConsole } from '@angular/core';
 import { Router } from '@angular/router';
-import { AutentificacionService } from 'src/app/servicios/autentificacionService';
+import { UsuariosService } from 'src/app/servicios/usuariosService';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
-import { Usuario } from 'src/app/modelos/usuario';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { LocalService } from 'src/app/servicios/localService';
+import { ToastrService } from 'ngx-toastr';
+import { HttpErrorEnum } from '../../../../../../../../CTIDI-client-davsae/CTIDI-client-davsae/src/app/modelos/base-app/httpErrorEnum';
 
 @Component({
   selector: 'app-login',
@@ -22,10 +23,11 @@ export class LoginComponent implements OnInit {
 
 
   constructor(
-    private autentificacionService: AutentificacionService,
+    private usuariosService: UsuariosService,
     private localService: LocalService, // Servicio para recuperar datos del localstorage
     private router: Router,
     private formBuilder: FormBuilder,
+    private toastr: ToastrService // Servicio que nos creara notificaciones
   ) { }
 
   ngOnInit() {
@@ -45,16 +47,20 @@ export class LoginComponent implements OnInit {
 
   // Funcion donde mandamos usuario logeado en el formulario al servicio que nos autentifica al usuario y mandamos a menus si es valido
   accederApp(): void {
-    const usuario: Usuario = {
-      dni: this.formLogin.controls.dni.value,
-      password: this.formLogin.controls.password.value
-    };
     const dni = this.formLogin.controls.dni.value;
     const password = this.formLogin.controls.password.value;
 
-    this.autentificacionService.loginUsuario(dni, password).subscribe(res => {
+    this.usuariosService.loginUsuario(dni, password).subscribe(res => {
+      // Si se el login es correcto
       NavbarComponent.updateUserStatus.next(true); // here!
       this.router.navigate(['/menu']);
+    }, err => {
+      // Si da error lo mostramos
+      if (err.status === HttpErrorEnum.BAD_REQUEST) {
+        this.toastr.error(err.error.error.message);
+      } else {
+        this.toastr.error('Contraseña incorrecta');
+      }
     });
   }
 

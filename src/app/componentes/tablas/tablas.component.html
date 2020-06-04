@@ -9,12 +9,12 @@
         </div>
 
         <div class="row d-flex justify-content-center ">
-            <a class="col-sm-12 col-md-2 tarjeta row " href="/tablas/crear/{{idUsuario}}" *ngIf="(acceso !='1') || (acceso == '1' && idUsuario != null)">
+            <a class="col-sm-12 col-md-2 tarjeta row "  [routerLink]="['/tablas/crear',idUsuario]" *ngIf="(acceso !='1') || (acceso == '1' && idUsuario != null)">
                 <i class="fas fa-plus-square fa-4x"></i>
                 <!-- <img src="/assets/imagenes/prueba/image.png" alt="Acceso a tablas"> -->
                 <h4 class="col-sm-12">Añadir tabla</h4>
             </a>
-            <a class="col-sm-12 col-md-2 tarjeta row " *ngFor="let tabla of tablasUsuario"  href="/tablas/visualizar/{{tabla._id}}">
+            <a class="col-sm-12 col-md-2 tarjeta row " *ngFor="let tabla of tablasUsuario"   [routerLink]="['/tablas/visualizar',tabla._id]">
                 <i class="fas fa-calendar-alt fa-4x"></i>
                 
                 <h4 class="col-sm-12">{{tabla.nombre}}</h4>

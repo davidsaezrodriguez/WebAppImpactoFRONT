@@ -1,3 +1,4 @@
+import { HttpErrorEnum } from '../../../../../../../../../CTIDI-client-davsae/CTIDI-client-davsae/src/app/modelos/base-app/httpErrorEnum';
 import { Component, OnInit } from '@angular/core';
 import { Tabla, Ejercicio, Dia } from 'src/app/modelos/tabla';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -128,13 +129,24 @@ export class CrearTablasComponent implements OnInit {
         nombre: this.formNuevaTabla.controls.nombreTabla.value,
         dia: this.dias
       });
-      this.tablasService.crearTabla(this.tabla);
-      this.toastr.success('', 'Tabla creada correctamente', {
-        timeOut: 3000,
-      });
-      this.router.navigate(['/tablas']);
 
+      // Mandamos tabla con api a la bbdd
+      this.tablasService.crearTabla(this.tabla).subscribe(res => {
+        // Si se crea correctamente mandamos mensaje y redirigimos a tablas
+        this.toastr.success('', 'Tabla creada correctamente', {
+          timeOut: 3000,
+        });
+        this.router.navigate(['/tablas']);
+      }, err => {
+        // Si da error lo mostramos
+        if (err.status === HttpErrorEnum.BAD_REQUEST) {
+          this.toastr.error(err.error.error.message);
+        } else {
+          this.toastr.error('Error al crear tabla');
+        }
+      });
     } else {
+      // Si no hay ejercicio en tabla mostramos notificacion
       this.toastr.warning('', 'No hay ningun ejercicio en la tabla', {
         timeOut: 3000,
       });

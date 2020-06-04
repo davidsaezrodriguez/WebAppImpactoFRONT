@@ -6,7 +6,7 @@ import { LoginComponent } from './componentes/login/login.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AutentificacionService } from './servicios/autentificacionService';
+import { UsuariosService } from './servicios/usuariosService';
 import { MenuComponent } from './componentes/menu/menu.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
@@ -19,6 +19,13 @@ import { TablasService } from './servicios/tablasService';
 import { AuthInterceptor } from './servicios/AuthInteceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UsuariosComponent } from './componentes/usuarios/usuarios.component';
+import { CrearUsuarioComponent } from './componentes/usuarios/crear-usuario/crear-usuario.component';
+import { DatosUsuarioComponent } from './componentes/usuarios/datos-usuario/datos-usuario.component';
+import { EjerciciosComponent } from './componentes/ejercicios/ejercicios.component';
+import { DietasComponent } from './componentes/dietas/dietas.component';
+import { SeguimientoComponent } from './componentes/seguimiento/seguimiento.component';
+import { ClasesComponent } from './componentes/clases/clases.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +37,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TablasComponent,
     BuscadorComponent,
     CrearTablasComponent,
-    VisualizarTablasComponent
+    VisualizarTablasComponent,
+    UsuariosComponent,
+    CrearUsuarioComponent,
+    DatosUsuarioComponent,
+    EjerciciosComponent,
+    DietasComponent,
+    SeguimientoComponent,
+    ClasesComponent
   ],
   imports: [
     AppRoutingModule,
@@ -44,7 +58,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    AutentificacionService,
+    UsuariosService,
     LocalService,
     TablasService
   ],

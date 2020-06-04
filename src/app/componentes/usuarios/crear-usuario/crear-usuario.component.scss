@@ -1,0 +1,26 @@
+h2{
+    padding: 1.5em;
+}
+
+// Estilos tarjeta de usuario
+.tarjeta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1em;
+    padding: 1em;
+    background-color: rgba(104, 104, 104, 0.452);
+    border: 1px solid rgba(109, 109, 109, 0.1);
+}
+
+h4 {
+    padding-top: 1em;
+}
+
+
+
+.botonCrearUsuario {
+    background-color: red;
+    margin-bottom: 5px;
+    height: 3em;
+}

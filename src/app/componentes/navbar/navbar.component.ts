@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
-import { AutentificacionService } from 'src/app/servicios/autentificacionService';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { LocalService } from 'src/app/servicios/localService';
@@ -31,6 +30,7 @@ export class NavbarComponent implements OnInit {
     private localService: LocalService, // Servicio para recuperar datos del localstorage
     private router: Router,
   ) {
+    // Hacemos que se actualize cuando usuario se logee
     NavbarComponent.updateUserStatus.subscribe(res => {
       this.usuarioLogeado = this.localService.getTokenData();
     });
@@ -42,15 +42,31 @@ export class NavbarComponent implements OnInit {
 
   //#region FUNCIONES
 
-  // Funcion con la que expandimos el navbar para desplegar las opciones en la version movil
-  public expandirNav() {
-    if (!this.navExpandida) {
-      $('#navbar').height(370);
-      this.navExpandida = true;
-    } else {
-      $('#navbar').height(90);
-      this.navExpandida = false;
+  // Funcion con la que expandimos y cerramos el navbar para desplegar las opciones en la version movil
+  expandirNav() {
+    if (screen.width < 768) {
+      if (!this.navExpandida) {
+        $('#navbar').height(370);
+
+        $('.navbarDiv').removeClass('collapse');
+        $('.navbarDiv').addClass('show');
+
+        $('.botoncolapsar').attr('aria-expanded', 'true');
+        $('.botoncolapsar').removeClass('collapsed');
+        this.navExpandida = true;
+      } else {
+        $('#navbar').height(90);
+
+        $('.navbarDiv').addClass('collapse');
+        $('.navbarDiv').removeClass('show');
+
+        $('.botoncolapsar').attr('aria-expanded', 'false');
+        $('.botoncolapsar').addClass('collapsed');
+
+        this.navExpandida = false;
+      }
     }
+
   }
 
   // Funcion con la que eliminamos el token generado y cerramos sesion

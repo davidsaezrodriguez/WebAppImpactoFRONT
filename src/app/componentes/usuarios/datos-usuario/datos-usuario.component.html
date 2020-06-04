@@ -1,0 +1,75 @@
+<section class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-sm-12 text-center">
+            <h2 class=""> Datos de usuario </h2>
+        </div>
+
+
+        <div class="row d-flex justify-content-center col-sm-12 col-md-9" *ngIf="usuario">
+            <div class="col-sm-10 tarjeta row ">
+                <i class="fas fa-user fa-4x col-sm-2 text-center"></i>
+                <div class="col-sm-10">
+                    <h5 class="col-sm-12">DNI: {{usuario.dni}}</h5>
+                    <h5 class="col-sm-12">Nombre: {{usuario.nombre}}</h5>
+                    <h5 class="col-sm-12">Domicilio: {{usuario.domicilio}}</h5>
+                    <h5 class="col-sm-12">Telefono: {{usuario.telefono}}</h5>
+                    <h5 class="col-sm-12">Acceso: {{nivelAcceso()}}</h5>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="usuarioLogeado.acceso === '1'" class="row d-flex justify-content-center col-sm-12 col-md-9 m-0">
+            <div class="col-sm-10 " [formGroup]="formActualizarDatosUsuario" (change)="cambiosFormDatos()">
+                <label class="col-sm-12 col-md-6 control-label text-left labelNombreTabla">
+                    DNI
+                    <input type="text" class="form-control" formControlName="dniUsuario"  >
+                </label>
+                <label class="control-label text-left col-sm-12 col-md-6 "> Nombre
+                    <input type="text" class="form-control" formControlName="nombreUsuario" >
+                </label>
+                <label class="control-label text-left col-sm-12 col-md-6"> Domicilio
+                    <input type="text" class="form-control" formControlName="domicilioUsuario" >
+                </label>
+                <label class="control-label text-left col-sm-12 col-md-6"> Telefono
+                    <input type="text" class="form-control" formControlName="telefonoUsuario" >
+                </label>
+                <label class="control-label text-left col-sm-12 col-md-12">Nivel de acceso del usuario
+                    <select class="form-control" formControlName="accesoUsuario" >
+                        <option value="2" selected>Ejercicio</option>
+                        <option value="3">Nutricion</option>
+                        <option value="4">Clases</option>
+                        <option value="5">Ejercicio + Nutricion</option>
+                        <option value="6">Ejercicio + Clases</option>
+                        <option value="7">Nutricion + Clases</option>
+                        <option value="8">Ejercicio + Nutricion + Clases</option>
+                        <option value="1">Administrador</option>
+                    </select>
+                </label>
+            </div>
+            <div class="row d-flex justify-content-center col-sm-12 col-md-12 pt-4 m-0">
+                <button type="submit" class="btn botonCrearUsuario col-sm-6 mx-auto "  [disabled]="!cambiosFormDatosComp" (click)="modificarDatos()">
+                    <i class="fas fa-save"></i> Modificar datos del usuario
+                </button>
+            </div>
+        </div>
+
+        <div  class="row d-flex justify-content-center col-sm-12 col-md-9 m-0 mb-3">
+            <div class="col-sm-10 " [formGroup]="formCambiarContrasena">
+                <label class="control-label text-left col-sm-12 col-md-12"> Contraseña antigua
+                    <input type="password" class="form-control" formControlName="passwordVieja">
+                </label>
+                <label class="control-label text-left col-sm-12 col-md-6"> Contraseña nueva
+                    <input type="password" class="form-control" formControlName="passwordNueva">
+                </label>
+                <label class="control-label text-left col-sm-12 col-md-6"> Repetir contraseña nueva
+                    <input type="password" class="form-control" formControlName="passwordNuevaConfirmacion">
+                </label>
+                <div class="row d-flex justify-content-center col-sm-12 col-md-12 pt-4 m-0">
+                    <button type="submit" class="btn botonCrearUsuario col-sm-6 mx-auto " [disabled]="!formCambiarContrasena.valid" (click)="cambiarContrasena()">
+                        <i class="fas fa-save"></i> Cambiar contraseña
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
