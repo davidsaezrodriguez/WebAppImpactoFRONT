@@ -6,7 +6,6 @@ import { ToastrService } from 'ngx-toastr';
 import { UsuariosService } from 'src/app/servicios/usuariosService';
 import { Usuario } from 'src/app/modelos/usuario';
 import { LocalService } from 'src/app/servicios/localService';
-import { HttpErrorEnum } from '../../../../../../../../../CTIDI-client-davsae/CTIDI-client-davsae/src/app/modelos/base-app/httpErrorEnum';
 
 @Component({
   selector: 'app-datos-usuario',
@@ -35,7 +34,7 @@ export class DatosUsuarioComponent implements OnInit {
 
   // Acceso usuario logeado
   usuarioLogeado = this.localService.getTokenData();
-  
+
   // Variable true si hay cambios en formulario datos
   cambiosFormDatosComp = false;
 
@@ -114,11 +113,7 @@ export class DatosUsuarioComponent implements OnInit {
       this.cambiosFormDatosComp = false;
     }, err => {
       // Si da error lo mostramos
-      if (err.status === HttpErrorEnum.BAD_REQUEST) {
-        this.toastr.error(err.error.error.message);
-      } else {
-        this.toastr.error('Error');
-      }
+      this.toastr.error('Error al modificar datos');
     });
   }
 
@@ -164,11 +159,7 @@ export class DatosUsuarioComponent implements OnInit {
         this.router.navigate(['/menu']);
       }, err => {
         // Si da error lo mostramos
-        if (err.status === HttpErrorEnum.BAD_REQUEST) {
-          this.toastr.error(err.error.error.message);
-        } else {
-          this.toastr.error('Contraseña incorrecta');
-        }
+        this.toastr.error('Contraseña incorrecta');
       });
     }
   }

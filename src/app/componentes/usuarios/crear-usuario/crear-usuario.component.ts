@@ -4,7 +4,6 @@ import { FormBuilder, Form, FormControl, Validators, FormGroup } from '@angular/
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Usuario } from 'src/app/modelos/usuario';
-import { HttpErrorEnum } from '../../../../../../../../../CTIDI-client-davsae/CTIDI-client-davsae/src/app/modelos/base-app/httpErrorEnum';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -64,11 +63,7 @@ export class CrearUsuarioComponent implements OnInit {
       this.router.navigate(['/usuarios']);
     }, err => {
       // Si da error lo mostramos
-      if (err.status === HttpErrorEnum.BAD_REQUEST) {
-        this.toastr.error(err.error.error.message);
-      } else {
         this.toastr.error('DNI ya registrado');
-      }
     });
   }
 

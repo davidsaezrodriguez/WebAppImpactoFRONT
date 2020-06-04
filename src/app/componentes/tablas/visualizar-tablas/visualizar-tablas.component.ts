@@ -5,7 +5,6 @@ import { UsuariosService } from 'src/app/servicios/usuariosService';
 import { TablasService } from 'src/app/servicios/tablasService';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { HttpErrorEnum } from '../../../../../../../../../CTIDI-client-davsae/CTIDI-client-davsae/src/app/modelos/base-app/httpErrorEnum';
 
 @Component({
   selector: 'app-visualizar-tablas',
@@ -89,11 +88,7 @@ export class VisualizarTablasComponent implements OnInit {
       });
     }, err => {
       // Si da error lo mostramos
-      if (err.status === HttpErrorEnum.BAD_REQUEST) {
-        this.toastr.error(err.error.error.message);
-      } else {
         this.toastr.error('Error al actualziar pesos');
-      }
     });
 
     this.toastr.success('', 'Pesos actualizados', {

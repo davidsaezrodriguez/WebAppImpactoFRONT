@@ -5,7 +5,6 @@ import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms'
 import { NavbarComponent } from '../navbar/navbar.component';
 import { LocalService } from 'src/app/servicios/localService';
 import { ToastrService } from 'ngx-toastr';
-import { HttpErrorEnum } from '../../../../../../../../CTIDI-client-davsae/CTIDI-client-davsae/src/app/modelos/base-app/httpErrorEnum';
 
 @Component({
   selector: 'app-login',
@@ -55,12 +54,7 @@ export class LoginComponent implements OnInit {
       NavbarComponent.updateUserStatus.next(true); // here!
       this.router.navigate(['/menu']);
     }, err => {
-      // Si da error lo mostramos
-      if (err.status === HttpErrorEnum.BAD_REQUEST) {
-        this.toastr.error(err.error.error.message);
-      } else {
-        this.toastr.error('Contraseña incorrecta');
-      }
+      this.toastr.error('Contraseña incorrecta');
     });
   }
 
