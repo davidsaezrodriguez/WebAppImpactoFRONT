@@ -13,9 +13,6 @@ export class TablasService {
   ServidorBACKEND = this.heroku;
   authSubject = new BehaviorSubject(false);
 
-  // Creamos token
-  private token: string;
-
   constructor(
     private httpClient: HttpClient
   ) {
@@ -30,17 +27,17 @@ export class TablasService {
   }
 
   // Buscamos las tablas del usuario que mandamos a la api
-  public listarTablasUsuario(idUsuario): Observable<Tablas> {
+  listarTablasUsuario(idUsuario): Observable<Tablas> {
     return this.httpClient.post<Tablas>(`${this.ServidorBACKEND}/listarTablasUsuario`, { idUsuario });
   }
 
   // Buscamos la tabla con la api en la base de datos
-  public buscarTabla(idTabla): Observable<any> {
+  buscarTabla(idTabla): Observable<any> {
     return this.httpClient.post<any>(`${this.ServidorBACKEND}/buscarTabla`, { idTabla });
   }
 
   // Actualizamos pesosMax de tabla
-  public actualizarPesoMax(cambiosPesoMax: Array<CambiosPeso>) {
+  actualizarPesoMax(cambiosPesoMax: Array<CambiosPeso>) {
     return this.httpClient.post(`${this.ServidorBACKEND}/actualizarPeso`, cambiosPesoMax);
   }
 

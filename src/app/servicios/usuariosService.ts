@@ -55,17 +55,17 @@ export class UsuariosService {
   }
 
   // Buscamos los usuarios registrados en la base de datos y devolvemos nombre y id
-  public usuariosRegistrados() {
+  usuariosRegistrados() {
     return this.httpClient.get<any>(`${this.ServidorBACKEND}/listarUsuarios`);
   }
 
   // Buscamos usuarios con el nivel acceso indicado. El nivel habra que mandarle en formato { "acceso" : [1,3,4] }
-  public usuariosNivelAcceso(acceso) {
+  usuariosNivelAcceso(acceso) {
     return this.httpClient.post<any>(`${this.ServidorBACKEND}/listarUsuariosFiltrarNivel`, { acceso });
   }
 
   // Buscamos usuario con api en bbdd para usar sus datos
-  public buscarUsuario(idUsuario) {
+  buscarUsuario(idUsuario) {
     return this.httpClient.post<any>(`${this.ServidorBACKEND}/buscarUsuario`, { idUsuario });
   }
 

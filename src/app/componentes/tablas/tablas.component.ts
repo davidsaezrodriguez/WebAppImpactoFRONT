@@ -41,7 +41,7 @@ export class TablasComponent implements OnInit {
       this.cargarTablasUsuario(this.idUsuario);
     } else {
       // Cargamos los nombres de usuarios de BD en el componente de buscador
-      this.usuariosService.usuariosNivelAcceso([2, 5, 6, 7]).subscribe(data => (
+      this.usuariosService.usuariosNivelAcceso([2, 5, 6, 8]).subscribe(data => (
         this.configBuscador.values = data.usuarios
       ));
     }

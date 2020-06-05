@@ -1,0 +1,22 @@
+<section class="col-sm-12 pt-4">
+    <div class="row d-flex justify-content-center">
+        <div class="col-sm-12 col-md-8 tarjeta row " *ngIf="ejercicio">
+            <h2 class="col-sm-12 text-center"> {{ejercicio.nombre}}</h2>
+            <div class="col-sm-12 col-md-6 informacion">
+                <h4>Explicación:</h4>
+                <p> {{ejercicio.explicacion}}</p>
+                <h4>Observaciones:</h4>
+                <p>{{ejercicio.consejos}}</p>
+            </div>
+            <div class="col-sm-12 col-md-6 imagen">
+                <img src="assets/imagenes/ejercicios/{{ejercicio.imagen}}" class="img-fluid">
+            </div>
+            <div class="col-sm-12 video" *ngIf="ejercicio.video">
+                <iframe width="560" height="315" [src]="getVideoIframe(ejercicio.video)" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,8 @@
+<section class="col-sm-12 pt-4">
+    <div class="row d-flex justify-content-center" >
+        <div class="col-sm-12 col-md-3 tarjeta row " *ngFor="let ejercicio of ejerciciosZona" [routerLink]="['detalles-ejercicio',ejercicio._id]">
+            <h4 class="col-sm-12"> {{ejercicio.nombre}}</h4>
+            <img src="assets/imagenes/ejercicios/{{ejercicio.imagen}}" class="img-fluid p-4">
+        </div>
+    </div>
+</section>

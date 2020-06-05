@@ -8,12 +8,12 @@
         <div class="row d-flex justify-content-center col-sm-12 col-md-9" *ngIf="usuario">
             <div class="col-sm-10 tarjeta row ">
                 <i class="fas fa-user fa-4x col-sm-2 text-center"></i>
-                <div class="col-sm-10">
-                    <h5 class="col-sm-12">DNI: {{usuario.dni}}</h5>
-                    <h5 class="col-sm-12">Nombre: {{usuario.nombre}}</h5>
-                    <h5 class="col-sm-12">Domicilio: {{usuario.domicilio}}</h5>
-                    <h5 class="col-sm-12">Telefono: {{usuario.telefono}}</h5>
-                    <h5 class="col-sm-12">Acceso: {{nivelAcceso()}}</h5>
+                <div class="col-sm-10n pt-3">
+                    <h5 class="col-sm-12">DNI: <span>{{usuario.dni}}</span></h5>
+                    <h5 class="col-sm-12">Nombre: <span>{{usuario.nombre}}</span></h5>
+                    <h5 class="col-sm-12">Domicilio: <span>{{usuario.domicilio}}</span></h5>
+                    <h5 class="col-sm-12">Telefono: <span>{{usuario.telefono}}</span></h5>
+                    <h5 class="col-sm-12">Acceso: <span>{{nivelAcceso()}}</span> </h5>
                 </div>
             </div>
         </div>

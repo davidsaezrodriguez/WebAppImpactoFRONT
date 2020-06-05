@@ -26,6 +26,10 @@ import { EjerciciosComponent } from './componentes/ejercicios/ejercicios.compone
 import { DietasComponent } from './componentes/dietas/dietas.component';
 import { SeguimientoComponent } from './componentes/seguimiento/seguimiento.component';
 import { ClasesComponent } from './componentes/clases/clases.component';
+import { VisualizarEjerciciosComponent } from './componentes/ejercicios/visualizar-ejercicios/visualizar-ejercicios.component';
+import { DetallesEjercicioComponent } from './componentes/ejercicios/visualizar-ejercicios/detalles-ejercicio/detalles-ejercicio.component';
+import { EjerciciosService } from './servicios/ejerciciosService';
+import { CrearEjerciciosComponent } from './componentes/ejercicios/crear-ejercicios/crear-ejercicios.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,10 @@ import { ClasesComponent } from './componentes/clases/clases.component';
     EjerciciosComponent,
     DietasComponent,
     SeguimientoComponent,
-    ClasesComponent
+    ClasesComponent,
+    VisualizarEjerciciosComponent,
+    DetallesEjercicioComponent,
+    CrearEjerciciosComponent
   ],
   imports: [
     AppRoutingModule,
@@ -60,7 +67,8 @@ import { ClasesComponent } from './componentes/clases/clases.component';
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     UsuariosService,
     LocalService,
-    TablasService
+    TablasService,
+    EjerciciosService
   ],
   bootstrap: [AppComponent]
 })

@@ -29,23 +29,23 @@ export class LocalService {
     }
 
     // Comprobamos si el usuario esta autentificado si esta el token el el storage
-    public comprobarAutentificacion(): boolean {
+    comprobarAutentificacion(): boolean {
         // tslint:disable-next-line: semicolon
         return localStorage.getItem('TokenDeAcceso') !== null;
     }
 
     // Nos devolvera el token guardado en localstorage
-    public getToken(): string {
+    getToken(): string {
         return localStorage.getItem('TokenDeAcceso');
     }
 
     // Nos devolvera la expiracion del token guardado en localstorage
-    public getExpiracionToken(): string {
+    getExpiracionToken(): string {
         return localStorage.getItem('ExpiracionToken');
     }
 
     // Desciframos los datos del token
-    public getTokenData(): JsonWebToken {
+    getTokenData(): JsonWebToken {
         const t = this.getToken();
         if (t) {
             const token = this.jwtHelper.decodeToken(t);
@@ -61,12 +61,12 @@ export class LocalService {
     }
 
     // Devolvemos acceso del usuario
-    public getAccesoUsuario(): string {
+    getAccesoUsuario(): string {
         const token = this.getTokenData();
         return token.acceso;
     }
     // Devolvemos acceso del usuario
-    public getIdUsuario(): string {
+    getIdUsuario(): string {
         const token = this.getTokenData();
         return token.id;
     }

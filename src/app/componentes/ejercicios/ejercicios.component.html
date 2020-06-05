@@ -1,1 +1,40 @@
-<p>ejercicios works!</p>
+<section class="col-sm-12 pt-4">
+    <div class="row" *ngIf="acceso == '1'">
+        <div class="col-sm-12 d-flex justify-content-center">
+            <div class="col-md-4 pt-5">
+
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center ">
+        <div class="col-sm-12 col-md-3 tarjeta row " [routerLink]="['visualizar-ejercicios','1']">
+            <h4 class="col-sm-12"> Pecho</h4>
+            <img src="/assets/imagenes/ejerciciosPecho.png" class="img-fluid p-4">
+
+        </div>
+        <div class="col-sm-12 col-md-3 tarjeta row " [routerLink]="['visualizar-ejercicios','2']">
+            <h4 class="col-sm-12"> Espalda</h4>
+            <img src="/assets/imagenes/ejerciciosEspalda.png" class="img-fluid p-4">
+        </div>
+        <div class="col-sm-12 col-md-3 tarjeta row " [routerLink]="['visualizar-ejercicios','3']">
+            <h4 class="col-sm-12"> Pierna</h4>
+            <img src="/assets/imagenes/ejerciciosPierna.png" class="img-fluid p-4">
+        </div>
+        <div class="col-sm-12 col-md-3 tarjeta row " [routerLink]="['visualizar-ejercicios','4']">
+            <h4 class="col-sm-12"> Hombro</h4>
+            <img src="/assets/imagenes/ejerciciosHombro.png" class="img-fluid p-4">
+        </div>
+        <div class="col-sm-12 col-md-3 tarjeta row " [routerLink]="['visualizar-ejercicios','5']">
+            <h4 class="col-sm-12"> Brazo</h4>
+            <img src="/assets/imagenes/ejerciciosBrazo.png" class="img-fluid p-4">
+        </div>
+        <div class="col-sm-12 col-md-3 tarjeta row " [routerLink]="['visualizar-ejercicios','6']">
+            <h4 class="col-sm-12"> Abdomen</h4>
+            <img src="/assets/imagenes/ejerciciosAbdomen.png" class="img-fluid p-4">
+        </div>
+        <div class="col-sm-12 col-md-6 tarjeta row " [routerLink]="['/ejercicios/crear']" *ngIf="acceso == '1'">
+            <h4 class="col-sm-12">Añadir ejercicio</h4>
+            <i class="fas fa-plus-square fa-4x"></i>
+        </div>
+    </div>
+</section>
