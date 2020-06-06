@@ -15,8 +15,8 @@ export class EjerciciosService {
   herokuFrontApi =  'https://webappimpactofront.herokuapp.com/';
 
 
-  ServidorBACKEND = this.heroku;
-  ServidorGuardarEjer = this.herokuFrontApi;
+  ServidorBACKEND = this.local;
+  ServidorGuardarEjer = this.localFrontApi;
 
   authSubject = new BehaviorSubject(false);
 
