@@ -22,7 +22,7 @@
             <label class="col-sm-12 col-md-6 control-label text-left ">
                 Imagen ejemplo del ejercicio
                 <input type="file" class="custom-file-input" id="inputImagen"  lang="es" formControlName="imagen" (change)="fileChange($event)">
-                <label class="custom-file-label subirImagen" >Seleccionar Archivo</label>
+                <label class="custom-file-label subirImagen" >{{nombreImagen}}</label>
             </label>
             <label class="col-sm-12 col-md-6 control-label text-left video">
                 URL Video Youtube 
