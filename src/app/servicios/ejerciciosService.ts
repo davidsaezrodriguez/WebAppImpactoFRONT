@@ -12,7 +12,7 @@ export class EjerciciosService {
   heroku = 'https://webappimpactoback.herokuapp.com';
 
   localFrontApi = 'http://localhost:4200';
-  herokuFrontApi =  'https://webappimpactofront.herokuapp.com/';
+  herokuFrontApi = 'https://webappimpactofront.herokuapp.com/';
 
 
   ServidorBACKEND = this.heroku;
@@ -50,6 +50,11 @@ export class EjerciciosService {
   // Guardar imagen
   guardarImagen(imagen) {
     return this.httpClient.post(`${this.ServidorGuardarEjer}/guardarImagen`, imagen);
+  }
+
+  // Eliminar ejercicio
+  eliminarEjercicio(idEjercicio) {
+    return this.httpClient.post(`${this.ServidorBACKEND}/eliminarEjercicio`, { idEjercicio });
   }
 
   //#endregion

@@ -1,8 +1,11 @@
+
 import { Component, OnInit } from '@angular/core';
 import { EjercicioEjemplo } from 'src/app/modelos/ejercicioEjemplo';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { EjerciciosService } from 'src/app/servicios/ejerciciosService';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { LocalService } from 'src/app/servicios/localService';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -20,11 +23,16 @@ export class DetallesEjercicioComponent implements OnInit {
   // Objeto ejercicio donde guardamos ejercicio a mostrar que nos devolvera la api
   ejercicio: EjercicioEjemplo;
 
+  // Comprobamos acceso para si es admin dejar borrar ejercicio
+  acceso = this.localService.getAccesoUsuario();
   //#endregion
 
   constructor(
     private rutaActiva: ActivatedRoute, // Clase con la que cogemos de URL el valor zona que nos manda el componente ejercicios
     private ejerciciosService: EjerciciosService, // Servicio para gestionar ejercicios con api
+    private localService: LocalService, // Servicio para comprobar con el token el nivel de acceso
+    private router: Router,
+    private toastr: ToastrService, // Servicio que nos creara notificaciones
     private _sanitizer: DomSanitizer // Utilizaremos este servicio para añadir video si el ejemplo lo tuviera
 
   ) { }
@@ -44,7 +52,7 @@ export class DetallesEjercicioComponent implements OnInit {
   }
 
   //#region FUNCIONES
-  
+
   getVideoIframe(url) {
     let video;
     let results;
@@ -56,7 +64,19 @@ export class DetallesEjercicioComponent implements OnInit {
     return this._sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video);
   }
 
-
+  // Eliminar ejercicio
+  eliminarEjercicio() {
+    this.ejerciciosService.eliminarEjercicio(this.idEjercicio).subscribe(res => {
+      // Si se crea correctamente mandamos mensaje y redirigimos a tablas
+      this.toastr.success('', 'Ejercicio elimnado correctamente', {
+        timeOut: 3000,
+      });
+      this.router.navigate(['/ejercicios']);
+    }, err => {
+      // Si da error lo mostramos
+      this.toastr.error('Error al borrar ejercicio');
+    });
+  }
   //#endregion
 
 }

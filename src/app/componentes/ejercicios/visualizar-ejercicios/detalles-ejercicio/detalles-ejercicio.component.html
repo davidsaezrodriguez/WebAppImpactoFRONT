@@ -15,8 +15,13 @@
                 <iframe width="560" height="315" [src]="getVideoIframe(ejercicio.video)" frameborder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
-
+            </div>
+            <div class="p-3" *ngIf="acceso == '1'">
+                <button type="submit" class="btn botonGuardarEjercicio col-sm-12" (click)="eliminarEjercicio()">
+                    <i class="fas fa-save"></i>Eliminar ejercicio
+                </button>
             </div>
         </div>
+
     </div>
 </section>
