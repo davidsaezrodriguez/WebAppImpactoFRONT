@@ -2,7 +2,7 @@
     <div class="row d-flex justify-content-center" *ngIf="tabla">
         <h2 class="col-sm-12 text-center"> {{tabla.nombre}}</h2>
         <div class="col-md-8 dia" *ngFor="let dia of tabla.dia;index as i">
-            <h3>Dia {{i+1}}</h3>
+            <h4>Dia {{i+1}}</h4>
             <div class="table-responsive">
                 <table class="table table-dark  ">
                     <thead class="thead-dark">
@@ -33,6 +33,15 @@
                 </button>
             </div>
 
+        </div>
+        <div class="col-sm-12 p-2 divEliminar" >
+            <button type="submit" class="btn botonEliminarTabla col-sm-12 col-md-2 ml-auto" [disabled]="!checkActivado" (click)="eliminarTabla()">
+                <i class="fas fa-trash-alt pr-1"></i> Eliminar tabla
+            </button>
+            <div class="custom-control custom-checkbox col-sm-12 col-md-6 eliminarCheck">
+                <input type="checkbox" class="custom-control-input " id="eliminar" (click)="checkEliminar()">
+                <label class="custom-control-label" for="eliminar">¿Seguro que quieres eliminar la tabla?</label>
+            </div>
         </div>
     </div>
 </section>

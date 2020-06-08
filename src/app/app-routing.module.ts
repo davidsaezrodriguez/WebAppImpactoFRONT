@@ -15,6 +15,8 @@ import { ClasesComponent } from './componentes/clases/clases.component';
 import { VisualizarEjerciciosComponent } from './componentes/ejercicios/visualizar-ejercicios/visualizar-ejercicios.component';
 import { DetallesEjercicioComponent } from './componentes/ejercicios/visualizar-ejercicios/detalles-ejercicio/detalles-ejercicio.component';
 import { CrearEjerciciosComponent } from './componentes/ejercicios/crear-ejercicios/crear-ejercicios.component';
+import { CrearDietasComponent } from './componentes/dietas/crear-dietas/crear-dietas.component';
+import { VisualizarDietasComponent } from './componentes/dietas/visualizar-dietas/visualizar-dietas.component';
 
 
 const routes: Routes = [
@@ -76,6 +78,14 @@ const routes: Routes = [
         path: '',
         component: DietasComponent,
       },
+      {
+        path: 'crear/:idUsuario',
+        component: CrearDietasComponent,
+      },
+      {
+        path: 'visualizar/:idDieta',
+        component: VisualizarDietasComponent,
+      }
     ]
   },
   {

@@ -1,0 +1,253 @@
+<section class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-sm-12">
+            <h2 class=""> Creacion de nueva dieta</h2>
+        </div>
+
+
+        <div class="col-sm-12 " [formGroup]="formNuevaDieta">
+            <label class="col-sm-12 control-label text-left labelNombreDieta">
+                Nombre de la dieta
+                <input type="text" class="form-control" formControlName="nombreDieta">
+            </label>
+            <div class="comida">
+                <h4 class="col-sm-12 pl-0">Comida 1 - Desayuno</h4>
+                <label class="control-label text-left col-md-6 col-sm-12 pl-0  pl-0  "> Alimento
+                    <input type="text" class="form-control" formControlName="alimentoComida1">
+                </label>
+                <label class="control-label text-left col-md-2 col-sm-12 pl-0 pl-0"> Cantidad
+                    <input type="text" class="form-control" formControlName="cantidadComida1">
+                </label>
+                <label class="control-label text-left col-md-2 col-sm-12 pl-0 pl-0"> Kcal
+                    <input type="number" class="form-control" formControlName="kcalComida1">
+                </label>
+                <button type="submit" class="btn botonAñadirAlim col-md-2 mx-auto"
+                    (click)="anadirAlimento(alimentosComida1,'alimentoComida1','cantidadComida1','kcalComida1')"
+                    [disabled]="(!formNuevaDieta.controls.alimentoComida1.valid || !formNuevaDieta.controls.cantidadComida1.valid )">
+                    <i class="fas fa-plus-circle"></i> Añadir alimento
+                </button>
+                <div class="table-responsive tablaAlimentos col-sm-12 ">
+                    <table class="table table-dark   ">
+                        <thead class="thead-dark">
+                            <tr class="d-flex">
+                                <th class="col-4 col-md-6">Alimento</th>
+                                <th class="col-5 col-md-2">Cantidad</th>
+                                <th class="col-5 col-md-2">Kcal</th>
+                                <th class="col-3 col-md-2">Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let alimento of alimentosComida1; let i = index" class="d-flex">
+                                <td class="col-4 col-md-6"> {{alimento.nombre}}</td>
+                                <td class="col-5 col-md-2"> {{alimento.cantidad}}</td>
+                                <td class="col-5 col-md-2"> {{alimento.kcal}}</td>
+                                <td class="col-3 col-md-2 text-center">
+                                    <button class="btn botonBorrarAli mx-auto"
+                                        (click)="borrarAlimento(alimentosComida1,i)">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+
+
+
+            <div class="comida">
+                <h4 class="col-sm-12 pl-0">Comida 2 - Almuerzo</h4>
+                <label class="control-label text-left col-md-6 col-sm-12 pl-0  pl-0  "> Alimento
+                    <input type="text" class="form-control" formControlName="alimentoComida2">
+                </label>
+                <label class="control-label text-left col-md-2 col-sm-12 pl-0 pl-0"> Cantidad
+                    <input type="text" class="form-control" formControlName="cantidadComida2">
+                </label>
+                <label class="control-label text-left col-md-2 col-sm-12 pl-0 pl-0"> Kcal
+                    <input type="number" class="form-control" formControlName="kcalComida2">
+                </label>
+                <button type="submit" class="btn botonAñadirAlim col-md-2 mx-auto"
+                    (click)="anadirAlimento(alimentosComida2,'alimentoComida2','cantidadComida2','kcalComida2')"
+                    [disabled]="(!formNuevaDieta.controls.alimentoComida2.valid || !formNuevaDieta.controls.cantidadComida2.valid )">
+                    <i class="fas fa-plus-circle"></i> Añadir alimento
+                </button>
+                <div class="table-responsive tablaAlimentos col-sm-12 ">
+                    <table class="table table-dark   ">
+                        <thead class="thead-dark">
+                            <tr class="d-flex">
+                                <th class="col-4 col-md-6">Alimento</th>
+                                <th class="col-5 col-md-2">Cantidad</th>
+                                <th class="col-5 col-md-2">Kcal</th>
+                                <th class="col-3 col-md-2">Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let alimento of alimentosComida2; let i = index" class="d-flex">
+                                <td class="col-4 col-md-6"> {{alimento.nombre}}</td>
+                                <td class="col-5 col-md-2"> {{alimento.cantidad}}</td>
+                                <td class="col-5 col-md-2"> {{alimento.kcal}}</td>
+                                <td class="col-3 col-md-2 text-center">
+                                    <button class="btn botonBorrarAli mx-auto"
+                                        (click)="borrarAlimento(alimentosComida2,i)">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+
+
+
+
+            <div class="comida">
+                <h4 class="col-sm-12 pl-0">Comida 3 - Comida</h4>
+                <label class="control-label text-left col-md-6 col-sm-12 pl-0  pl-0  "> Alimento
+                    <input type="text" class="form-control" formControlName="alimentoComida3">
+                </label>
+                <label class="control-label text-left col-md-2 col-sm-12 pl-0 pl-0"> Cantidad
+                    <input type="text" class="form-control" formControlName="cantidadComida3">
+                </label>
+                <label class="control-label text-left col-md-2 col-sm-12 pl-0 pl-0"> Kcal
+                    <input type="number" class="form-control" formControlName="kcalComida3">
+                </label>
+                <button type="submit" class="btn botonAñadirAlim col-md-2 mx-auto"
+                    (click)="anadirAlimento(alimentosComida3,'alimentoComida3','cantidadComida3','kcalComida3')"
+                    [disabled]="(!formNuevaDieta.controls.alimentoComida3.valid || !formNuevaDieta.controls.cantidadComida3.valid )">
+                    <i class="fas fa-plus-circle"></i> Añadir alimento
+                </button>
+                <div class="table-responsive tablaAlimentos col-sm-12 ">
+                    <table class="table table-dark   ">
+                        <thead class="thead-dark">
+                            <tr class="d-flex">
+                                <th class="col-4 col-md-6">Alimento</th>
+                                <th class="col-5 col-md-2">Cantidad</th>
+                                <th class="col-5 col-md-2">Kcal</th>
+                                <th class="col-3 col-md-2">Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let alimento of alimentosComida3; let i = index" class="d-flex">
+                                <td class="col-4 col-md-6"> {{alimento.nombre}}</td>
+                                <td class="col-5 col-md-2"> {{alimento.cantidad}}</td>
+                                <td class="col-5 col-md-2"> {{alimento.kcal}}</td>
+                                <td class="col-3 col-md-2 text-center">
+                                    <button class="btn botonBorrarAli mx-auto"
+                                        (click)="borrarAlimento(alimentosComida3,i)">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+
+
+
+            <div class="comida">
+                <h4 class="col-sm-12 pl-0">Comida 4 - Merienda</h4>
+                <label class="control-label text-left col-md-6 col-sm-12 pl-0  pl-0  "> Alimento
+                    <input type="text" class="form-control" formControlName="alimentoComida4">
+                </label>
+                <label class="control-label text-left col-md-2 col-sm-12 pl-0 pl-0"> Cantidad
+                    <input type="text" class="form-control" formControlName="cantidadComida4">
+                </label>
+                <label class="control-label text-left col-md-2 col-sm-12 pl-0 pl-0"> Kcal
+                    <input type="number" class="form-control" formControlName="kcalComida4">
+                </label>
+                <button type="submit" class="btn botonAñadirAlim col-md-2 mx-auto"
+                    (click)="anadirAlimento(alimentosComida4,'alimentoComida4','cantidadComida4','kcalComida4')"
+                    [disabled]="(!formNuevaDieta.controls.alimentoComida4.valid || !formNuevaDieta.controls.cantidadComida4.valid )">
+                    <i class="fas fa-plus-circle"></i> Añadir alimento
+                </button>
+                <div class="table-responsive tablaAlimentos col-sm-12 ">
+                    <table class="table table-dark   ">
+                        <thead class="thead-dark">
+                            <tr class="d-flex">
+                                <th class="col-4 col-md-6">Alimento</th>
+                                <th class="col-5 col-md-2">Cantidad</th>
+                                <th class="col-5 col-md-2">Kcal</th>
+                                <th class="col-3 col-md-2">Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let alimento of alimentosComida4; let i = index" class="d-flex">
+                                <td class="col-4 col-md-6"> {{alimento.nombre}}</td>
+                                <td class="col-5 col-md-2"> {{alimento.cantidad}}</td>
+                                <td class="col-5 col-md-2"> {{alimento.kcal}}</td>
+                                <td class="col-3 col-md-2 text-center">
+                                    <button class="btn botonBorrarAli mx-auto"
+                                        (click)="borrarAlimento(alimentosComida4,i)">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <div class="comida">
+                <h4 class="col-sm-12 pl-0">Comida 5 - Cena</h4>
+                <label class="control-label text-left col-md-6 col-sm-12 pl-0  pl-0  "> Alimento
+                    <input type="text" class="form-control" formControlName="alimentoComida5">
+                </label>
+                <label class="control-label text-left col-md-2 col-sm-12 pl-0 pl-0"> Cantidad
+                    <input type="text" class="form-control" formControlName="cantidadComida5">
+                </label>
+                <label class="control-label text-left col-md-2 col-sm-12 pl-0 pl-0"> Kcal
+                    <input type="number" class="form-control" formControlName="kcalComida5">
+                </label>
+                <button type="submit" class="btn botonAñadirAlim col-md-2 mx-auto"
+                    (click)="anadirAlimento(alimentosComida5,'alimentoComida5','cantidadComida5','kcalComida5')"
+                    [disabled]="(!formNuevaDieta.controls.alimentoComida5.valid || !formNuevaDieta.controls.cantidadComida5.valid )">
+                    <i class="fas fa-plus-circle"></i> Añadir alimento
+                </button>
+                <div class="table-responsive tablaAlimentos col-sm-12 ">
+                    <table class="table table-dark   ">
+                        <thead class="thead-dark">
+                            <tr class="d-flex">
+                                <th class="col-4 col-md-6">Alimento</th>
+                                <th class="col-5 col-md-2">Cantidad</th>
+                                <th class="col-5 col-md-2">Kcal</th>
+                                <th class="col-3 col-md-2">Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let alimento of alimentosComida5; let i = index" class="d-flex">
+                                <td class="col-4 col-md-6"> {{alimento.nombre}}</td>
+                                <td class="col-5 col-md-2"> {{alimento.cantidad}}</td>
+                                <td class="col-5 col-md-2"> {{alimento.kcal}}</td>
+                                <td class="col-3 col-md-2 text-center">
+                                    <button class="btn botonBorrarAli mx-auto"
+                                        (click)="borrarAlimento(alimentosComida5,i)">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="d-flex justify-content-end ">
+                <h5 class="kcalTotales">La dieta tiene <strong>{{kcalTotal}} kcal </strong></h5>
+            </div>
+
+
+            <div class="d-flex justify-content-center p-3">
+                <button type="submit" class="btn botonGuardarDieta col-sm-12" (click)="guardarDieta()" [disabled]="!formNuevaDieta.controls.nombreDieta.valid">
+                    <i class="fas fa-save pr-1"></i>Guardar dieta
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</section>

@@ -11,7 +11,7 @@
                 <input type="text" class="form-control" formControlName="nombreTabla">
             </label>
             <div class="dia ">
-                <h3 class="col-sm-12 pl-0">Dia 1</h3>
+                <h4 class="col-sm-12 pl-0">Dia 1</h4>
                 <label class="control-label text-left col-md-7 col-sm-12 pl-0  pl-0  "> Ejercicio
                     <input type="text" class="form-control" formControlName="ejercicioDia1">
                 </label>
@@ -49,7 +49,7 @@
             </div>
 
             <div class="dia">
-                <h3 class="col-sm-12 pl-0">Dia 2</h3>
+                <h4 class="col-sm-12 pl-0">Dia 2</h4>
                 <label class="control-label text-left col-md-7 col-sm-12 pl-0 "> Ejercicio
                     <input type="text" class="form-control" formControlName="ejercicioDia2">
                 </label>
@@ -84,7 +84,7 @@
                 </div>
             </div>
             <div class="dia">
-                <h3 class="col-sm-12 pl-0">Dia 3</h3>
+                <h4 class="col-sm-12 pl-0">Dia 3</h4>
                 <label class="control-label text-left col-md-7 col-sm-12 pl-0 "> Ejercicio
                     <input type="text" class="form-control" formControlName="ejercicioDia3">
                 </label>
@@ -119,7 +119,7 @@
                 </div>
             </div>
             <div class="dia">
-                <h3 class="col-sm-12 pl-0">Dia 4</h3>
+                <h4 class="col-sm-12 pl-0">Dia 4</h4>
                 <label class="control-label text-left col-md-7 col-sm-12 pl-0 "> Ejercicio
                     <input type="text" class="form-control" formControlName="ejercicioDia4">
                 </label>
@@ -154,7 +154,7 @@
                 </div>
             </div>
             <div class="dia">
-                <h3 class="col-sm-12 pl-0">Dia 5</h3>
+                <h4 class="col-sm-12 pl-0">Dia 5</h4>
                 <label class="control-label text-left col-md-7 col-sm-12 pl-0  pl-0 "> Ejercicio
                     <input type="text" class="form-control" formControlName="ejercicioDia5">
                 </label>
@@ -189,8 +189,8 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center p-3">
-                <button type="submit" class="btn botonGuardarTabla col-sm-12" (click)="guardarTabla()">
-                    <i class="fas fa-save"></i>Guardar tabla
+                <button type="submit" class="btn botonGuardarTabla col-sm-12 pr-1" (click)="guardarTabla()" [disabled]="!formNuevaTabla.controls.nombreTabla.valid">
+                    <i class="fas fa-save pr-1"></i>Guardar tabla
                 </button>
             </div>
 

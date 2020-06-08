@@ -41,6 +41,12 @@ export class TablasService {
     return this.httpClient.post(`${this.ServidorBACKEND}/actualizarPeso`, cambiosPesoMax);
   }
 
+  // Mandamois ID de la tabla para borrarla en la bdd con api
+  eliminarTabla(idTabla): Observable<any> {
+    return this.httpClient.post<any>(`${this.ServidorBACKEND}/eliminarTabla`, { idTabla });
+  }
+
+
   //#endregion
 
 

@@ -3,7 +3,7 @@ h2{
 }
 
 // Diseño de la tarjeta para cada dia de la tabla
-.dia{
+.comida{
     background-color: rgba(104, 104, 104, 0.452);
     border: 1px solid rgba(109, 109, 109, 0.1);
    
@@ -15,15 +15,14 @@ h2{
 th{
     background-color: rgb(47, 47, 47) !important;
 }
-
-// Boton guardar pesos nuevos
-.botonGuardarPesos{
+// Recuadro kcal totales
+.kcalTotales{
     background-color: red;
-    margin-bottom: 5px;
+    padding: 0.5em;
 }
 
 // Boton eliminar dieta
-.botonEliminarTabla{
+.botonEliminarDieta{
     background-color: red;
     margin-bottom: 5px;
 }
@@ -46,4 +45,9 @@ th{
         display: flex;
         justify-content: center;
     }
+    .kcalTotales{
+        margin-right: 15px;
+    }
+    
 }
+

@@ -11,7 +11,6 @@
         <div class="row d-flex justify-content-center ">
             <div class="col-sm-12 col-md-2 tarjeta row "  [routerLink]="['/tablas/crear',idUsuario]" *ngIf="(acceso !='1') || (acceso == '1' && idUsuario != null)">
                 <i class="fas fa-plus-square fa-4x"></i>
-                <!-- <img src="/assets/imagenes/prueba/image.png" alt="Acceso a tablas"> -->
                 <h4 class="col-sm-12">Añadir tabla</h4>
             </div>
             <div class="col-sm-12 col-md-2 tarjeta row " *ngFor="let tabla of tablasUsuario"   [routerLink]="['/tablas/visualizar',tabla._id]">

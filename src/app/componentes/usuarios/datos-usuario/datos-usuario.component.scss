@@ -28,3 +28,29 @@ span{
     margin-bottom: 5px;
     height: 3em;
 }
+
+// Boton eliminar dieta
+.botonEliminarUsuario{
+    background-color: red;
+    margin-bottom: 5px;
+}
+
+.eliminarCheck{
+    margin-left: 5px;
+    margin-top: 7px;
+}
+.divEliminar{
+    display: flex;
+    justify-content: center;
+}
+
+// Css para version movil
+@media only screen and (max-width: 768px) {
+    .divEliminar{
+        display: block
+    }
+    .eliminarCheck{
+        display: flex;
+        justify-content: center;
+    }
+}

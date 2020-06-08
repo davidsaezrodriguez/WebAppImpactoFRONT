@@ -30,3 +30,29 @@ h2 {
     background-color: red;
     margin-bottom: 5px;
 }
+
+// Boton eliminar dieta
+.botonEliminarEjercicio{
+    background-color: red;
+    margin-bottom: 5px;
+}
+
+.eliminarCheck{
+    margin-left: 5px;
+    margin-top: 7px;
+}
+.divEliminar{
+    display: flex;
+    justify-content: center;
+}
+
+// Css para version movil
+@media only screen and (max-width: 768px) {
+    .divEliminar{
+        display: block
+    }
+    .eliminarCheck{
+        display: flex;
+        justify-content: center;
+    }
+}

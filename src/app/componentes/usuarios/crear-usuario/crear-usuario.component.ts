@@ -4,6 +4,7 @@ import { FormBuilder, Form, FormControl, Validators, FormGroup } from '@angular/
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Usuario } from 'src/app/modelos/usuario';
+import { SeguimientosService } from 'src/app/servicios/seguimientosService';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -25,7 +26,9 @@ export class CrearUsuarioComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private toastr: ToastrService, // Servicio que nos creara notificaciones
-    private usuariosService: UsuariosService // Servicio para crear el usuario
+    private usuariosService: UsuariosService, // Servicio para crear el usuario
+    private seguimientosService: SeguimientosService // Servicio para interactuar con api seguimiento
+  
   ) { }
 
   ngOnInit(): void {
@@ -56,6 +59,9 @@ export class CrearUsuarioComponent implements OnInit {
 
     // Mandamos tabla con api a la bbdd
     this.usuariosService.registrarUsuario(this.nuevoUsuario).subscribe(res => {
+      // Creamos seguimiento por si tiene o algun dia llegara a tener seguimientos
+      console.log(res._id);
+      this.seguimientosService.crearSeguimiento(res._id).subscribe();
       // Si se crea correctamente mandamos mensaje y redirigimos a tablas
       this.toastr.success('', 'Usuario creado correctamente correctamente', {
         timeOut: 3000,

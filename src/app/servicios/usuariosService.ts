@@ -78,7 +78,12 @@ export class UsuariosService {
   // Funcion para cambiar contraseña
   modificarDatosUsuario(user: Usuario): Observable<any> {
     // mandamos en un post a la url del servidor del back las dos contraseñas para comprobar y cambiar
-    return this.httpClient.post<any>(`${this.ServidorBACKEND}/modificarDatosUsuario`,  user );
+    return this.httpClient.post<any>(`${this.ServidorBACKEND}/modificarDatosUsuario`, user);
+  }
+
+  // Mandamois ID del usuario para borrarla en la bdd con api
+  eliminarUsuario(idUsuario): Observable<any> {
+    return this.httpClient.post<any>(`${this.ServidorBACKEND}/eliminarUsuario`, { idUsuario });
   }
 
   //#endregion

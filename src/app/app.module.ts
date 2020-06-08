@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './componentes/login/login.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsuariosService } from './servicios/usuariosService';
@@ -30,7 +30,13 @@ import { VisualizarEjerciciosComponent } from './componentes/ejercicios/visualiz
 import { DetallesEjercicioComponent } from './componentes/ejercicios/visualizar-ejercicios/detalles-ejercicio/detalles-ejercicio.component';
 import { EjerciciosService } from './servicios/ejerciciosService';
 import { CrearEjerciciosComponent } from './componentes/ejercicios/crear-ejercicios/crear-ejercicios.component';
+import { DietasService } from './servicios/dietasService';
+import { CrearDietasComponent } from './componentes/dietas/crear-dietas/crear-dietas.component';
+import { VisualizarDietasComponent } from './componentes/dietas/visualizar-dietas/visualizar-dietas.component';
+import { SeguimientosService } from './servicios/seguimientosService';
+import localeEs from '@angular/common/locales/es';
 
+registerLocaleData(localeEs, 'es');
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +57,9 @@ import { CrearEjerciciosComponent } from './componentes/ejercicios/crear-ejercic
     ClasesComponent,
     VisualizarEjerciciosComponent,
     DetallesEjercicioComponent,
-    CrearEjerciciosComponent
+    CrearEjerciciosComponent,
+    CrearDietasComponent,
+    VisualizarDietasComponent
   ],
   imports: [
     AppRoutingModule,
@@ -65,10 +73,13 @@ import { CrearEjerciciosComponent } from './componentes/ejercicios/crear-ejercic
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: LOCALE_ID, useValue: 'es' } ,
     UsuariosService,
     LocalService,
     TablasService,
-    EjerciciosService
+    EjerciciosService,
+    DietasService,
+    SeguimientosService
   ],
   bootstrap: [AppComponent]
 })

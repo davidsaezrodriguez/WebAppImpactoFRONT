@@ -25,6 +25,10 @@ export class DetallesEjercicioComponent implements OnInit {
 
   // Comprobamos acceso para si es admin dejar borrar ejercicio
   acceso = this.localService.getAccesoUsuario();
+
+  // Variable para verificar estar seguro de borrar o no
+  checkActivado = false;
+
   //#endregion
 
   constructor(
@@ -33,6 +37,7 @@ export class DetallesEjercicioComponent implements OnInit {
     private localService: LocalService, // Servicio para comprobar con el token el nivel de acceso
     private router: Router,
     private toastr: ToastrService, // Servicio que nos creara notificaciones
+    // tslint:disable-next-line: variable-name
     private _sanitizer: DomSanitizer // Utilizaremos este servicio para añadir video si el ejemplo lo tuviera
 
   ) { }
@@ -62,6 +67,14 @@ export class DetallesEjercicioComponent implements OnInit {
     results = url.match('[\\?&]v=([^&#]*)');
     video = (results === null) ? url : results[1];
     return this._sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video);
+  }
+
+  checkEliminar() {
+    if (!this.checkActivado) {
+      this.checkActivado = true;
+    } else {
+      this.checkActivado = false;
+    }
   }
 
   // Eliminar ejercicio

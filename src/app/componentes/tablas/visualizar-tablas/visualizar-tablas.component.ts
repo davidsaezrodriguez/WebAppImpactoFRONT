@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Tabla, Tablas, CambiosPeso } from 'src/app/modelos/tabla';
 import { UsuariosService } from 'src/app/servicios/usuariosService';
 import { TablasService } from 'src/app/servicios/tablasService';
@@ -27,13 +27,16 @@ export class VisualizarTablasComponent implements OnInit {
   // Array donde guardaremos los pesos maximos guardados para despues mandarlos con api a BBDD
   cambiosPesoMax: Array<CambiosPeso> = [];
 
+  // Variable para verificar estar seguro de borrar o no
+  checkActivado = false;
+  
   //#endregion
 
   constructor(
     private rutaActiva: ActivatedRoute, // Clase con la que cogemos de URL el valor idTabla que nos manda el componente tablas
-    private usuariosService: UsuariosService, // Servicio para interactuar con API
     private tablasService: TablasService, // Servicio para interactuar con API con TABLAS
     private formBuilder: FormBuilder,
+    private router: Router,
     private toastr: ToastrService // Servicio que nos creara notificaciones
   ) {
     this.setformPesoMax();
@@ -88,7 +91,7 @@ export class VisualizarTablasComponent implements OnInit {
       });
     }, err => {
       // Si da error lo mostramos
-        this.toastr.error('Error al actualziar pesos');
+      this.toastr.error('Error al actualziar pesos');
     });
 
     this.toastr.success('', 'Pesos actualizados', {
@@ -96,6 +99,27 @@ export class VisualizarTablasComponent implements OnInit {
     });
     this.cambiosPesoMax = [];
   }
+
+  checkEliminar() {
+    if (!this.checkActivado) {
+      this.checkActivado = true;
+    } else {
+      this.checkActivado = false;
+    }
+  }
+  eliminarTabla() {
+    this.tablasService.eliminarTabla(this.idTabla).subscribe(res => {
+      // Si se elimina corectamente
+      this.toastr.success('', 'Tabla eliminada correctamente', {
+        timeOut: 3000,
+      });
+      this.router.navigate(['/tablas']);
+    }, err => {
+      // Si da error lo mostramos
+      this.toastr.error('Error al eliminar la tabla');
+    });
+  }
+
   //#endregion
 }
 

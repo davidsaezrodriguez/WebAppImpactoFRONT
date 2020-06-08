@@ -1,0 +1,66 @@
+h2 {
+    text-align: center;
+    margin: 1em;
+}
+
+// Diseño de la tarjeta para cada dia de la tabla
+.comida {
+    background-color: rgba(104, 104, 104, 0.452);
+    border: 1px solid rgba(109, 109, 109, 0.1);
+
+    margin: 1em;
+    padding: 1.5em;
+}
+th {
+    background-color: rgb(47, 47, 47) !important;
+}
+.tablaAlimentos {
+    margin-top: 1em;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+// Estilo de botones
+.botonAñadirAlim {
+    background-color: red;
+    margin-bottom: 5px;
+}
+.botonBorrarAli {
+    background-color: red;
+}
+.botonGuardarDieta{
+    background-color: red;
+    margin-bottom: 5px;
+}
+tr th,tr td {
+    padding-left: 3px;
+}
+
+// Recuadro kcal totales
+.kcalTotales{
+    background-color: red;
+    padding: 0.5em;
+    margin-right: 15px;
+}
+// Css para version movil
+@media only screen and (max-width: 768px) {
+    // Quitamos padding a la tarjeta que engloba cada dia y ponemos en columna
+    .comida {
+        padding: 0.5em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .botonAñadirAlim {
+        width: 12em;
+        margin-top: 0.5em;
+    }
+    label {
+        padding-right: 0;
+    }
+    .labelNombreDieta {
+        padding-right: 15px;
+    }
+}
+
+

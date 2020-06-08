@@ -38,6 +38,9 @@ export class DatosUsuarioComponent implements OnInit {
   // Variable true si hay cambios en formulario datos
   cambiosFormDatosComp = false;
 
+  // Variable para verificar estar seguro de borrar o no
+  checkActivado = false;
+
   //#endregion
   constructor(
     private rutaActiva: ActivatedRoute, // Clase con la que cogemos de URL el valor idUsuario que nos manda el componente tablas
@@ -163,5 +166,27 @@ export class DatosUsuarioComponent implements OnInit {
       });
     }
   }
+
+  checkEliminar() {
+    if (!this.checkActivado) {
+      this.checkActivado = true;
+    } else {
+      this.checkActivado = false;
+
+    }
+  }
+  eliminarUsuario() {
+    this.usuariosService.eliminarUsuario(this.usuario._id).subscribe(res => {
+      // Si se elimina corectamente
+      this.toastr.success('', 'Usuario eliminado correctamente', {
+        timeOut: 3000,
+      });
+      this.router.navigate(['/usuarios']);
+    }, err => {
+      // Si da error lo mostramos
+      this.toastr.error('Error al eliminar la usuario');
+    });
+  }
+
   //#endregion
 }
