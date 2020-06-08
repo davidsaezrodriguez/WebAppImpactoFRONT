@@ -41,6 +41,7 @@ tr th,tr td {
     background-color: red;
     padding: 0.5em;
     margin-right: 15px;
+    font-size: 18px;
 }
 // Css para version movil
 @media only screen and (max-width: 768px) {
@@ -60,6 +61,10 @@ tr th,tr td {
     }
     .labelNombreDieta {
         padding-right: 15px;
+    }
+    .kcalTotales{
+        margin-right: 15px;
+        font-size: 16px;
     }
 }
 

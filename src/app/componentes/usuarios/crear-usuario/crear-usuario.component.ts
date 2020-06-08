@@ -60,7 +60,6 @@ export class CrearUsuarioComponent implements OnInit {
     // Mandamos tabla con api a la bbdd
     this.usuariosService.registrarUsuario(this.nuevoUsuario).subscribe(res => {
       // Creamos seguimiento por si tiene o algun dia llegara a tener seguimientos
-      console.log(res._id);
       this.seguimientosService.crearSeguimiento(res._id).subscribe();
       // Si se crea correctamente mandamos mensaje y redirigimos a tablas
       this.toastr.success('', 'Usuario creado correctamente correctamente', {

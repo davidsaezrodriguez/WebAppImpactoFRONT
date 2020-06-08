@@ -146,8 +146,6 @@ export class CrearDietasComponent implements OnInit {
         comida: this.comidas,
         kcalTotal: this.kcalTotal
       });
-
-      console.log(this.dieta);
       // Mandamos dieta con api a la bbdd
       this.dietasService.crearDieta(this.dieta).subscribe(res => {
         // Si se crea correctamente mandamos mensaje y redirigimos a tablas

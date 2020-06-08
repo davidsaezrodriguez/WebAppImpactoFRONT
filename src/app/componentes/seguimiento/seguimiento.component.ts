@@ -86,23 +86,23 @@ export class SeguimientoComponent implements OnInit {
       this.idUsuario = null; // Tambien vaciamos el usuario ya que no habria ninguno seleccionado
     }
   }
-  // Buscamos con api las tablas del usuario seleccionado y las cargamos
+  // Buscamos con api el seguimiento del usuario seleccionado y las cargamos
   cargarSeguimientoUsuario(idUsuario) {
     this.seguimientosService.buscarSeguimiento(idUsuario).subscribe(data => {
-      const seguimiento = data[0];
+      const seguimiento = data;
       // Formateamos todas las fechas ya que nos las devuelve en formato Date y se verian mal en la tabla
       for (const indice of seguimiento.indice) {
-        indice.fecha = this.pipe.transform(indice.fecha, 'dd/MM/yyyy');
+        indice.fecha = this.pipe.transform(indice.fecha, 'dd/MM/yy');
       }
       for (const medida of seguimiento.medida) {
-        medida.fecha = this.pipe.transform(medida.fecha, 'dd/MM/yyyy');
+        medida.fecha = this.pipe.transform(medida.fecha, 'dd/MM/yy');
       }
       this.seguimiento = seguimiento;
     });
   }
   private setForm() {
     const now = Date.now();
-    const fechaHoy = this.pipe.transform(now, 'dd/MM/yyyy');
+    const fechaHoy = this.pipe.transform(now, 'dd/MM/yy');
     this.formNuevoIndice = this.formBuilder.group({
       fechaIndice: new FormControl(fechaHoy, Validators.required),
       peso: new FormControl(null, Validators.required),
@@ -121,6 +121,7 @@ export class SeguimientoComponent implements OnInit {
     });
   }
 
+  // Calculo del IMC con peso y altura
   calculoIMC() {
     const peso = this.formNuevoIndice.controls.peso.value;
     const altura = this.formNuevoIndice.controls.altura.value;
@@ -130,12 +131,14 @@ export class SeguimientoComponent implements OnInit {
       this.formNuevoIndice.controls.imc.setValue(IMC);
     }
   }
+
+  // Guardar indice nuevo para el usuario
   guardarIndice() {
     // Cogemos valor de fecha y lo pasamos a un date que nos guarde bien en BBDD
     const fecha = (this.formNuevoIndice.controls.fechaIndice.value).split('/');
     const diaIndice: number = fecha[0];
     const mesIndice: number = fecha[1];
-    const anoIndice: number = fecha[2];
+    const anoIndice: number = 20 + fecha[2];
     const fechaIndice = new Date(anoIndice, mesIndice - 1, diaIndice);
 
     // Creamos seguimiento para enviarlo a api y añadir indice
@@ -152,7 +155,7 @@ export class SeguimientoComponent implements OnInit {
 
     // Guardamos en BBDD con API
     this.seguimientosService.guardarIndice(this.seguimientoNuevo).subscribe(res => {
-      // Si se crea correctamente mandamos mensaje y redirigimos a tablas
+      // Si se crea correctamente mandamos mensaje y  recargamos componente
       this.toastr.success('', 'Indice guardado correctamente', {
         timeOut: 3000,
       });
@@ -163,12 +166,14 @@ export class SeguimientoComponent implements OnInit {
       this.toastr.error('Error al guardar indice');
     });
   }
+
+  // Guardamos nueva medida del usuario en bbdd
   guardarMedidas() {
     // Cogemos valor de fecha y lo pasamos a un date que nos guarde bien en BBDD
     const fecha = (this.formNuevaMedidas.controls.fechaMedidas.value).split('/');
     const diaMedida: number = fecha[0];
     const mesMedida: number = fecha[1];
-    const anoMedida: number = fecha[2];
+    const anoMedida: number = 20 + fecha[2];
     const fechaMedida = new Date(anoMedida, mesMedida - 1, diaMedida);
 
     // Creamos seguimiento para enviarlo a api y añadir medida
@@ -184,10 +189,9 @@ export class SeguimientoComponent implements OnInit {
         muslo: this.formNuevaMedidas.controls.muslo.value,
       }]
     });
-
     // Guardamos en BBDD con API
     this.seguimientosService.guardarMedidas(this.seguimientoNuevo).subscribe(res => {
-      // Si se crea correctamente mandamos mensaje y redirigimos a tablas
+      // Si se crea correctamente mandamos mensaje y  recargamos componente
       this.toastr.success('', 'Medidas guardadas correctamente', {
         timeOut: 3000,
       });
@@ -202,7 +206,7 @@ export class SeguimientoComponent implements OnInit {
 
   eliminarIndice(idIndice) {
     this.seguimientosService.eliminarIndice(this.seguimiento._id, idIndice).subscribe(res => {
-      // Si se crea correctamente mandamos mensaje y redirigimos a tablas
+      // Si se elimina correctamente mandamos mensaje y recargamos componente
       this.toastr.success('', 'Indice eliminado correctamente', {
         timeOut: 3000,
       });
@@ -216,7 +220,7 @@ export class SeguimientoComponent implements OnInit {
 
   eliminarMedida(idMedida) {
     this.seguimientosService.eliminarMedidas(this.seguimiento._id, idMedida).subscribe(res => {
-      // Si se crea correctamente mandamos mensaje y redirigimos a tablas
+      // Si se elimina correctamente mandamos mensaje y  recargamos componente
       this.toastr.success('', 'Medida eliminada correctamente', {
         timeOut: 3000,
       });

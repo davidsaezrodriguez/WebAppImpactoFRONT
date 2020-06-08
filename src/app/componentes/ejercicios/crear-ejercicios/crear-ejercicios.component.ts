@@ -76,8 +76,6 @@ export class CrearEjerciciosComponent implements OnInit {
       imagen: this.nombreImagen,
       video: this.formNuevoEjercicio.controls.video.value,
     });
-
-    console.log(this.ejercicio);
     // Mandamos tabla con api a la bbdd
     this.ejerciciosService.crearEjercicio(this.ejercicio, this.imagenFormateada).subscribe(res => {
       // Si se crea correctamente mandamos mensaje y redirigimos a tablas

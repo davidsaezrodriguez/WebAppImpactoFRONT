@@ -12,3 +12,24 @@ th {
 .botonAñadirIndice {
     background-color: red;
 }
+
+// Css para version movil
+@media only screen and (max-width: 768px) {
+    .divEliminar{
+        display: block
+    }
+    .eliminarCheck{
+        display: flex;
+        justify-content: center;
+    }
+    table{
+        font-size: 12px;
+    }
+    input{
+        font-size: 12px;
+    }
+    td{
+        background-color: #343a40;
+    }
+
+}

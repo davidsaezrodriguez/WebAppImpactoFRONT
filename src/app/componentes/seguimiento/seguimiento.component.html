@@ -12,146 +12,150 @@
         <div class="col-md-8 tarjetaSeguimiento">
             <h4>Indices</h4>
             <div class="table-responsive">
-                <table class="table table-dark  ">
-                    <thead class="thead-dark">
-                        <tr class="d-flex">
-                            <th class="col-2 col-md-2">Fecha</th>
-                            <th class="col-2 col-md-2">Peso</th>
-                            <th class="col-2 col-md-2">Altura(cm)</th>
-                            <th class="col-2 col-md-2">IMC</th>
-                            <th class="col-2 col-md-2">Grasa</th>
-                            <th class="col-2 col-md-2">Guardar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="d-flex" [formGroup]="formNuevoIndice">
-                            <td class="col-2 col-md-2">
-                                <input type="text" class="form-control" formControlName="fechaIndice">
-                            </td>
-                            <td class="col-2 col-md-2">
-                                <input type="text" class="form-control" formControlName="peso" (change)="calculoIMC()">
-                            </td>
-                            <td class="col-2 col-md-2">
-                                <input type="text" class="form-control" formControlName="altura" (change)="calculoIMC()">
-                            </td>
-                            <td class="col-2 col-md-2">
-                                <input type="text" class="form-control" disabled formControlName="imc">
-                            </td>
-                            <td class="col-2 col-md-2">
-                                <input type="text" class="form-control" formControlName="grasa">
-                            </td>
-                            <td class="col-2 col-md-2 text-center">
-                                <button class="btn botonAñadirIndice mx-auto" (click)="guardarIndice()" [disabled]="!formNuevoIndice.valid">
-                                    <i class="fas fa-save"></i> </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table class="table table-dark " *ngIf="seguimiento">
-                    <tbody>
-                        <tr class="d-flex" *ngFor="let indice of seguimiento.indice">
-                            <td class="col-2 col-md-2">
-                                {{indice.fecha}}
-                            </td>
-                            <td class="col-2 col-md-2">
-                                {{indice.peso}} Kg
-                            </td>
-                            <td class="col-2 col-md-2">
-                                {{indice.altura}} cm
-                            </td>
-                            <td class="col-2 col-md-2">
-                                {{indice.imc}} %
-                            </td>
-                            <td class="col-2 col-md-2">
-                                {{indice.grasa}} %
-                            </td>
-                            <td class="col-2 col-md-2 text-center">
-                                <button class="btn botonAñadirIndice mx-auto" (click)="eliminarIndice(indice._id)">
-                                    <i class="fas fa-trash-alt"></i>
-                                 </button>
-                            </td>
-                        </tr>
-                    </tbody>
+                <table class="table table-dark text-center " [formGroup]="formNuevoIndice" *ngIf="seguimiento">
+                    <tr class="d-flex">
+                        <th class="col-3 col-md-2">Fecha</th>
+                        <td class="col-3 col-md-2">
+                            <input type="text" class="form-control" formControlName="fechaIndice">
+                        </td>
+                        <td class="col-2 col-md" *ngFor="let indice of seguimiento.indice">
+                            {{indice.fecha}}
+                        </td>
+                    </tr>
+                    <tr class="d-flex">
+                        <th class="col-3 col-md-2">Peso</th>
+                        <td class="col-3 col-md-2">
+                            <input type="text" class="form-control" formControlName="peso" (change)="calculoIMC()">
+                        </td>
+                        <td class="col-2 col-md" *ngFor="let indice of seguimiento.indice">
+                            {{indice.peso}} Kg
+                        </td>
+                    </tr>
+                    <tr class="d-flex">
+                        <th class="col-3 col-md-2">Altura(cm)</th>
+                        <td class="col-3 col-md-2">
+                            <input type="text" class="form-control" formControlName="altura" (change)="calculoIMC()">
+                        </td>
+                        <td class="col-2 col-md" *ngFor="let indice of seguimiento.indice">
+                            {{indice.altura}} cm
+                        </td>
+                    </tr>
+                    <tr class="d-flex">
+                        <th class="col-3 col-md-2">IMC</th>
+                        <td class="col-3 col-md-2">
+                            <input type="text" class="form-control" disabled formControlName="imc">
+                        </td>
+                        <td class="col-2 col-md" *ngFor="let indice of seguimiento.indice">
+                            {{indice.imc}} %
+                        </td>
+                    </tr>
+                    <tr class="d-flex">
+                        <th class="col-3 col-md-2">Grasa</th>
+                        <td class="col-3 col-md-2">
+                            <input type="text" class="form-control" formControlName="grasa">
+                        </td>
+                        <td class="col-2 col-md" *ngFor="let indice of seguimiento.indice">
+                            {{indice.grasa}} %
+                        </td>
+                    </tr>
+                    <tr class="d-flex">
+                        <th class="col-3 col-md-2">Guardar</th>
+                        <td class="col-3 col-md-2 text-center">
+                            <button class="btn botonAñadirIndice mx-auto" (click)="guardarIndice()"
+                                [disabled]="!formNuevoIndice.valid">
+                                <i class="fas fa-save"></i> </button>
+                        </td>
+                        <td class="col-2 col-md text-center" *ngFor="let indice of seguimiento.indice">
+                            <button class="btn botonAñadirIndice mx-auto" (click)="eliminarIndice(indice._id)">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </div>
         <div class="col-md-8 tarjetaSeguimiento">
             <h4>Medidas</h4>
             <div class="table-responsive">
-                <table class="table table-dark  ">
-                    <thead class="thead-dark">
-                        <tr class="d-flex">
-                            <th class="col-2">Fecha</th>
-                            <th class="col">Biceps</th>
-                            <th class="col">Hombros</th>
-                            <th class="col">Pecho</th>
-                            <th class="col">Cintura</th>
-                            <th class="col">Gluteo</th>
-                            <th class="col">Muslo</th>
-                            <th class="col">Guardar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="d-flex" [formGroup]="formNuevaMedidas">
-                            <td class="col-2">
-                                <input type="text" class="form-control" formControlName="fechaMedidas">
-                            </td>
-                            <td class="col">
-                                <input type="text" class="form-control" formControlName="biceps">
-                            </td>
-                            <td class="col">
-                                <input type="text" class="form-control" formControlName="hombros">
-                            </td>
-                            <td class="col">
-                                <input type="text" class="form-control" formControlName="pecho">
-                            </td>
-                            <td class="col">
-                                <input type="text" class="form-control" formControlName="cintura">
-                            </td>
-                            <td class="col">
-                                <input type="text" class="form-control" formControlName="gluteo">
-                            </td>
-                            <td class="col">
-                                <input type="text" class="form-control" formControlName="muslo">
-                            </td>
-                            <td class="col text-center">
-                                <button class="btn botonAñadirIndice mx-auto" (click)="guardarMedidas()"  [disabled]="!formNuevaMedidas.valid">
-                                    <i class="fas fa-save"></i> </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table class="table table-dark " *ngIf="seguimiento">
-                    <tbody>
-                        <tr class="d-flex" *ngFor="let medida of seguimiento.medida">
-                            <td class="col-2 col-md-2">
-                                {{medida.fecha }}
-                            </td>
-                            <td class="col">
-                                {{medida.biceps}} cm
-                            </td>
-                            <td class="col">
-                                {{medida.hombros}} cm
-                            </td>
-                            <td class="col">
-                                {{medida.pecho}} cm
-                            </td>
-                            <td class="col">
-                                {{medida.cintura}} cm
-                            </td>
-                            <td class="col">
-                                {{medida.gluteo}} cm
-                            </td>
-                            <td class="col">
-                                {{medida.muslo}} cm
-                            </td>
-                            <td class="col text-center">
-                                <button class="btn botonAñadirIndice mx-auto" (click)="eliminarMedida(medida._id)">
-                                    <i class="fas fa-trash-alt"></i>
-                                 </button>
-                            </td>
-                        </tr>
-                    </tbody>
+                <table class="table table-dark text-center " [formGroup]="formNuevaMedidas" *ngIf="seguimiento">
+                    <tr class="d-flex">
+                        <th class="col-3 col-md-2">Fecha</th>
+                        <td class="col-3 col-md-2">
+                            <input type="text" class="form-control" formControlName="fechaMedidas">
+                        </td>
+                        <td class="col-2 col-md" *ngFor="let medida of seguimiento.medida">
+                            {{medida.fecha }}
+                        </td>
+                    </tr>
+                    <tr class="d-flex">
+                        <th class=" col-3 col-md-2">Biceps</th>
+                        <td class=" col-3 col-md-2">
+                            <input type="text" class="form-control" formControlName="biceps">
+                        </td>
+                        <td class=" col-2 col-md" *ngFor="let medida of seguimiento.medida">
+                            {{medida.biceps}} cm
+                        </td>
+                    </tr>
+                    <tr class="d-flex">
+                        <th class=" col-3 col-md-2">Hombros</th>
+                        <td class=" col-3 col-md-2">
+                            <input type="text" class="form-control" formControlName="hombros">
+                        </td>
+                        <td class=" col-2 col-md" *ngFor="let medida of seguimiento.medida">
+                            {{medida.hombros}} cm
+                        </td>
+                    </tr>
+                    <tr class="d-flex">
+                        <th class=" col-3 col-md-2">Pecho</th>
+
+                        <td class=" col-3 col-md-2">
+                            <input type="text" class="form-control" formControlName="pecho">
+                        </td>
+                        <td class=" col-2 col-md" *ngFor="let medida of seguimiento.medida">
+                            {{medida.pecho}} cm
+                        </td>
+                    </tr>
+                    <tr class="d-flex">
+                        <th class=" col-3 col-md-2">Cintura</th>
+                        <td class=" col-3 col-md-2">
+                            <input type="text" class="form-control" formControlName="cintura">
+                        </td>
+                        <td class=" col-2 col-md" *ngFor="let medida of seguimiento.medida">
+                            {{medida.cintura}} cm
+                        </td>
+                    </tr>
+                    <tr class="d-flex">
+                        <th class=" col-3 col-md-2">Gluteo</th>
+                        <td class=" col-3 col-md-2">
+                            <input type="text" class="form-control" formControlName="gluteo">
+                        </td>
+                        <td class=" col-2 col-md" *ngFor="let medida of seguimiento.medida">
+                            {{medida.gluteo}} cm
+                        </td>
+                    </tr>
+                    <tr class="d-flex">
+                        <th class=" col-3 col-md-2">Muslo</th>
+                        <td class=" col-3 col-md-2">
+                            <input type="text" class="form-control" formControlName="muslo">
+                        </td>
+                        <td class=" col-2 col-md" *ngFor="let medida of seguimiento.medida">
+                            {{medida.muslo}} cm
+                        </td>
+                    </tr>
+                    <tr class="d-flex">
+                        <th class=" col-3 col-md-2">Guardar</th>
+                        <td class=" col-3 col-md-2 text-center">
+                            <button class="btn botonAñadirIndice mx-auto" (click)="guardarMedidas()"
+                                [disabled]="!formNuevaMedidas.valid">
+                                <i class="fas fa-save"></i>
+                            </button>
+                        </td>
+                        <td class=" col-2 col-md text-center" *ngFor="let medida of seguimiento.medida">
+                            <button class="btn botonAñadirIndice mx-auto" (click)="eliminarMedida(medida._id)">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </div>

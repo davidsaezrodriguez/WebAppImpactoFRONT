@@ -8,7 +8,7 @@ export interface Seguimiento {
 
 export interface Indice {
     _id?: string;
-    fecha: Date;
+    fecha: any;
     peso: Number;
     altura: Number;
     imc: Number;
@@ -17,7 +17,7 @@ export interface Indice {
 
 export interface Medida {
     _id?: string;
-    fecha: Date;
+    fecha: any;
     biceps: Number;
     hombros: Number;
     pecho: Number;

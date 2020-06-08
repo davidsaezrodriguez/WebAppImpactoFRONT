@@ -22,36 +22,35 @@ export class SeguimientosService {
 
     //#region FUNCIONES INTERACTUAR CON API
 
-    // Funcion para guardar en base de datos nueva tabla
+    // Funcion para crear un seguimiento al usuario en bdd
     crearSeguimiento(idUsuario): Observable<any> {
         return this.httpClient.post<any>(`${this.ServidorBACKEND}/crearSeguimiento`, { idUsuario });
     }
 
-    // Funcion para guardar en base de datos nueva tabla
+    // Funcion para buscar en bbdd el seguimiento del usuario
     buscarSeguimiento(idUsuario): Observable<Seguimiento> {
         return this.httpClient.post<Seguimiento>(`${this.ServidorBACKEND}/buscarSeguimiento`, { idUsuario });
     }
 
-    // Buscamos la tabla con la api en la base de datos
+    // Guardamos nuevo indice del usuario en bbdd
     guardarIndice(seguimiento: Seguimiento): Observable<any> {
         return this.httpClient.post<any>(`${this.ServidorBACKEND}/guardarIndice`, { seguimiento });
     }
 
-    // Actualizamos pesosMax de tabla
+    // Guardamos nueva medida del usuario en bbdd
     guardarMedidas(seguimiento: Seguimiento) {
         return this.httpClient.post(`${this.ServidorBACKEND}/guardarMedidas`, { seguimiento });
     }
 
-    // Mandamois ID de la tabla para borrarla en la bdd con api
+    // Eliminamos un indice del usuario en bbdd
     eliminarIndice(idSeguimiento, idIndice): Observable<any> {
         return this.httpClient.post<any>(`${this.ServidorBACKEND}/eliminarIndice`, { idSeguimiento, idIndice });
     }
 
-    // Mandamois ID de la tabla para borrarla en la bdd con api
+    // Eliminamos una medida del usuario en bbdd
     eliminarMedidas(idSeguimiento, idMedida): Observable<any> {
         return this.httpClient.post<any>(`${this.ServidorBACKEND}/eliminarMedidas`, { idSeguimiento, idMedida });
     }
-
 
     //#endregion
 
