@@ -35,6 +35,15 @@ import { CrearDietasComponent } from './componentes/dietas/crear-dietas/crear-di
 import { VisualizarDietasComponent } from './componentes/dietas/visualizar-dietas/visualizar-dietas.component';
 import { SeguimientosService } from './servicios/seguimientosService';
 import localeEs from '@angular/common/locales/es';
+import { ClasesService } from './servicios/clasesService';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/moment';
+import * as moment from 'moment';
+import { UtilCalendarioCabeceraComponent } from './componentes/adicionales/util-calendario/util-calendario-cabecera/util-calendario-cabecera.component';
+
+export function momentAdapterFactory() {
+  return adapterFactory(moment);
+}
 
 registerLocaleData(localeEs, 'es');
 @NgModule({
@@ -59,7 +68,8 @@ registerLocaleData(localeEs, 'es');
     DetallesEjercicioComponent,
     CrearEjerciciosComponent,
     CrearDietasComponent,
-    VisualizarDietasComponent
+    VisualizarDietasComponent,
+    UtilCalendarioCabeceraComponent
   ],
   imports: [
     AppRoutingModule,
@@ -69,7 +79,8 @@ registerLocaleData(localeEs, 'es');
     CommonModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: momentAdapterFactory })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
@@ -79,7 +90,8 @@ registerLocaleData(localeEs, 'es');
     TablasService,
     EjerciciosService,
     DietasService,
-    SeguimientosService
+    SeguimientosService,
+    ClasesService
   ],
   bootstrap: [AppComponent]
 })
