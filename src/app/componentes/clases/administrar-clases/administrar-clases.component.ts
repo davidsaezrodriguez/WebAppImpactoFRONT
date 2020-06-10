@@ -69,7 +69,6 @@ export class AdministrarClasesComponent implements OnInit {
       dia: new FormControl(null, Validators.required),
       inicio: new FormControl(null, Validators.required),
       fin: new FormControl(null, Validators.required),
-      color: new FormControl(null, Validators.required),
       maxAlumnos: new FormControl(null, Validators.required),
     });
   }
@@ -101,20 +100,12 @@ export class AdministrarClasesComponent implements OnInit {
   }
   crearClase() {
     // Cogemos fecha y hras de string y la pasamos a variables number para crear luego un date
-    const fecha = (this.formNuevaClase.controls.dia.value).split('/');
-    const dia: number = fecha[0];
-    const mes: number = fecha[1];
-    const ano: number = 20 + fecha[2];
+    const fecha = (this.formNuevaClase.controls.dia.value)
+    const hinicio = (this.formNuevaClase.controls.inicio.value)
+    const hfin = (this.formNuevaClase.controls.fin.value)
 
-    const horaInicio = (this.formNuevaClase.controls.inicio.value).split(':');
-    const hInicio: number = horaInicio[0];
-    const minInicio: number = horaInicio[1];
-    const inicio = new Date(ano, mes - 1, dia, hInicio, minInicio);
-
-    const horaFin = (this.formNuevaClase.controls.fin.value).split(':');
-    const hFin: number = horaFin[0];
-    const minFin: number = horaFin[1];
-    const fin = new Date(ano, mes - 1, dia, hFin, minFin);
+    const inicio = new Date(fecha.year, fecha.month - 1, fecha.day, hinicio.hour, hinicio.minute);
+    const fin = new Date(fecha.year, fecha.month - 1, fecha.day, hfin.hour, hfin.minute);
 
     const tipo = this.formNuevaClase.controls.tipo.value;
     const color = this.cargarColor(tipo);
@@ -126,8 +117,6 @@ export class AdministrarClasesComponent implements OnInit {
       color,
       maxAlumnos: this.formNuevaClase.controls.maxAlumnos.value,
     });
-    console.log(this.nuevaClase);
-
     //  Mandamos tabla con api a la bbdd
     this.clasesService.crearClase(this.nuevaClase).subscribe(res => {
       // Si se crea correctamente mandamos mensaje y redirigimos a clases

@@ -41,6 +41,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/moment';
 import * as moment from 'moment';
 import { UtilCalendarioCabeceraComponent } from './componentes/adicionales/util-calendario/util-calendario-cabecera/util-calendario-cabecera.component';
 import { AdministrarClasesComponent } from './componentes/clases/administrar-clases/administrar-clases.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 export function momentAdapterFactory() {
   return adapterFactory(moment);
@@ -83,6 +84,7 @@ registerLocaleData(localeEs, 'es');
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: momentAdapterFactory }),
+    NgbModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -54,7 +54,13 @@ export class LoginComponent implements OnInit {
       NavbarComponent.updateUserStatus.next(true); // here!
       this.router.navigate(['/menu']);
     }, err => {
-      this.toastr.error('Contraseña incorrecta');
+      if (err && err.status === 404) {
+        this.toastr.error('DNI no existe');
+
+      } else {
+        this.toastr.error('Contraseña incorrecta');
+
+      }
     });
   }
 

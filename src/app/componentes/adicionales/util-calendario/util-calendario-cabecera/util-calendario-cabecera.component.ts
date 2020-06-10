@@ -13,8 +13,6 @@ export class UtilCalendarioCabeceraComponent {
 
   @Input() locale = 'es-ES';
 
-  @Output() viewChange = new EventEmitter<CalendarView>();
-
   @Output() viewDateChange = new EventEmitter<Date>();
 
   CalendarView = CalendarView;

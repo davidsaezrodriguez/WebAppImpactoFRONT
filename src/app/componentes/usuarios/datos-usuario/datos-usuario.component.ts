@@ -162,7 +162,11 @@ export class DatosUsuarioComponent implements OnInit {
         this.router.navigate(['/menu']);
       }, err => {
         // Si da error lo mostramos
-        this.toastr.error('Contraseña incorrecta');
+        if (err && err.status === 404) {
+          this.toastr.error('Error con usuario');
+        } else {
+          this.toastr.error('La contraseña es incorrectar');
+        }
       });
     }
   }

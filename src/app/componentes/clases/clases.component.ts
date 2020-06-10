@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ChangeDetectionStrategy, OnDestroy, ViewEncapsulation, } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectionStrategy, OnDestroy, ViewEncapsulation, EventEmitter, Output, Input, } from '@angular/core';
 import { CalendarEvent, CalendarView, CalendarEventAction, CalendarEventTitleFormatter } from 'angular-calendar';
 import { isSameDay, isSameMonth } from 'date-fns';
 import { DOCUMENT, DatePipe } from '@angular/common';
@@ -9,6 +9,7 @@ import { Clase } from 'src/app/modelos/clase';
 import { ClasesService } from 'src/app/servicios/clasesService';
 import { Usuario } from 'src/app/modelos/usuario';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 // Colores que se usaran para marcar eventos
 export const colors: any = {
@@ -60,11 +61,11 @@ export class ClasesComponent implements OnInit {
   excludeDays: number[] = [0, 6];
 
   // Eventos que apareceran en el calendario
-  clases: CalendarEvent[];
-  clasesNoLlenas: CalendarEvent[];
-  clasesLlenas: CalendarEvent[];
+  clasesAsiste: CalendarEvent[] = [];
+  clasesNoLlenas: CalendarEvent[] = [];
+  clasesLlenas: CalendarEvent[] = [];
 
-  events: CalendarEvent[];
+  events: CalendarEvent[] = [];
 
   // Comprobar abrir dia seleccionado
   activeDayIsOpen: boolean;
@@ -87,7 +88,7 @@ export class ClasesComponent implements OnInit {
   // Variable que usamos para crear la accion de salirte de la clase en el calendario
   actionsNoAsistir: CalendarEventAction[] = [
     {
-      label: '<i class="fas fa-trash-alt"></i> Dejar de asistir a la clase</i>',
+      label: '<i class="fas fa-trash-alt"><span class="labelBoton">Salir de la clase</span></i>',
       cssClass: 'botonNoAsistir',
       onClick: ({ event }: { event: CalendarEvent }): void => {
         this.desapuntarseClase(event.id);
@@ -95,30 +96,39 @@ export class ClasesComponent implements OnInit {
     },
   ];
 
-
+  // Variable que usamos para crear la accion de salirte de la clase en el calendario
+  actionsClaseLlena: CalendarEventAction[] = [
+    {
+      label: '<span class="labelBoton">Clase llena</span>',
+      cssClass: 'claseLlena',
+      onClick: ({ event }: { event: CalendarEvent }): void => {
+        this.toastr.warning('', 'Clase completa', {
+          timeOut: 3000,
+        });
+      },
+    },
+  ];
 
   //#endregion
 
   constructor(
     private localService: LocalService, // Servicio para comprobar acceso de persona logeada
     private clasesService: ClasesService, // Servicio con el que gestionamos las clases
+    private router: Router,
     private toastr: ToastrService, // Servicio que nos creara notificaciones
   ) { }
 
   ngOnInit(): void {
-    this.events = [];
-
     // Cargamos eventos al calendario
     this.cargarEventosCalendario();
-
     // Funcion que añadira el mes al componente con mayuscula primera
     this.cambioMes();
-
   }
 
   //#region FUNCIONES
 
   cargarEventosCalendario() {
+    this.events = [];
     // Usuario logeado
     const usuarioLoge = this.localService.getTokenData();
     this.usuario = ({
@@ -164,6 +174,7 @@ export class ClasesComponent implements OnInit {
             start: new Date(clase.inicio),
             end: new Date(clase.fin),
             color: clase.color,
+            actions: this.actionsClaseLlena,
             cssClass: 'clase '
           });
           this.events.push(claseFormateada);
@@ -180,7 +191,7 @@ export class ClasesComponent implements OnInit {
         timeOut: 3000,
       });
       // Recargamos componente para ver datos añadidos y vaciar campos
-      this.ngOnInit();
+      this.router.navigate(['/menu']);
     }, err => {
       // Si da error lo mostramos
       this.toastr.error('Error al apuntarse a la clase');
@@ -197,7 +208,7 @@ export class ClasesComponent implements OnInit {
         timeOut: 3000,
       });
       // Recargamos componente para ver datos añadidos y vaciar campos
-      this.ngOnInit();
+      this.router.navigate(['/menu']);
     }, err => {
       // Si da error lo mostramos
       this.toastr.error('Error al eliminar usuario de la clase');

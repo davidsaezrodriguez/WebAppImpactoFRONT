@@ -28,7 +28,6 @@ export class CrearUsuarioComponent implements OnInit {
     private toastr: ToastrService, // Servicio que nos creara notificaciones
     private usuariosService: UsuariosService, // Servicio para crear el usuario
     private seguimientosService: SeguimientosService // Servicio para interactuar con api seguimiento
-  
   ) { }
 
   ngOnInit(): void {
@@ -68,7 +67,12 @@ export class CrearUsuarioComponent implements OnInit {
       this.router.navigate(['/usuarios']);
     }, err => {
       // Si da error lo mostramos
+      if (err && err.status === 409) {
         this.toastr.error('DNI ya registrado');
+
+      } else {
+        this.toastr.error('Error en el servidor');
+      }
     });
   }
 

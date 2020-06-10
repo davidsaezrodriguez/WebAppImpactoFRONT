@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Usuario } from '../modelos/usuario';
+import { Component, OnInit, Inject, ChangeDetectionStrategy, OnDestroy, ViewEncapsulation, } from '@angular/core';
+import { CalendarEvent, CalendarView, CalendarEventAction, CalendarEventTitleFormatter } from 'angular-calendar';
 
 @Injectable()
 export class ClasesService {
@@ -41,7 +43,6 @@ export class ClasesService {
 
   // Añadir alumno a clase
   anadirAlumnoClase(idClase, usuario) {
-    console.log(idClase);
     return this.httpClient.post(`${this.ServidorBACKEND}/anadirAlumnoClase`, { idClase, usuario });
   }
   // Añadir alumno a clase
@@ -58,7 +59,6 @@ export class ClasesService {
   listarClasesNoAsiste(usuario: Usuario): Observable<any> {
     return this.httpClient.post<any>(`${this.ServidorBACKEND}/listarClasesNoAsiste`, { usuario });
   }
-
 
   //#endregion
 
