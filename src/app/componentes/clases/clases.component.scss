@@ -1,29 +1,41 @@
 
-.asiste{
-  background-color: red;
-}
-
-.botonNoAsistir,.botonAsistir{
+.botonNoAsistir,
+.botonAsistir {
   padding-left: 1em;
   color: white;
 }
 
+.botonAsistir {
+  border-radius: 3px;
+  background-color: green;
+  padding: 0.4em;
+  margin-left: 1em;
+}
+.botonNoAsistir {
+  border-radius: 3px;
+  background-color: red;
+  padding: 0.4em;
+  margin-left: 1em;
+}
+.labelBoton {
+  font-family: "Segoe UI" !important;
+  font-weight: 400 !important;
+}
+
+a:hover {
+  color: white;
+}
+
+.clase {
+  margin: 1.3em;
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.botonAnadirClase {
+  background-color: red;
+  margin-bottom: 5px;
+  height: 3em;
+}
 
 
 
@@ -39,8 +51,10 @@
 
 
 // PERSONALIZACION DEL CALENDARIO
-@import '~angular-calendar/scss/angular-calendar.scss';
+@import "~angular-calendar/scss/angular-calendar.scss";
 .dark-theme {
+  padding-top: 1em;
+  padding-bottom: 1em;;
   // First define some global color variables for your app, these are just for the demo, they can be anything you like
   $bg-dark-primary: #1f262d;
   $bg-dark-secondary: #394046;

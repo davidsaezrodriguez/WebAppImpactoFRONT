@@ -1,0 +1,19 @@
+.botonCrearClase {
+    background-color: red;
+    margin-bottom: 5px;
+}
+
+.calendar {
+    position: absolute;
+    z-index: 100;
+    top:23px;
+    left: 400px;
+}
+
+// Css para version movil
+@media only screen and (max-width: 768px) {
+    .calendar {
+        left: 325px;
+    }
+
+}

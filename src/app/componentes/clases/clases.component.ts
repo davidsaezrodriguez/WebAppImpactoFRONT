@@ -4,6 +4,11 @@ import { isSameDay, isSameMonth } from 'date-fns';
 import { DOCUMENT, DatePipe } from '@angular/common';
 import * as moment from 'moment';
 import { CustomEventTitleFormatter } from '../adicionales/util-calendario/util-calendario-customEventTitleFormatter/custom-event-title-formatter.provider';
+import { LocalService } from 'src/app/servicios/localService';
+import { Clase } from 'src/app/modelos/clase';
+import { ClasesService } from 'src/app/servicios/clasesService';
+import { Usuario } from 'src/app/modelos/usuario';
+import { ToastrService } from 'ngx-toastr';
 
 // Colores que se usaran para marcar eventos
 export const colors: any = {
@@ -35,7 +40,13 @@ export const colors: any = {
   ],
 })
 export class ClasesComponent implements OnInit {
+
   //#region VARIABLES
+
+  // Variable comprobar acceso de usuario logeado
+  acceso = this.localService.getAccesoUsuario();
+  // Usuario logeado
+  usuario: Usuario;
 
   // Variables para manejar el CALENDARIO
 
@@ -49,7 +60,11 @@ export class ClasesComponent implements OnInit {
   excludeDays: number[] = [0, 6];
 
   // Eventos que apareceran en el calendario
-  events: CalendarEvent[] = [];
+  clases: CalendarEvent[];
+  clasesNoLlenas: CalendarEvent[];
+  clasesLlenas: CalendarEvent[];
+
+  events: CalendarEvent[];
 
   // Comprobar abrir dia seleccionado
   activeDayIsOpen: boolean;
@@ -61,10 +76,10 @@ export class ClasesComponent implements OnInit {
   // Variable que usamos para crear la accion de apuntarse a clase en el calendario
   actionsAsistir: CalendarEventAction[] = [
     {
-      label: '<i class="fas fa-pencil-alt"> Asistir a la clase </i>',
+      label: '<i class="fas fa-pencil-alt"> <span class="labelBoton"> Asistir a la clase </span></i>',
       cssClass: 'botonAsistir',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        console.log(event);
+        this.apuntarseClase(event.id);
       },
     },
   ];
@@ -75,81 +90,122 @@ export class ClasesComponent implements OnInit {
       label: '<i class="fas fa-trash-alt"></i> Dejar de asistir a la clase</i>',
       cssClass: 'botonNoAsistir',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        console.log(event);
+        this.desapuntarseClase(event.id);
       },
     },
   ];
 
+
+
   //#endregion
 
   constructor(
-    @Inject(DOCUMENT) private document) { }
+    private localService: LocalService, // Servicio para comprobar acceso de persona logeada
+    private clasesService: ClasesService, // Servicio con el que gestionamos las clases
+    private toastr: ToastrService, // Servicio que nos creara notificaciones
+  ) { }
 
   ngOnInit(): void {
-    // Añadimos eventos recibidos de la api al calendario
-    this.events.push(
-      {
-        id: 'asdasdsad',
-        title: 'Zumba',
-        // start: moment('06/09/2020 19:15:00'),
-        start: new Date(2020, 5, 9, 19, 0),
-        // end: moment('06/09/2020 19:30:00'),
-        end: new Date(2020, 5, 9, 20, 0),
-        color: colors.blue,
-        actions: this.actionsAsistir
-      },
-      {
-        title: 'GAP',
-        // start: moment('06/09/2020 19:15:00').toDate(),
-        start: new Date(2020, 5, 9, 19, 0),
-        // end: moment('06/09/2020 19:30:00').toDate(),
-        end: new Date(2020, 5, 9, 20, 0),
-        color: colors.red,
-        actions: this.actionsAsistir
-      },
-    );
-    this.events.push(
-      {
-        title: 'GAP',
-        start: new Date(2020, 5, 12, 16, 0),
-        end: new Date(2020, 5, 12, 17, 0),
-        color: colors.red,
-        actions: this.actionsNoAsistir,
-        cssClass: 'asiste'
-      },
-      {
-        title: 'GAP',
-        // start: moment('06/09/2020 19:15:00').toDate(),
-        start: new Date(2020, 5, 12, 17, 0),
-        // end: moment('06/09/2020 19:30:00').toDate(),
-        end: new Date(2020, 5, 12, 18, 0),
-        color: colors.red,
-        actions: this.actionsNoAsistir,
-        cssClass: 'asiste'
-      },
-      {
-        title: 'GAP',
-        // start: moment('06/09/2020 19:15:00').toDate(),
-        start: new Date(2020, 5, 12, 18, 0),
-        // end: moment('06/09/2020 19:30:00').toDate(),
-        end: new Date(2020, 5, 12, 19, 0),
-        color: colors.red,
-        actions: this.actionsAsistir
-      }
-    );
+    this.events = [];
+
+    // Cargamos eventos al calendario
+    this.cargarEventosCalendario();
+
     // Funcion que añadira el mes al componente con mayuscula primera
     this.cambioMes();
-  }
-
-  anadir(id) {
 
   }
-
 
   //#region FUNCIONES
 
+  cargarEventosCalendario() {
+    // Usuario logeado
+    const usuarioLoge = this.localService.getTokenData();
+    this.usuario = ({
+      _id: usuarioLoge.id,
+      nombre: usuarioLoge.nombre
+    });
+    // Pedimos a la api las clases a las que asiste el usuario y las añadimos al calendario
+    this.clasesService.listarClasesAsiste(this.usuario).subscribe(data => {
+      for (const clase of data.clasesAsiste) {
+        const claseFormateada = ({
+          id: clase._id,
+          title: clase.tipo,
+          start: new Date(clase.inicio),
+          end: new Date(clase.fin),
+          color: clase.color,
+          actions: this.actionsNoAsistir,
+          cssClass: 'clase '
+        });
+        this.events.push(claseFormateada);
+      }
+    });
+    // Pedimos a la api las clases a las que NO asiste el usuario y las añadimos al calendario separando completas de las que hay hueco
+    this.clasesService.listarClasesNoAsiste(this.usuario).subscribe(data => {
+      if (data.clasesNoLlenas) {
+        for (const clase of data.clasesNoLlenas) {
+          const claseFormateada = ({
+            id: clase._id,
+            title: clase.tipo,
+            start: new Date(clase.inicio),
+            end: new Date(clase.fin),
+            color: clase.color,
+            actions: this.actionsAsistir,
+            cssClass: 'clase '
+          });
+          this.events.push(claseFormateada);
+        }
+      }
+      if (data.clasesLlenas) {
+        for (const clase of data.clasesLlenas) {
+          const claseFormateada = ({
+            id: clase._id,
+            title: clase.tipo,
+            start: new Date(clase.inicio),
+            end: new Date(clase.fin),
+            color: clase.color,
+            cssClass: 'clase '
+          });
+          this.events.push(claseFormateada);
+        }
+      }
+    });
+  }
+  // Funcion para apuntarse a la clase
+  apuntarseClase(idClase) {
+    //  Mandamos orden de apuntar al usuario de la clase
+    this.clasesService.anadirAlumnoClase(idClase, this.usuario).subscribe(res => {
+      // Si se apunta correctamente mandamos mensaje
+      this.toastr.success('', 'Usuario apuntao a la clase', {
+        timeOut: 3000,
+      });
+      // Recargamos componente para ver datos añadidos y vaciar campos
+      this.ngOnInit();
+    }, err => {
+      // Si da error lo mostramos
+      this.toastr.error('Error al apuntarse a la clase');
+    });
+
+  }
+
+  // Funcion para desaputnarse de la clase
+  desapuntarseClase(idClase) {
+    //  Mandamos orden de desapuntar al usuario de la clase
+    this.clasesService.eliminarAlumnoClase(idClase, this.usuario).subscribe(res => {
+      // Si se desapunta correctamente mandamos mensaje
+      this.toastr.success('', 'Usuario desapuntado de la clase', {
+        timeOut: 3000,
+      });
+      // Recargamos componente para ver datos añadidos y vaciar campos
+      this.ngOnInit();
+    }, err => {
+      // Si da error lo mostramos
+      this.toastr.error('Error al eliminar usuario de la clase');
+    });
+  }
+
   // Funcion con la que añadiremos al componente el titulo del mes del calendario con 1 letra mayus
-  cambioMes(){
+  cambioMes() {
     const mesSeleccionado = this.pipe.transform(this.viewDate, 'MMMM yyyy');
     this.mesSeleccionado = mesSeleccionado.charAt(0).toUpperCase() + mesSeleccionado.slice(1);
   }
@@ -168,7 +224,6 @@ export class ClasesComponent implements OnInit {
       }
     }
   }
-
   //#endregion
 
 }

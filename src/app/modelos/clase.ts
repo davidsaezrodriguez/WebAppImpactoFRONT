@@ -3,8 +3,9 @@ import { Usuario } from './usuario';
 export interface Clase {
     _id?: string;
     tipo: string;
-    inicio: Date;
-    fin: Date;
+    inicio: any;
+    fin: any;
     color: any;
-    alumnos: Usuario[];
+    maxAlumnos?: number;
+    alumnos?: Usuario[];
 }

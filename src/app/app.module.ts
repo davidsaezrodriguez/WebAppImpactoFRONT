@@ -40,6 +40,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/moment';
 import * as moment from 'moment';
 import { UtilCalendarioCabeceraComponent } from './componentes/adicionales/util-calendario/util-calendario-cabecera/util-calendario-cabecera.component';
+import { AdministrarClasesComponent } from './componentes/clases/administrar-clases/administrar-clases.component';
 
 export function momentAdapterFactory() {
   return adapterFactory(moment);
@@ -69,7 +70,8 @@ registerLocaleData(localeEs, 'es');
     CrearEjerciciosComponent,
     CrearDietasComponent,
     VisualizarDietasComponent,
-    UtilCalendarioCabeceraComponent
+    UtilCalendarioCabeceraComponent,
+    AdministrarClasesComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -80,11 +82,11 @@ registerLocaleData(localeEs, 'es');
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: momentAdapterFactory })
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: momentAdapterFactory }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: LOCALE_ID, useValue: 'es' } ,
+    { provide: LOCALE_ID, useValue: 'es' },
     UsuariosService,
     LocalService,
     TablasService,

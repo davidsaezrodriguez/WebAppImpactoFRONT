@@ -1,0 +1,76 @@
+<section class="container pt-4">
+    <div class="row d-flex justify-content-center">
+        <div class="col-sm-12 ">
+            <h2 class="text-center"> Creacion de nueva clase</h2>
+        </div>
+        <div class="col-sm-10 pt-4" [formGroup]="formNuevaClase">
+            <label class="col-sm-12 col-md-6 control-label text-left ">
+                Tipo de clase
+                <select class="form-control" formControlName="tipo">
+                    <option value="Body Impacto">Body Impacto</option>
+                    <option value="Zumba">Zumba</option>
+                    <option value="Pilates">Pilates</option>
+                    <option value="Flamenco">Flamenco</option>
+                    <option value="Rumba">Rumba</option>
+                    <option value="Hipopresivos">Hipopresivos</option>
+                    <option value="GAP">GAP</option>
+                    <option value="Cycle">Cycle</option>
+
+                </select>
+            </label>
+
+            <label class="col-sm-12 col-md-6 control-label text-left video">
+                Nº alumnos maximo
+                <input type="number" class="form-control" formControlName="maxAlumnos">
+            </label>
+            <label class="col-sm-12 col-md-4 control-label text-left video">
+                Dia (Formato -> 20/03/20)
+                <input formControlName="dia" class="form-control">
+            </label>
+            <label class="col-sm-12 col-md-4 control-label text-left video">
+                Inicio de clase (Formato -> 19:00)
+                <input type="text" class="form-control" formControlName="inicio">
+            </label>
+            <label class="col-sm-12 col-md-4 control-label text-left video">
+                Fin de clase (Formato -> 20:00)
+                <input type="text" class="form-control" formControlName="fin">
+            </label>
+
+            <div class="d-flex justify-content-center p-3">
+                <button type="submit" class="btn botonCrearClase col-sm-12" (click)="crearClase()">
+                    <i class="fas fa-save"></i> Crear clase
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="table-responsive tablaAlimentos col-sm-12 ">
+        <table class="table table-dark  text-center ">
+            <thead class="thead-dark">
+                <tr class="d-flex ">
+                    <th class="col">Tipo</th>
+                    <th class="col">Inicio</th>
+                    <th class="col">Fin</th>
+                    <th class="col">Alumnos</th>
+                    <th class="col">Borrar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let clase of clases" class="d-flex">
+                    <td class="col"> {{clase.tipo}}</td>
+                    <td class="col"> {{clase.inicio}}</td>
+                    <td class="col"> {{clase.fin}}</td>
+                    <td class="col"> {{clase.alumnos.length}} / {{clase.maxAlumnos}}</td>
+
+                    <td class="col text-center">
+                        <button class="btn botonCrearClase mx-auto" (click)="borrarClase(clase._id)">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
+            </tbody>
+        </table>
+
+    </div>
+
+</section>

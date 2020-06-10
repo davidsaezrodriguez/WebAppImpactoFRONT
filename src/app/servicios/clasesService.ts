@@ -1,6 +1,8 @@
+import { Clase } from '../modelos/clase';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { Usuario } from '../modelos/usuario';
 
 @Injectable()
 export class ClasesService {
@@ -23,36 +25,41 @@ export class ClasesService {
 
   //#region FUNCIONES INTERACTUAR CON API
 
-//   // Funcion guardar ejercicio
-//   crearEjercicio(ejercicio: EjercicioEjemplo, imagen): Observable<any> {
-//     this.guardarImagen(imagen).subscribe(res => {
-//       console.log('Imagen guardada');
-//     });
-//     return this.httpClient.post<any>(`${this.ServidorBACKEND}/crearEjercicio`, { ejercicio });
-//   }
+  // Funcion guardar ejercicio
+  crearClase(clase: Clase): Observable<any> {
+    return this.httpClient.post<any>(`${this.ServidorBACKEND}/crearClase`, { clase });
+  }
 
-//   // Buscamos las tablas del usuario que mandamos a la api
-//   listarEjerciciosZona(zona): Observable<EjercicioEjemplo[]> {
-//     return this.httpClient.post<EjercicioEjemplo[]>(`${this.ServidorBACKEND}/listarEjerciciosZona`, { zona });
-//   }
+  // Buscamos todas las clases
+  listarClases(): Observable<Clase[]> {
+    return this.httpClient.post<Clase[]>(`${this.ServidorBACKEND}/listarClases`, '');
+  }
+  // Eliminar ejercicio
+  eliminarClase(idClase) {
+    return this.httpClient.post(`${this.ServidorBACKEND}/eliminarClase`, { idClase });
+  }
 
-//   // Buscamos la tabla con la api en la base de datos
-//   buscarEjercicio(idEjercicio): Observable<EjercicioEjemplo> {
-//     return this.httpClient.post<EjercicioEjemplo>(`${this.ServidorBACKEND}/buscarEjercicio`, { idEjercicio });
-//   }
+  // Añadir alumno a clase
+  anadirAlumnoClase(idClase, usuario) {
+    console.log(idClase);
+    return this.httpClient.post(`${this.ServidorBACKEND}/anadirAlumnoClase`, { idClase, usuario });
+  }
+  // Añadir alumno a clase
+  eliminarAlumnoClase(idClase, usuario) {
+    return this.httpClient.post(`${this.ServidorBACKEND}/eliminarAlumnoClase`, { idClase, usuario });
+  }
 
-//   // Guardar imagen
-//   guardarImagen(imagen) {
-//     return this.httpClient.post(`${this.ServidorGuardarEjer}/guardarImagen`, imagen);
-//   }
+  // Listar clases a las que asiste el alumno
+  listarClasesAsiste(usuario: Usuario): Observable<any> {
+    return this.httpClient.post<any>(`${this.ServidorBACKEND}/listarClasesAsiste`, { usuario });
+  }
 
-//   // Eliminar ejercicio
-//   eliminarEjercicio(idEjercicio) {
-//     return this.httpClient.post(`${this.ServidorBACKEND}/eliminarEjercicio`, { idEjercicio });
-//   }
+  // Listar clases a las que NO asiste el alumno
+  listarClasesNoAsiste(usuario: Usuario): Observable<any> {
+    return this.httpClient.post<any>(`${this.ServidorBACKEND}/listarClasesNoAsiste`, { usuario });
+  }
+
 
   //#endregion
-
-
 
 }

@@ -2,12 +2,18 @@
     <div class="row d-flex justify-content-center">
         <h3 class="col-md-10 text-center">{{mesSeleccionado}}</h3>
         <div class="col-md-10 d-flex justify-content-center pb-4">
-            <app-util-calendario-cabecera [(view)]="view" [(viewDate)]="viewDate" (click)="cambioMes()"></app-util-calendario-cabecera>
+            <app-util-calendario-cabecera [(view)]="view" [(viewDate)]="viewDate" (click)="cambioMes()">
+            </app-util-calendario-cabecera>
         </div>
-        <div class="col-md-10 dark-theme" [ngSwitch]="view">
-            <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [excludeDays]="excludeDays" [activeDayIsOpen]="activeDayIsOpen"
-            (dayClicked)="dayClicked($event.day)">
+        <div class="col-md-10 dark-theme" [ngSwitch]="view" >
+            <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events"
+                [excludeDays]="excludeDays" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)">
             </mwl-calendar-month-view>
         </div>
+    </div>
+    <div class="row d-flex justify-content-center col-sm-12 col-md-12 pt-4 m-0" *ngIf="acceso == '1'">
+        <button type="submit" class="btn botonAnadirClase col-sm-6 mx-auto " [routerLink]="['administrar-clases']">
+            <i class="fas fa-plus-circle"></i> Administrar clases
+        </button>
     </div>
 </section>

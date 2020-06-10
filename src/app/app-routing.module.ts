@@ -17,6 +17,7 @@ import { DetallesEjercicioComponent } from './componentes/ejercicios/visualizar-
 import { CrearEjerciciosComponent } from './componentes/ejercicios/crear-ejercicios/crear-ejercicios.component';
 import { CrearDietasComponent } from './componentes/dietas/crear-dietas/crear-dietas.component';
 import { VisualizarDietasComponent } from './componentes/dietas/visualizar-dietas/visualizar-dietas.component';
+import { AdministrarClasesComponent } from './componentes/clases/administrar-clases/administrar-clases.component';
 
 
 const routes: Routes = [
@@ -103,6 +104,10 @@ const routes: Routes = [
       {
         path: '',
         component: ClasesComponent,
+      },
+      {
+        path: 'administrar-clases',
+        component: AdministrarClasesComponent,
       },
     ]
   },
