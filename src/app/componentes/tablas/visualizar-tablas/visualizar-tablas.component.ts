@@ -1,3 +1,4 @@
+import { LocalService } from '../../../servicios/localService';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Tabla, Tablas, CambiosPeso } from 'src/app/modelos/tabla';
@@ -29,7 +30,7 @@ export class VisualizarTablasComponent implements OnInit {
 
   // Variable para verificar estar seguro de borrar o no
   checkActivado = false;
-  
+
   //#endregion
 
   constructor(
@@ -37,12 +38,18 @@ export class VisualizarTablasComponent implements OnInit {
     private tablasService: TablasService, // Servicio para interactuar con API con TABLAS
     private formBuilder: FormBuilder,
     private router: Router,
-    private toastr: ToastrService // Servicio que nos creara notificaciones
+    private toastr: ToastrService, // Servicio que nos creara notificaciones
+    private localService: LocalService // Servicio para comprobar usuario logeado
   ) {
     this.setformPesoMax();
   }
 
   ngOnInit(): void {
+
+    // Comprobamos que el usuario logeado es admin, y si no lo es e intenta entrar en el perfil de otro usuario le rederigimos a menu
+    const usuarioLogeado = this.localService.getTokenData();
+
+
     // Cogemos el valor que nos manda la URL para idTabla
     this.rutaActiva.params.subscribe(
       (params: Params) => {
@@ -50,15 +57,25 @@ export class VisualizarTablasComponent implements OnInit {
       }
     );
 
-    this.tablasService.buscarTabla(this.idTabla).subscribe(data => (
+    this.tablasService.buscarTabla(this.idTabla).subscribe(data => {
       // La api nos devuelve array de tablas por lo que cogemos el primero ya que solo hay 1
       this.tabla = ({
         _id: data.tabla[0]._id,
         usuario: data.tabla[0].usuario,
         nombre: data.tabla[0].nombre,
         dia: data.tabla[0].dia,
-      })
-    ));
+      });
+      if (usuarioLogeado.acceso !== '1') {
+        if (this.tabla) {
+          if (usuarioLogeado.id !== this.tabla.usuario) {
+            this.toastr.error('Falta de permisos para esta accion');
+            this.router.navigate(['/menu']);
+          }
+        }
+      }
+
+    });
+
   }
 
 

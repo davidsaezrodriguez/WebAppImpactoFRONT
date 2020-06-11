@@ -1,3 +1,4 @@
+import {LocalService} from '../../../servicios/localService';
 import { Component, OnInit } from '@angular/core';
 import { Dieta, Alimento, Comida } from 'src/app/modelos/dieta';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -42,7 +43,9 @@ export class CrearDietasComponent implements OnInit {
     private dietasService: DietasService, // Servicio para interactuar con API con TABLAS
     private formBuilder: FormBuilder,
     private router: Router,
-    private toastr: ToastrService // Servicio que nos creara notificaciones
+    private toastr: ToastrService, // Servicio que nos creara notificaciones
+    private localService: LocalService // Servicio para comprobar usuario logeado
+
   ) {
     this.setformNuevaDieta();
   }
@@ -55,6 +58,16 @@ export class CrearDietasComponent implements OnInit {
         this.idUsuario = params.idUsuario;
       }
     );
+
+    // Comprobamos que el usuario logeado es admin, y si no lo es e intenta entrar en el perfil de otro usuario le rederigimos a menu
+    const usuarioLogeado = this.localService.getTokenData();
+    if (usuarioLogeado.acceso !== '1') {
+      if (usuarioLogeado.id !== this.idUsuario) {
+        this.toastr.error('Falta de permisos para esta accion');
+        this.router.navigate(['/menu']);
+      }
+    }
+
   }
 
   //#region FUNCIONES

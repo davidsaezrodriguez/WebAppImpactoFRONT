@@ -58,6 +58,16 @@ export class DatosUsuarioComponent implements OnInit {
         this.idUsuario = params.idUsuario;
       }
     );
+
+    // Comprobamos que el usuario logeado es admin, y si no lo es e intenta entrar en el perfil de otro usuario le rederigimos a menu
+    const usuarioLogeado = this.localService.getTokenData();
+    if (usuarioLogeado.acceso !== '1') {
+      if (usuarioLogeado.id !== this.idUsuario) {
+        this.toastr.error('Falta de permisos para esta accion');
+        this.router.navigate(['/menu']);
+      }
+    }
+
     this.usuariosService.buscarUsuario(this.idUsuario).subscribe(res => {
       this.usuario = res.usuario;
       this.datosDeUsuarioAlFormulario();

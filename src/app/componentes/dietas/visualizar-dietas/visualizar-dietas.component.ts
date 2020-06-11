@@ -41,6 +41,9 @@ export class VisualizarDietasComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Comprobamos que el usuario logeado es admin, y si no lo es e intenta entrar en el perfil de otro usuario le rederigimos a menu
+    const usuarioLogeado = this.localService.getTokenData();
+
     // Cogemos el valor que nos manda la URL para idTabla
     this.rutaActiva.params.subscribe(
       (params: Params) => {
@@ -48,7 +51,7 @@ export class VisualizarDietasComponent implements OnInit {
       }
     );
 
-    this.dietasService.buscarDieta(this.idDieta).subscribe(data => (
+    this.dietasService.buscarDieta(this.idDieta).subscribe(data => {
       // La api nos devuelve array de dietas por lo que cogemos el primero ya que solo hay 1
       this.dieta = ({
         _id: data.dieta[0]._id,
@@ -56,8 +59,16 @@ export class VisualizarDietasComponent implements OnInit {
         nombre: data.dieta[0].nombre,
         comida: data.dieta[0].comida,
         kcalTotal: data.dieta[0].kcalTotal
-      })
-    ));
+      });
+      if (usuarioLogeado.acceso !== '1') {
+        if (this.dieta) {
+          if (usuarioLogeado.id !== this.dieta.usuario) {
+            this.toastr.error('Falta de permisos para esta accion');
+            this.router.navigate(['/menu']);
+          }
+        }
+      }
+    });
   }
 
 

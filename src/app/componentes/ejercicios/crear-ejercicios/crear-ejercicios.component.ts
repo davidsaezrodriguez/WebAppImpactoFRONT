@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { EjercicioEjemplo } from 'src/app/modelos/ejercicioEjemplo';
 import { EjerciciosService } from 'src/app/servicios/ejerciciosService';
+import { LocalService } from 'src/app/servicios/localService';
 
 @Component({
   selector: 'app-crear-ejercicios',
@@ -33,6 +34,7 @@ export class CrearEjerciciosComponent implements OnInit {
   //#endregion
 
   constructor(
+    private localService: LocalService, // Servicio para comprobar acceso
     private formBuilder: FormBuilder,
     private httpClient: HttpClient,
     private router: Router,
@@ -44,6 +46,12 @@ export class CrearEjerciciosComponent implements OnInit {
 
 
   ngOnInit(): void {
+    // En este componente solo puede entrar un administrador, comprobamos y si no lo es lo echamos
+    const acceso = this.localService.getAccesoUsuario();
+    if (acceso !== '1') {
+      this.toastr.error('Falta de permisos para esta accion');
+      this.router.navigate(['/menu']);
+    }
   }
 
   //#region FUNCIONES

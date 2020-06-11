@@ -4,6 +4,7 @@ import { UsuariosService } from 'src/app/servicios/usuariosService';
 import { Usuario } from 'src/app/modelos/usuario';
 import { Router } from '@angular/router';
 import { ConfiguracionBuscador } from '../adicionales/buscador/buscador.component';
+import { ToastrService } from 'ngx-toastr';
 
 // tslint:disable: member-ordering
 @Component({
@@ -17,7 +18,8 @@ export class UsuariosComponent implements OnInit {
   constructor(
     private usuariosService: UsuariosService, // Servicio para interactuar con API
     private localService: LocalService, // Servicio para recuperar datos del localstorage
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService, // Servicio que nos creara notificaciones
   ) { }
 
   //#region VARIABLES
@@ -32,7 +34,8 @@ export class UsuariosComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.acceso !== '1') {
-      this.router.navigate(['/tablas']);
+      this.toastr.error('Falta de permisos para esta accion');
+      this.router.navigate(['/menu']);
     }
     this.usuariosService.usuariosRegistrados().subscribe(data => (
       this.configBuscador.values = data.usuarios,
@@ -52,7 +55,7 @@ export class UsuariosComponent implements OnInit {
     render: (value) => value.nombre
   };
 
-  // Funcion utilizada pada cuando se selecciona usuario del autocomplete 
+  // Funcion utilizada pada cuando se selecciona usuario del autocomplete
   selectUsuario($event) {
     if ($event != null) {
       // Si seleccionamos uno cargamos el array de usuarios solo con ese para mostrar su tarjeta

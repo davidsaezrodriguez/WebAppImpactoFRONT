@@ -10,22 +10,7 @@ import { ClasesService } from 'src/app/servicios/clasesService';
 import { Usuario } from 'src/app/modelos/usuario';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-
-// Colores que se usaran para marcar eventos
-export const colors: any = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3',
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF',
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA',
-  },
-};
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-clases',
@@ -60,12 +45,8 @@ export class ClasesComponent implements OnInit {
   // Quitamos fines de semana del caledario ya que no hay clases
   excludeDays: number[] = [0, 6];
 
-  // Eventos que apareceran en el calendario
-  clasesAsiste: CalendarEvent[] = [];
-  clasesNoLlenas: CalendarEvent[] = [];
-  clasesLlenas: CalendarEvent[] = [];
-
-  events: CalendarEvent[] = [];
+  // Eventos (clases) que apareceran en el calendario
+  events: CalendarEvent[];
 
   // Comprobar abrir dia seleccionado
   activeDayIsOpen: boolean;
@@ -73,6 +54,9 @@ export class ClasesComponent implements OnInit {
   // Mes seleccionado en calendario para formatearlo y poner letra mayuscula mas adelante
   pipe = new DatePipe('es-ES'); // Use your own locale
   mesSeleccionado;
+
+  // Variable que usamos para indicar al calendario que refresque cuando cargamos clases
+  refresh: Subject<any> = new Subject();
 
   // Variable que usamos para crear la accion de apuntarse a clase en el calendario
   actionsAsistir: CalendarEventAction[] = [
@@ -96,7 +80,7 @@ export class ClasesComponent implements OnInit {
     },
   ];
 
-  // Variable que usamos para crear la accion de salirte de la clase en el calendario
+  // Variable que usamos para crear accion de clase completa
   actionsClaseLlena: CalendarEventAction[] = [
     {
       label: '<span class="labelBoton">Clase llena</span>',
@@ -119,6 +103,7 @@ export class ClasesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.events = [];
     // Cargamos eventos al calendario
     this.cargarEventosCalendario();
     // Funcion que añadira el mes al componente con mayuscula primera
@@ -128,7 +113,6 @@ export class ClasesComponent implements OnInit {
   //#region FUNCIONES
 
   cargarEventosCalendario() {
-    this.events = [];
     // Usuario logeado
     const usuarioLoge = this.localService.getTokenData();
     this.usuario = ({
@@ -137,8 +121,9 @@ export class ClasesComponent implements OnInit {
     });
     // Pedimos a la api las clases a las que asiste el usuario y las añadimos al calendario
     this.clasesService.listarClasesAsiste(this.usuario).subscribe(data => {
+      this.refresh.next();
       for (const clase of data.clasesAsiste) {
-        const claseFormateada = ({
+        this.events.push({
           id: clase._id,
           title: clase.tipo,
           start: new Date(clase.inicio),
@@ -147,14 +132,14 @@ export class ClasesComponent implements OnInit {
           actions: this.actionsNoAsistir,
           cssClass: 'clase '
         });
-        this.events.push(claseFormateada);
       }
     });
     // Pedimos a la api las clases a las que NO asiste el usuario y las añadimos al calendario separando completas de las que hay hueco
     this.clasesService.listarClasesNoAsiste(this.usuario).subscribe(data => {
       if (data.clasesNoLlenas) {
+        this.refresh.next();
         for (const clase of data.clasesNoLlenas) {
-          const claseFormateada = ({
+          this.events.push({
             id: clase._id,
             title: clase.tipo,
             start: new Date(clase.inicio),
@@ -163,12 +148,12 @@ export class ClasesComponent implements OnInit {
             actions: this.actionsAsistir,
             cssClass: 'clase '
           });
-          this.events.push(claseFormateada);
         }
       }
       if (data.clasesLlenas) {
+        this.refresh.next();
         for (const clase of data.clasesLlenas) {
-          const claseFormateada = ({
+          this.events.push({
             id: clase._id,
             title: clase.tipo,
             start: new Date(clase.inicio),
@@ -177,11 +162,11 @@ export class ClasesComponent implements OnInit {
             actions: this.actionsClaseLlena,
             cssClass: 'clase '
           });
-          this.events.push(claseFormateada);
         }
       }
     });
   }
+
   // Funcion para apuntarse a la clase
   apuntarseClase(idClase) {
     //  Mandamos orden de apuntar al usuario de la clase
@@ -191,7 +176,8 @@ export class ClasesComponent implements OnInit {
         timeOut: 3000,
       });
       // Recargamos componente para ver datos añadidos y vaciar campos
-      this.router.navigate(['/menu']);
+      // this.router.navigate(['/menu']);
+      this.ngOnInit();
     }, err => {
       // Si da error lo mostramos
       this.toastr.error('Error al apuntarse a la clase');
@@ -199,7 +185,7 @@ export class ClasesComponent implements OnInit {
 
   }
 
-  // Funcion para desaputnarse de la clase
+  // Funcion para desapuntarse de la clase
   desapuntarseClase(idClase) {
     //  Mandamos orden de desapuntar al usuario de la clase
     this.clasesService.eliminarAlumnoClase(idClase, this.usuario).subscribe(res => {
@@ -208,7 +194,7 @@ export class ClasesComponent implements OnInit {
         timeOut: 3000,
       });
       // Recargamos componente para ver datos añadidos y vaciar campos
-      this.router.navigate(['/menu']);
+      this.ngOnInit();
     }, err => {
       // Si da error lo mostramos
       this.toastr.error('Error al eliminar usuario de la clase');

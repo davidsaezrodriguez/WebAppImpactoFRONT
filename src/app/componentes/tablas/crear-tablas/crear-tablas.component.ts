@@ -5,6 +5,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { TablasService } from 'src/app/servicios/tablasService';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { LocalService } from 'src/app/servicios/localService';
 
 
 @Component({
@@ -43,7 +44,8 @@ export class CrearTablasComponent implements OnInit {
     private tablasService: TablasService, // Servicio para interactuar con API con TABLAS
     private formBuilder: FormBuilder,
     private router: Router,
-    private toastr: ToastrService // Servicio que nos creara notificaciones
+    private toastr: ToastrService, // Servicio que nos creara notificaciones
+    private localService: LocalService // Servicio para comprobar usuario logeado
   ) {
     this.setformNuevaTabla();
   }
@@ -56,6 +58,16 @@ export class CrearTablasComponent implements OnInit {
         this.idUsuario = params.idUsuario;
       }
     );
+
+    // Comprobamos que el usuario logeado es admin, y si no lo es e intenta entrar en el perfil de otro usuario le rederigimos a menu
+    const usuarioLogeado = this.localService.getTokenData();
+    if (usuarioLogeado.acceso !== '1') {
+      if (usuarioLogeado.id !== this.idUsuario) {
+        this.toastr.error('Falta de permisos para esta accion');
+        this.router.navigate(['/menu']);
+      }
+    }
+
   }
 
   //#region FUNCIONES

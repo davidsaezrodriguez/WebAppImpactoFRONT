@@ -16,6 +16,7 @@ export class AppComponent {
 
   // tslint:disable-next-line: use-lifecycle-interface
   ngOnInit(): void {
+    // Si no hay token cerramos sesion para que lo genere al logearse
     if (!this.localService.comprobarAutentificacion()) {
       this.localService.cerrarSesion();
     }

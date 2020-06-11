@@ -44,7 +44,9 @@ a:hover {
 @media (max-width: 700px) {
   .botonNoAsistir,
   .botonAsistir,.claseLlena {
-    margin-left: 12em;
+    margin-left: 6em;
+    position: relative;
+    top: 10px;
   }
 }
 

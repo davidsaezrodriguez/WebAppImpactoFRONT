@@ -44,6 +44,7 @@ export class AdministrarClasesComponent implements OnInit {
   ngOnInit(): void {
     const acceso = this.localService.getAccesoUsuario();
     if (acceso !== '1') {
+      this.toastr.error('Falta de permisos para esta accion');
       this.router.navigate(['/clases']);
     }
     this.setformNuevaClase();
@@ -58,7 +59,7 @@ export class AdministrarClasesComponent implements OnInit {
       }
       this.clases = clases;
       this.clases = data;
-    })
+    });
   }
 
   //#region FUNCIONES
@@ -100,9 +101,9 @@ export class AdministrarClasesComponent implements OnInit {
   }
   crearClase() {
     // Cogemos fecha y hras de string y la pasamos a variables number para crear luego un date
-    const fecha = (this.formNuevaClase.controls.dia.value)
-    const hinicio = (this.formNuevaClase.controls.inicio.value)
-    const hfin = (this.formNuevaClase.controls.fin.value)
+    const fecha = (this.formNuevaClase.controls.dia.value);
+    const hinicio = (this.formNuevaClase.controls.inicio.value);
+    const hfin = (this.formNuevaClase.controls.fin.value);
 
     const inicio = new Date(fecha.year, fecha.month - 1, fecha.day, hinicio.hour, hinicio.minute);
     const fin = new Date(fecha.year, fecha.month - 1, fecha.day, hfin.hour, hfin.minute);

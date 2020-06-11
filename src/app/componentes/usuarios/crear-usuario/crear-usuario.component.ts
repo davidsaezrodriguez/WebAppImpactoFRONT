@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Usuario } from 'src/app/modelos/usuario';
 import { SeguimientosService } from 'src/app/servicios/seguimientosService';
+import { LocalService } from 'src/app/servicios/localService';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -23,6 +24,7 @@ export class CrearUsuarioComponent implements OnInit {
 
   //#endregion
   constructor(
+    private localService: LocalService, // Servicio para comprobar acceso
     private formBuilder: FormBuilder,
     private router: Router,
     private toastr: ToastrService, // Servicio que nos creara notificaciones
@@ -31,6 +33,12 @@ export class CrearUsuarioComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // En este componente solo puede entrar un administrador, comprobamos y si no lo es lo echamos
+    const acceso = this.localService.getAccesoUsuario();
+    if (acceso !== '1') {
+      this.toastr.error('Falta de permisos para esta accion');
+      this.router.navigate(['/menu']);
+    }
     this.setformNuevoUsuario();
   }
 
