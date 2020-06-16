@@ -172,7 +172,7 @@ export class ClasesComponent implements OnInit {
     //  Mandamos orden de apuntar al usuario de la clase
     this.clasesService.anadirAlumnoClase(idClase, this.usuario).subscribe(res => {
       // Si se apunta correctamente mandamos mensaje
-      this.toastr.success('', 'Usuario apuntao a la clase', {
+      this.toastr.success('', 'Usuario apuntado a la clase', {
         timeOut: 3000,
       });
       // Recargamos componente para ver datos añadidos y vaciar campos

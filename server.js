@@ -24,11 +24,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Servir solo los archivos estáticos del directorio dist
 app.use(express.static(__dirname + '/dist/WebAppImpactoFRONT'));
 app.use(express.static(__dirname + '/src/assets/imagenes'));
-
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname + '/dist/WebAppImpactoFRONT/index.html'));
 });
-
 // Funciones para guardar imagenes al crear ejercicios en el directorio src/assets
 multer = require("multer");
 let storage = multer.diskStorage({
@@ -40,12 +38,8 @@ let storage = multer.diskStorage({
   }
 });
 var upload = multer({ storage });
-
-
 app.post("/guardarImagen", upload.single('file'), (req, res) => {
   return res.send(req.file);
 });
-
-
 // Inicie la aplicación escuchando en el puerto predeterminado de Heroku
 app.listen(process.env.PORT || 4200);

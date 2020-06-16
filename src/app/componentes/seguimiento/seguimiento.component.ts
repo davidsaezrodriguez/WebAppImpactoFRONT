@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Seguimiento } from 'src/app/modelos/seguimiento';
 import { SeguimientosService } from 'src/app/servicios/seguimientosService';
 import { DatePipe } from '@angular/common';
+import { MensajeConfirmarService } from 'src/app/servicios/mensajeConfirmarService';
 
 // tslint:disable: member-ordering
 
@@ -46,7 +47,8 @@ export class SeguimientoComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private seguimientosService: SeguimientosService, // Servicio para interactuar con api seguimiento
-    private toastr: ToastrService // Servicio que nos creara notificaciones
+    private toastr: ToastrService, // Servicio que nos creara notificaciones
+    private mensajeConfirmarService: MensajeConfirmarService // Servicio para confirmar eliminar
   ) { }
 
   ngOnInit(): void {
@@ -230,6 +232,18 @@ export class SeguimientoComponent implements OnInit {
       // Si da error lo mostramos
       this.toastr.error('Error al borrar medida');
     });
+  }
+
+  confirmarEliminacionIndice(indiceId){
+    this.mensajeConfirmarService.confirm('Por favor confirme..', '¿Estas seguro de eliminar el indice?')
+    .then((confirmed) => { if (confirmed) { this.eliminarIndice(indiceId); } })
+    .catch(() => console.log('No eliminar'));
+  }
+
+  confirmarEliminacionMedida(medidaId){
+    this.mensajeConfirmarService.confirm('Por favor confirme..', '¿Estas seguro de eliminar la medida?')
+    .then((confirmed) => { if (confirmed) { this.eliminarMedida(medidaId); } })
+    .catch(() => console.log('No eliminar'));
   }
   //#endregion
 }

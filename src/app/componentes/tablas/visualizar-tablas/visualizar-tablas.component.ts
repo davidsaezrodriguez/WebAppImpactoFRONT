@@ -6,6 +6,7 @@ import { UsuariosService } from 'src/app/servicios/usuariosService';
 import { TablasService } from 'src/app/servicios/tablasService';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { MensajeConfirmarService } from 'src/app/servicios/mensajeConfirmarService';
 
 @Component({
   selector: 'app-visualizar-tablas',
@@ -39,7 +40,8 @@ export class VisualizarTablasComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private toastr: ToastrService, // Servicio que nos creara notificaciones
-    private localService: LocalService // Servicio para comprobar usuario logeado
+    private localService: LocalService, // Servicio para comprobar usuario logeado
+    private mensajeConfirmarService: MensajeConfirmarService // Servicio para confirmar eliminar
   ) {
     this.setformPesoMax();
   }
@@ -136,7 +138,12 @@ export class VisualizarTablasComponent implements OnInit {
       this.toastr.error('Error al eliminar la tabla');
     });
   }
-
+  // Confirmar eliminacion con alert
+  public confirmarEliminacion() {
+    this.mensajeConfirmarService.confirm('Por favor confirme..', '¿Estas seguro de eliminar la tabla?')
+      .then((confirmed) => { if (confirmed) { this.eliminarTabla(); } })
+      .catch(() => console.log('No eliminar'));
+  }
   //#endregion
 }
 

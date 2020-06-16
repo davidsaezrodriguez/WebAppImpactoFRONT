@@ -6,6 +6,7 @@ import { EjerciciosService } from 'src/app/servicios/ejerciciosService';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { LocalService } from 'src/app/servicios/localService';
 import { ToastrService } from 'ngx-toastr';
+import { MensajeConfirmarService } from 'src/app/servicios/mensajeConfirmarService';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class DetallesEjercicioComponent implements OnInit {
 
   //#region VARIABLES
 
-  // Variable donde guardamos idEjercicio que nos mandamos por url 
+  // Variable donde guardamos idEjercicio que nos mandamos por url
   idEjercicio;
 
   // Objeto ejercicio donde guardamos ejercicio a mostrar que nos devolvera la api
@@ -38,7 +39,8 @@ export class DetallesEjercicioComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService, // Servicio que nos creara notificaciones
     // tslint:disable-next-line: variable-name
-    private _sanitizer: DomSanitizer // Utilizaremos este servicio para añadir video si el ejemplo lo tuviera
+    private _sanitizer: DomSanitizer, // Utilizaremos este servicio para añadir video si el ejemplo lo tuviera
+    private mensajeConfirmarService: MensajeConfirmarService // Servicio para confirmar eliminar
 
   ) { }
 
@@ -89,6 +91,13 @@ export class DetallesEjercicioComponent implements OnInit {
       // Si da error lo mostramos
       this.toastr.error('Error al borrar ejercicio');
     });
+  }
+
+   // Confirmar eliminacion con alert
+   public confirmarEliminacion() {
+    this.mensajeConfirmarService.confirm('Por favor confirme..', '¿Estas seguro de eliminar el ejercicio?')
+      .then((confirmed) => { if (confirmed) { this.eliminarEjercicio(); } })
+      .catch(() => console.log('No eliminar'));
   }
   //#endregion
 

@@ -61,12 +61,12 @@
                     <tr class="d-flex">
                         <th class="col-3 col-md-2">Guardar</th>
                         <td class="col-3 col-md-2 text-center">
-                            <button class="btn botonAñadirIndice mx-auto" (click)="guardarIndice()"
+                            <button class="btn botonAñadirIndice mx-auto" (click)="guardarIndice()" data-toggle="tooltip" data-placement="top" title="Guardar indice"
                                 [disabled]="!formNuevoIndice.valid">
                                 <i class="fas fa-save"></i> </button>
                         </td>
                         <td class="col-2 col-md text-center" *ngFor="let indice of seguimiento.indice">
-                            <button class="btn botonAñadirIndice mx-auto" (click)="eliminarIndice(indice._id)">
+                            <button class="btn botonAñadirIndice mx-auto"  (click)="confirmarEliminacionIndice(indice._id)" data-toggle="tooltip" data-placement="top" title="Eliminar indice">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                         </td>
@@ -145,13 +145,13 @@
                     <tr class="d-flex">
                         <th class=" col-3 col-md-2">Guardar</th>
                         <td class=" col-3 col-md-2 text-center">
-                            <button class="btn botonAñadirIndice mx-auto" (click)="guardarMedidas()"
+                            <button class="btn botonAñadirIndice mx-auto" (click)="guardarMedidas()" data-toggle="tooltip" data-placement="top" title="Guardar seguimiento"
                                 [disabled]="!formNuevaMedidas.valid">
                                 <i class="fas fa-save"></i>
                             </button>
                         </td>
                         <td class=" col-2 col-md text-center" *ngFor="let medida of seguimiento.medida">
-                            <button class="btn botonAñadirIndice mx-auto" (click)="eliminarMedida(medida._id)">
+                            <button class="btn botonAñadirIndice mx-auto" (click)="confirmarEliminacionMedida(medida._id)" data-toggle="tooltip" data-placement="top" title="Eliminar seguimiento">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                         </td>

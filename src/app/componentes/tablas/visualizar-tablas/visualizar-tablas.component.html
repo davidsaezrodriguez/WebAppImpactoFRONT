@@ -35,13 +35,9 @@
 
         </div>
         <div class="col-sm-12 p-2 divEliminar" >
-            <button type="submit" class="btn botonEliminarTabla col-sm-12 col-md-2 ml-auto" [disabled]="!checkActivado" (click)="eliminarTabla()">
+            <button type="submit" class="btn botonEliminarTabla col-sm-12 col-md-2 " (click)="confirmarEliminacion()">
                 <i class="fas fa-trash-alt pr-1"></i> Eliminar tabla
             </button>
-            <div class="custom-control custom-checkbox col-sm-12 col-md-6 eliminarCheck">
-                <input type="checkbox" class="custom-control-input " id="eliminar" (click)="checkEliminar()">
-                <label class="custom-control-label" for="eliminar">¿Seguro que quieres eliminar la tabla?</label>
-            </div>
         </div>
     </div>
 </section>

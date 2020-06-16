@@ -42,6 +42,8 @@ import * as moment from 'moment';
 import { UtilCalendarioCabeceraComponent } from './componentes/adicionales/util-calendario/util-calendario-cabecera/util-calendario-cabecera.component';
 import { AdministrarClasesComponent } from './componentes/clases/administrar-clases/administrar-clases.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MensajeConfirmarComponent } from './componentes/adicionales/mensaje-confirmar/mensaje-confirmar.component';
+import { MensajeConfirmarService } from './servicios/mensajeConfirmarService';
 
 export function momentAdapterFactory() {
   return adapterFactory(moment);
@@ -73,6 +75,7 @@ registerLocaleData(localeEs, 'es');
     VisualizarDietasComponent,
     UtilCalendarioCabeceraComponent,
     AdministrarClasesComponent,
+    MensajeConfirmarComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -95,7 +98,8 @@ registerLocaleData(localeEs, 'es');
     EjerciciosService,
     DietasService,
     SeguimientosService,
-    ClasesService
+    ClasesService,
+    MensajeConfirmarService
   ],
   bootstrap: [AppComponent]
 })

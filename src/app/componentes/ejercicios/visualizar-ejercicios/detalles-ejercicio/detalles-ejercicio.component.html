@@ -18,13 +18,10 @@
             </div>
 
             <div class="col-sm-12 p-2 divEliminar" *ngIf="acceso == '1'">
-                <button type="submit" class="btn botonEliminarEjercicio col-sm-12 col-md-2 ml-auto" [disabled]="!checkActivado" (click)="eliminarEjercicio()">
+                <button type="submit" class="btn botonEliminarEjercicio col-sm-12 col-md-4" (click)="confirmarEliminacion()">
                     <i class="fas fa-trash-alt pr-1"></i> Eliminar ejercicio
                 </button>
-                <div class="custom-control custom-checkbox col-sm-12 col-md-6 eliminarCheck">
-                    <input type="checkbox" class="custom-control-input " id="eliminar" (click)="checkEliminar()">
-                    <label class="custom-control-label" for="eliminar">¿Seguro que quieres eliminar el ejercicio?</label>
-                </div>
+                
             </div>
         </div>
 

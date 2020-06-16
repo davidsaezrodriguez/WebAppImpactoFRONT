@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Clase } from 'src/app/modelos/clase';
 import { ClasesService } from 'src/app/servicios/clasesService';
 import { DatePipe } from '@angular/common';
+import { MensajeConfirmarService } from 'src/app/servicios/mensajeConfirmarService';
 
 @Component({
   selector: 'app-administrar-clases',
@@ -23,6 +24,7 @@ export class AdministrarClasesComponent implements OnInit {
     private router: Router,
     private clasesService: ClasesService, // Servicio para gestionar clases con api
     private toastr: ToastrService, // Servicio que nos creara notificaciones
+    private mensajeConfirmarService: MensajeConfirmarService // Servicio para confirmar eliminar
   ) { }
 
 
@@ -144,5 +146,11 @@ export class AdministrarClasesComponent implements OnInit {
       // Si da error lo mostramos
       this.toastr.error('Error al eliminar clase');
     });
+  }
+
+  confirmarEliminacionClase(claseId){
+    this.mensajeConfirmarService.confirm('Por favor confirme..', '¿Estas seguro de eliminar la clase?')
+    .then((confirmed) => { if (confirmed) { this.borrarClase(claseId); } })
+    .catch(() => console.log('No eliminar'));
   }
 }

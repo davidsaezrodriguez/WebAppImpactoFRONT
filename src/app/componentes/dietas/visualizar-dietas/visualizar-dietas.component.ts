@@ -7,6 +7,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DietasService } from 'src/app/servicios/dietasService';
 import { LocalService } from 'src/app/servicios/localService';
+import { MensajeConfirmarService } from 'src/app/servicios/mensajeConfirmarService';
 
 @Component({
   selector: 'app-visualizar-dietas',
@@ -36,7 +37,8 @@ export class VisualizarDietasComponent implements OnInit {
     private dietasService: DietasService, // Servicio para interactuar con API con DIETAS
     private router: Router,
     private localService: LocalService, // Servicio para buscar acceso usuario logeado en token
-    private toastr: ToastrService // Servicio que nos creara notificaciones
+    private toastr: ToastrService, // Servicio que nos creara notificaciones
+    private mensajeConfirmarService: MensajeConfirmarService // Servicio para confirmar eliminar
   ) {
   }
 
@@ -95,6 +97,12 @@ export class VisualizarDietasComponent implements OnInit {
     });
   }
 
+  // Confirmar eliminacion con alert
+  public confirmarEliminacion() {
+    this.mensajeConfirmarService.confirm('Por favor confirme..', '¿Estas seguro de eliminar la dieta?')
+      .then((confirmed) => { if (confirmed) { this.eliminarDieta(); } })
+      .catch(() => console.log('No eliminar'));
+  }
   //#endregion
 }
 

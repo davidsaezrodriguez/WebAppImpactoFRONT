@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UsuariosService } from 'src/app/servicios/usuariosService';
 import { Usuario } from 'src/app/modelos/usuario';
 import { LocalService } from 'src/app/servicios/localService';
+import { MensajeConfirmarService } from 'src/app/servicios/mensajeConfirmarService';
 
 @Component({
   selector: 'app-datos-usuario',
@@ -48,7 +49,8 @@ export class DatosUsuarioComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService, // Servicio que nos creara notificaciones
     private usuariosService: UsuariosService, // Servicio para crear el usuario
-    private localService: LocalService // Servicio para crear el usuario
+    private localService: LocalService, // Servicio para crear el usuario
+    private mensajeConfirmarService: MensajeConfirmarService // Servicio para confirmar eliminar
   ) { }
 
   ngOnInit(): void {
@@ -200,6 +202,13 @@ export class DatosUsuarioComponent implements OnInit {
       // Si da error lo mostramos
       this.toastr.error('Error al eliminar la usuario');
     });
+  }
+
+  // Confirmar eliminacion con alert
+  public confirmarEliminacion() {
+    this.mensajeConfirmarService.confirm('Por favor confirme..', '¿Estas seguro de eliminar el usuario?')
+      .then((confirmed) => { if (confirmed) { this.eliminarUsuario(); } })
+      .catch(() => console.log('No eliminar'));
   }
 
   //#endregion
