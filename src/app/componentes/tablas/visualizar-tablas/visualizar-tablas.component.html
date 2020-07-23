@@ -15,8 +15,8 @@
                     <tbody>
                         <tr *ngFor="let ejercicio of dia.ejercicio" class="d-flex">
                             <td class="col-4 col-md-7">{{ejercicio.nombre}}</td>
-                            <td class="col-5 col-md-3">{{ejercicio.repeticiones}}</td>
-                            <td class="col-3 col-md-2">
+                            <td class="col-4 col-md-3">{{ejercicio.repeticiones}}</td>
+                            <td class="col-4 col-md-2">
                                 <div [formGroup]="formPesoMax">
                                     <input type="text" class="form-control" formControlName="pesoMax"
                                         (change)="actualizarPeso(ejercicio._id,dia._id)" placeholder="{{ejercicio.pesoMax}}">
