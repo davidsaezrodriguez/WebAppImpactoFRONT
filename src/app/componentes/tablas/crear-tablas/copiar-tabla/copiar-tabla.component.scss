@@ -1,0 +1,13 @@
+// Estilo de botones
+.botonCopiarTabla{
+    background-color: red;
+    margin-bottom: 5px;
+    width: 22em;
+}
+
+// Css para version movil
+@media only screen and (max-width: 768px) {
+    .botonCopiarTabla{
+        margin-left: 15px !important;
+    }
+}

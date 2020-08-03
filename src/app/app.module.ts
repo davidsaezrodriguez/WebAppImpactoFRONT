@@ -44,6 +44,7 @@ import { AdministrarClasesComponent } from './componentes/clases/administrar-cla
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MensajeConfirmarComponent } from './componentes/adicionales/mensaje-confirmar/mensaje-confirmar.component';
 import { MensajeConfirmarService } from './servicios/mensajeConfirmarService';
+import { CopiarTablaComponent } from './componentes/tablas/crear-tablas/copiar-tabla/copiar-tabla.component';
 
 export function momentAdapterFactory() {
   return adapterFactory(moment);
@@ -76,6 +77,7 @@ registerLocaleData(localeEs, 'es');
     UtilCalendarioCabeceraComponent,
     AdministrarClasesComponent,
     MensajeConfirmarComponent,
+    CopiarTablaComponent,
   ],
   imports: [
     AppRoutingModule,

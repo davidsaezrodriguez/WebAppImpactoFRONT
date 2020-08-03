@@ -6,10 +6,13 @@
 
 
         <div class="col-sm-12 " [formGroup]="formNuevaTabla">
-            <label class="col-sm-12 control-label text-left labelNombreTabla">
+            <label class="col-sm-8 control-label text-left labelNombreTabla">
                 Nombre de la tabla
                 <input type="text" class="form-control" formControlName="nombreTabla">
             </label>
+            <button type="submit" class="btn botonCopiarTabla col-md-4 " [routerLink]="['/tablas/copiar']" [disabled]='formNuevaTabla.controls.nombreTabla.valid'>
+                    <i class="fas fa-plus-circle"></i> Copiar tabla compartida
+                </button>
             <div class="dia ">
                 <h4 class="col-sm-12 pl-0">Dia 1</h4>
                 <label class="control-label text-left col-md-7 col-sm-12 pl-0  pl-0  "> Ejercicio

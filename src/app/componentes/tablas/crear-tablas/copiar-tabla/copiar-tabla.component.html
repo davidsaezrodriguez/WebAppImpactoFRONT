@@ -1,0 +1,21 @@
+<section class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-sm-12 d-flex justify-content-center">
+            <h2 class=""> Copiar tabla compartida</h2>
+        </div>
+
+
+        <div class="col-sm-12 " [formGroup]="formCopiarTabla">
+            <label class="col-sm-8 control-label text-left labelNombreTabla">
+                Id de la tabla compartida
+                <input type="text" class="form-control" formControlName="tabla">
+            </label>
+            <button type="submit" class="btn botonCopiarTabla col-md-4 mx-auto" (click)="copiarTabla()"
+                [disabled]="(!formCopiarTabla.valid)">
+                <i class="fas fa-plus-circle"></i> Copiar tabla
+            </button>
+
+        </div>
+    </div>
+
+</section>

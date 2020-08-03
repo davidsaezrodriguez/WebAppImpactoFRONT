@@ -36,6 +36,12 @@ th{
     display: flex;
     justify-content: center;
 }
+.compartirTabla{
+    background-color: rgba(104, 104, 104, 0.452);
+    border: 1px solid rgba(109, 109, 109, 0.1);
+   
+    margin: 1em;
+}
 
 // Css para version movil
 @media only screen and (max-width: 768px) {

@@ -18,6 +18,7 @@ import { CrearEjerciciosComponent } from './componentes/ejercicios/crear-ejercic
 import { CrearDietasComponent } from './componentes/dietas/crear-dietas/crear-dietas.component';
 import { VisualizarDietasComponent } from './componentes/dietas/visualizar-dietas/visualizar-dietas.component';
 import { AdministrarClasesComponent } from './componentes/clases/administrar-clases/administrar-clases.component';
+import { CopiarTablaComponent } from './componentes/tablas/crear-tablas/copiar-tabla/copiar-tabla.component';
 
 
 const routes: Routes = [
@@ -43,6 +44,9 @@ const routes: Routes = [
       {
         path: 'visualizar/:idTabla',
         component: VisualizarTablasComponent,
+      }, {
+        path: 'copiar',
+        component: CopiarTablaComponent,
       }
     ]
   },

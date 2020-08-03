@@ -47,6 +47,11 @@ export class TablasService {
   }
 
 
+  // Mandamos ID de la tabla para buscarla y copiarla al idUsuario
+  copiarTabla(idUsuario, idTabla): Observable<any> {
+    return this.httpClient.post<any>(`${this.ServidorBACKEND}/copiarTabla`, { idUsuario, idTabla });
+  }
+
   //#endregion
 
 
